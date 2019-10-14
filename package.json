@@ -1,0 +1,34 @@
+{
+  "name": "@forminator/react-wire",
+  "description": "connect react components with wire",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "lib/forminator-react-wire.js",
+  "unpkg": "dist/forminator-react-wire.js",
+  "module": "es/forminator-react-wire.js",
+  "typings": "./index.d.ts",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src",
+    "index.d.ts",
+    "tsdoc-metadata.json"
+  ],
+  "scripts": {
+    "build": "libton-script build",
+    "build:doc": "libton-script doc",
+    "test": "libton-script test",
+    "lint": "libton-script lint",
+    "format": "libton-script format",
+    "format:check": "libton-script format --check",
+    "validate": "libton-script lint && libton-script format --check && libton-script test",
+    "prepublishOnly": "yarn validate && yarn build"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.18",
+    "libton-script": "0.11.2",
+    "husky": "3.0.9",
+    "lint-staged": "9.4.2"
+  }
+}

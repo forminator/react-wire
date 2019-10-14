@@ -1,0 +1,7 @@
+/dist/
+/lib/
+/es/
+/bin/
+/coverage/
+/.cache/
+/tsdoc-metadata.json
