@@ -28,9 +28,22 @@
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "@types/jest": "24.0.18",
+    "@testing-library/react-hooks": "^3.1.0",
+    "@types/jest": "24.0.20",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.3",
     "husky": "3.0.9",
     "libton-script": "0.11.2",
-    "lint-staged": "9.4.2"
+    "lint-staged": "9.4.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-test-renderer": "^16.11.0"
+  },
+  "dependencies": {
+    "mitt": "^1.2.0"
+  },
+  "peerDependencies": {
+    "react": "^16.10.0",
+    "react-dom": "^16.10.0"
   }
 }
