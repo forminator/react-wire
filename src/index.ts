@@ -3,10 +3,10 @@
 /**
  * connect react components with wire
  *
- * @remarks
- * provide {@link ForminatorReactWire} function that returns `forminator-react-wire` string
- *
  * @packageDocumentation
  */
 
-export { ForminatorReactWire } from './forminator-react-wire';
+export { _WireImpl } from './wire.impl';
+export { useWire } from './use-wire';
+export { useWireState } from './use-wire-state';
+export { useWireValue } from './use-wire-value';
