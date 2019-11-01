@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 'node'
+install:
+  - yarn global add codecov
+  - yarn
+script:
+  - yarn lint
+  - yarn format:check
+  - yarn test --coverage --verbose
+  - yarn build
+  - codecov
