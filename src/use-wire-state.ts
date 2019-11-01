@@ -10,9 +10,40 @@ import { isSetStateAction } from './is-set-state-action';
 import { Subscribable } from './subscribable';
 import { useWire } from './use-wire';
 
+/**
+ * same as react useState but synced with wire.
+ *
+ * @param wire - the wire to be connected to and sync value with
+ *
+ * @returns state and setState.
+ *
+ * @remarks
+ * if wire is null, it should behave like useState
+ *
+ * please always pass same wire and avoid changing wire, it can cause strange behavior and bad intermediate values
+ *
+ */
 export function useWireState<Value>(
   wire: Subscribable<Value> | null | undefined,
 ): [Value | undefined, Dispatch<SetStateAction<Value>>];
+/**
+ * same as react useState but synced with wire.
+ *
+ * @param wire - the wire to be connected to and sync value with
+ * @param initialValue - initial value or initializer function
+ *
+ * @returns state and setState.
+ *
+ * @remarks
+ * if wire is null, it should behave like `useState`
+ *
+ * if `wire` param provided and wire has a value, the state respect wire value and ignore its own initial value.
+ *
+ * if `wire` param provided and wire hasn't a value (has `undefined` value), wire value will be updated
+ *
+ * please always pass same wire and avoid changing wire, it can cause strange behavior and bad intermediate values
+ *
+ */
 export function useWireState<Value>(
   wire: Subscribable<Value> | null | undefined,
   initialValue: Value | (() => Value),
