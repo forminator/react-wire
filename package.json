@@ -15,6 +15,10 @@
     "index.d.ts",
     "tsdoc-metadata.json"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/forminator/react-wire"
+  },
   "publishConfig": {
     "access": "public"
   },
