@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 'node'
+  - node
 install:
   - yarn global add codecov
   - yarn
@@ -10,3 +10,12 @@ script:
   - yarn test --coverage --verbose
   - yarn build
   - codecov
+deploy:
+  provider: npm
+  email: se.mo.moosavi@gmail.com
+  api_key:
+    secure: c1iNg02NcB2PfkWGbEpRGqUihV6htqQnZ/ijPBJ4keKywqjC6sgVkkd1i8H3WRjoyCSosl/13cdW//P5T9QfJ0T3xmmFuiEYweu/mcJgblegeGCzaUfaD57g5HZKAApHVx9aEaiCaROQFma9e/S5qxUUISO/ZCGAILLizkhk2ReOfXRcmjwHmZdwMBSZ15JyskYziInxUYXRQ8sZWOgGKMor8Z8GL0HR2AJQSagtu3b1Nt4PC+21th4lOBDqSekmG/UZbaharpZ7nf3g5Eol5jg3XOX7XP/peKEw95CqcJvLiePMTl8QVCkCx0iu5tn1nH+TLb266XBIKCPXzyanXTql/uLWDZqAjZfhgYp2obwY2VSw9pnipMXBDlJkXtyHuvew3REubdjcmZNDfiXjLHqaCYPmbjppeoCHMF1scYyKpJzGSiBqlEcr22D8g8za3AsosGMnvTkfPjUFSvWLTnLevoe4+ppsk3FO3zD8fI8Q1yx3G7S5ZEzqJ17h9zlIP3pWFtSFxP/SZViVEHByasD6CKEG7xVJAkNl0bd0kswTkVC+ksZKhW1NdSCiHcTYL8jalI6ERHjC2Lr6txU+yC1bcpCA54sPHTEphvqZ43yPgLvyvcPSgT0ZnxeZ3wxBWBn3n/bHdycGKLdvBjhbktwVG+7M396n+DgXtke8SjU=
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: forminator/react-wire
