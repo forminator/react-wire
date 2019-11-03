@@ -15,6 +15,9 @@
     "index.d.ts",
     "tsdoc-metadata.json"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "libton-script build",
     "build:doc": "libton-script doc",
@@ -23,7 +26,8 @@
     "format": "libton-script format",
     "format:check": "libton-script format --check",
     "validate": "libton-script lint && libton-script format --check && libton-script test",
-    "prepublishOnly": "yarn validate && yarn build"
+    "prepublishOnly": "yarn validate && yarn build",
+    "release": "standard-version"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
@@ -37,7 +41,8 @@
     "lint-staged": "9.4.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-test-renderer": "^16.11.0"
+    "react-test-renderer": "^16.11.0",
+    "standard-version": "^7.0.0"
   },
   "dependencies": {
     "mitt": "^1.2.0"
