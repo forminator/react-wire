@@ -21,6 +21,7 @@
   "scripts": {
     "build": "libton-script build",
     "build:doc": "libton-script doc",
+    "toc": "markdown-toc -i README.md",
     "test": "libton-script test",
     "lint": "libton-script lint",
     "format": "libton-script format",
@@ -39,6 +40,7 @@
     "husky": "3.0.9",
     "libton-script": "0.11.2",
     "lint-staged": "9.4.2",
+    "markdown-toc": "^1.2.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-test-renderer": "^16.11.0",
