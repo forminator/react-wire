@@ -15,7 +15,9 @@ connect react components with wire
   - [`useWireValue` hook](#usewirevalue-hook)
   - [`useWireState` hook](#usewirestate-hook)
   - [get/set wire value](#getset-wire-value)
+- [Advanced usages](#advanced-usages)
   - [Subscribe to the wire](#subscribe-to-the-wire)
+  - [`useInterferer` hook](#useinterferer-hook)
 - [Notes](#notes)
   - [`undefined` value vs `null` value](#undefined-value-vs-null-value)
   - [Initial value](#initial-value)
@@ -128,9 +130,14 @@ const value = wire.getValue();
 wire.setValue(someValue);
 ```
 
+## Advanced usages
+
 ### Subscribe to the wire
 
 Every time wire value changed the callback function will be called
+
+<details>
+<summary>more detail</summary>
 
 ```tsx
 // subscribe
@@ -141,6 +148,36 @@ const unsubscribe = wire.subscribe(value => {
 // unsubscribe
 unsubscribe();
 ```
+
+</details>
+
+### `useInterferer` hook
+
+in some rare use-cases you need changing wire behavior and interfering set value. `useInterferer` helps in these use-cases.
+
+<details>
+<summary>more detail</summary>
+
+`useInterferer` hook gets wire and interferer function and returns new wire. on every `setValue` of returned wire, the interferer function gets next value and previous value and returns a new value. the returned value of the interferer will be set on the wire.
+
+```tsx
+const wire = useInterferer(anotherWire, (nextValue, preValue) => /* anotherValue */)
+```
+
+**example**:
+
+```tsx
+const valueWire = useInterferer(
+  props.valueWire,
+  useCallback(
+    (nextValue, preValue) =>
+      props.submittingWire.getValue() ? preValue : nextValue,
+    [props.submittingWire],
+  ),
+);
+```
+
+</details>
 
 ## Notes
 

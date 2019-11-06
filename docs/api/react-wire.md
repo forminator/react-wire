@@ -10,6 +10,7 @@ connect react components with wire
 
 | Function                                                           | Description                                                |
 | ------------------------------------------------------------------ | ---------------------------------------------------------- |
+| [useInterferer(wire, interferer)](./react-wire.useinterferer.md)   | returns new wire and interfering setValue of returned wire |
 | [useWire(upLink, initialValue)](./react-wire.usewire.md)           | creates and returns a new wire.                            |
 | [useWireState(wire, initialValue)](./react-wire.usewirestate.md)   | same as react useState but synced with wire.               |
 | [useWireState(wire, initialValue)](./react-wire.usewirestate_1.md) | same as react useState but synced with wire.               |
@@ -24,6 +25,7 @@ connect react components with wire
 
 ## Type Aliases
 
-| Type Alias                   | Description |
-| ---------------------------- | ----------- |
-| [Wire](./react-wire.wire.md) |             |
+| Type Alias                               | Description |
+| ---------------------------------------- | ----------- |
+| [Interferer](./react-wire.interferer.md) |             |
+| [Wire](./react-wire.wire.md)             |             |
