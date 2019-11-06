@@ -11,7 +11,7 @@ connect react components with wire
 | Function                                                           | Description                                                |
 | ------------------------------------------------------------------ | ---------------------------------------------------------- |
 | [useWire(upLink, initialValue)](./react-wire.usewire.md)           | creates and returns a new wire.                            |
-| [useWireState(wire)](./react-wire.usewirestate.md)                 | same as react useState but synced with wire.               |
+| [useWireState(wire, initialValue)](./react-wire.usewirestate.md)   | same as react useState but synced with wire.               |
 | [useWireState(wire, initialValue)](./react-wire.usewirestate_1.md) | same as react useState but synced with wire.               |
 | [useWireValue(wire)](./react-wire.usewirevalue.md)                 | returns wire value and subscribe to wire for value updates |
 | [useWireValue(wire, defaultValue)](./react-wire.usewirevalue_1.md) | returns wire value and subscribe to wire for value updates |

@@ -11,23 +11,29 @@ same as react useState but synced with wire.
 ```typescript
 export declare function useWireState<Value>(
   wire: Subscribable<Value> | null | undefined,
-): [Value | undefined, Dispatch<SetStateAction<Value>>];
+  initialValue: Value | (() => Value),
+): [Value, Dispatch<SetStateAction<Defined<Value>>>];
 ```
 
 ## Parameters
 
-| Parameter | Type                                                                | Description                                     |
-| --------- | ------------------------------------------------------------------- | ----------------------------------------------- |
-| wire      | <code>Subscribable&lt;Value&gt; &#124; null &#124; undefined</code> | the wire to be connected to and sync value with |
+| Parameter    | Type                                                                | Description                                     |
+| ------------ | ------------------------------------------------------------------- | ----------------------------------------------- |
+| wire         | <code>Subscribable&lt;Value&gt; &#124; null &#124; undefined</code> | the wire to be connected to and sync value with |
+| initialValue | <code>Value &#124; (() =&gt; Value)</code>                          | initial value or initializer function           |
 
 <b>Returns:</b>
 
-`[Value | undefined, Dispatch<SetStateAction<Value>>]`
+`[Value, Dispatch<SetStateAction<Defined<Value>>>]`
 
 state and setState.
 
 ## Remarks
 
-if wire is null, it should behave like useState
+if wire is null, it should behave like `useState`
+
+if `wire` param provided and wire has a value, the state respect wire value and ignore its own initial value.
+
+if `wire` param provided and wire hasn't a value (has `undefined` value), wire value will be updated
 
 please always pass same wire and avoid changing wire, it can cause strange behavior and bad intermediate values
