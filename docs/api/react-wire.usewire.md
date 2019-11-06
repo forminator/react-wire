@@ -11,7 +11,7 @@ creates and returns a new wire.
 ```typescript
 export declare function useWire<Value>(
   upLink: Wire<Value> | null | undefined,
-  initialValue?: Value | (() => Value),
+  initialValue?: Value | (() => Value | undefined),
 ): Wire<Value>;
 ```
 
@@ -20,7 +20,7 @@ export declare function useWire<Value>(
 | Parameter    | Type                                                        | Description                                             |
 | ------------ | ----------------------------------------------------------- | ------------------------------------------------------- |
 | upLink       | <code>Wire&lt;Value&gt; &#124; null &#124; undefined</code> | the up-link wire to be connected to and sync value with |
-| initialValue | <code>Value &#124; (() =&gt; Value)</code>                  | initial value or initializer function                   |
+| initialValue | <code>Value &#124; (() =&gt; Value &#124; undefined)</code> | initial value or initializer function                   |
 
 <b>Returns:</b>
 

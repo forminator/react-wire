@@ -27,7 +27,7 @@ import { _WireImpl } from './wire.impl';
  */
 export function useWire<Value>(
   upLink: Wire<Value> | null | undefined,
-  initialValue?: Value | (() => Value),
+  initialValue?: Value | (() => Value | undefined),
 ): Wire<Value> {
   const [wire] = useState(
     () =>
