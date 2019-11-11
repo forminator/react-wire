@@ -10,4 +10,7 @@ export { _WireImpl } from './wire.impl';
 export { useWire } from './use-wire';
 export { useWireState } from './use-wire-state';
 export { useWireValue } from './use-wire-value';
-export { useInterferer } from './use-interferer';
+export { useInterceptor } from './use-interceptor';
+
+// TODO remove. kept for backward compatibility
+export { useInterceptor as useInterferer } from './use-interceptor';

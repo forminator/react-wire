@@ -17,7 +17,7 @@ connect react components with wire
   - [get/set wire value](#getset-wire-value)
 - [Advanced usages](#advanced-usages)
   - [Subscribe to the wire](#subscribe-to-the-wire)
-  - [`useInterferer` hook](#useinterferer-hook)
+  - [`useInterceptor` hook](#useinterceptor-hook)
 - [Notes](#notes)
   - [`undefined` value vs `null` value](#undefined-value-vs-null-value)
   - [Initial value](#initial-value)
@@ -151,23 +151,23 @@ unsubscribe();
 
 </details>
 
-### `useInterferer` hook
+### `useInterceptor` hook
 
-in some rare use-cases you need changing wire behavior and interfering set value. `useInterferer` helps in these use-cases.
+in some rare use-cases you need changing wire behavior and interfering set value. `useInterceptor` helps in these use-cases.
 
 <details>
 <summary>more detail</summary>
 
-`useInterferer` hook gets wire and interferer function and returns new wire. on every `setValue` of returned wire, the interferer function gets next value and previous value and returns a new value. the returned value of the interferer will be set on the wire.
+`useInterceptor` hook gets wire and interceptor function and returns new wire. on every `setValue` of returned wire, the interceptor function gets next value and previous value and returns a new value. the returned value of the interceptor will be set on the wire.
 
 ```tsx
-const wire = useInterferer(anotherWire, (nextValue, preValue) => /* anotherValue */)
+const wire = useInterceptor(anotherWire, (nextValue, preValue) => /* anotherValue */)
 ```
 
 **example**:
 
 ```tsx
-const valueWire = useInterferer(
+const valueWire = useInterceptor(
   props.valueWire,
   useCallback(
     (nextValue, preValue) =>

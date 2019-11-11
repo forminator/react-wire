@@ -1,3 +1,6 @@
 export { Subscribable } from './subscribable';
 export { Wire } from './wire';
-export { Interferer } from './Interferer';
+export { Interceptor } from './interceptor';
+
+// TODO remove. kept for backward compatibility
+export { Interceptor as Interferer } from './interceptor';
