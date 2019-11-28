@@ -7,9 +7,9 @@ import {
   useState,
 } from 'react';
 import { isSetStateAction } from './is-set-state-action';
-import { Subscribable } from './subscribable';
 import { Defined } from './type-utils';
 import { useWire } from './use-wire';
+import { Wire } from './wire';
 
 /**
  * same as react useState but synced with wire.
@@ -30,7 +30,7 @@ import { useWire } from './use-wire';
  *
  */
 export function useWireState<Value>(
-  wire: Subscribable<Value> | null | undefined,
+  wire: Wire<Value, any> | null | undefined,
   initialValue: Value | (() => Value),
 ): [Value, Dispatch<SetStateAction<Defined<Value>>>];
 
@@ -52,11 +52,11 @@ export function useWireState<Value>(
  *
  */
 export function useWireState<Value>(
-  wire: Subscribable<Value> | null | undefined,
+  wire: Wire<Value> | null | undefined,
   initialValue?: undefined | Value | (() => Value | undefined),
 ): [Value | undefined, Dispatch<SetStateAction<Value>>];
 export function useWireState<Value>(
-  wire: Subscribable<Value> | null | undefined,
+  wire: Wire<Value> | null | undefined,
   initialValue?: undefined | Value | (() => Value | undefined),
 ): [Value | undefined, Dispatch<SetStateAction<Value>>] {
   const innerWire = useWire<Value>(wire, initialValue);

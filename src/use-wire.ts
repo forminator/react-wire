@@ -25,13 +25,13 @@ import { _WireImpl } from './wire.impl';
 
  *
  */
-export function useWire<Value>(
-  upLink: Wire<Value> | null | undefined,
+export function useWire<Value, Fs = {}>(
+  upLink: Wire<Value, Fs> | null | undefined,
   initialValue?: Value | (() => Value | undefined),
-): Wire<Value> {
+): Wire<Value, Fs> {
   const [wire] = useState(
     () =>
-      new _WireImpl(
+      new _WireImpl<Value, Fs>(
         upLink,
         isInitializer<Value | undefined>(initialValue)
           ? initialValue()

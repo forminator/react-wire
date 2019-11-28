@@ -1,19 +1,28 @@
 import mitt, { Emitter } from 'mitt';
 import ReactDOM from 'react-dom';
+import { Action, ActionListener, Listenable } from './listenable';
+import { Methods, StrictMethodsGuard } from './type-utils';
+
 import { Wire } from './wire';
+import { Fns } from './with-fns';
+
+const fnsKey = (type: string | number | symbol) => 'action:' + type.toString();
 
 /**
  * @internal
  */
-export class _WireImpl<Value> implements Wire<Value> {
+export class _WireImpl<Value, Fs = {}>
+  implements Wire<Value, Fs>, Listenable<Fs> {
   private key: string = 'value';
   private value: Value | undefined;
   private readonly emitter: Emitter = mitt();
-  private upLink: Wire<Value> | null = null;
+  private upLink: Wire<Value, Fs> | null = null;
   private _disconnect: (() => void) | null = null;
+  private readonly fnsEmitter: Emitter = mitt();
+  public fns = this._makeFns();
 
   constructor(
-    upLink: Wire<Value> | null | undefined,
+    upLink: Wire<Value, Fs> | null | undefined,
     initialValue?: Value | undefined,
   ) {
     this.value = initialValue;
@@ -30,7 +39,7 @@ export class _WireImpl<Value> implements Wire<Value> {
     }
   }
 
-  connect(upLink: Wire<Value>) {
+  connect(upLink: Wire<Value, Fs>) {
     this.upLink = upLink;
     const onValue = (value: Value) => {
       this._setValue(value);
@@ -49,8 +58,15 @@ export class _WireImpl<Value> implements Wire<Value> {
 
     const unsubscribe = upLink.subscribe(onValue);
 
+    const handle = (type: string, action: Action<Fs>) => {
+      this._fire(action);
+    };
+
+    const dispose = upLink.listen('*', handle);
+
     this._disconnect = () => {
       this._disconnect = null;
+      dispose();
       unsubscribe();
       this.upLink = null;
     };
@@ -101,4 +117,69 @@ export class _WireImpl<Value> implements Wire<Value> {
       this.emitter.off(this.key, handler);
     };
   }
+
+  fn<K extends keyof Methods<Fs>>(name: K, fn: Fs[K]): () => void {
+    if (name === '*') {
+      throw new Error("the name parameter can't be a star (*) string");
+    }
+    return this.listen(name, fn);
+  }
+
+  listen(type: '*', fn: ActionListener<Fs>): () => void;
+  listen<K extends keyof Methods<Fs>>(type: K, fn: Fs[K]): () => void;
+  listen<K extends keyof Methods<Fs>>(
+    type: K | '*',
+    fn: Fs[K] | ActionListener<Fs>,
+  ): () => void {
+    if (type === '*') {
+      const handler = (type?: string, action?: Action<Fs>) => {
+        if (type !== undefined && action) {
+          (fn as ActionListener<Fs>)(type, action);
+        }
+      };
+      this.fnsEmitter.on('*', handler);
+      return () => {
+        this.fnsEmitter.off('*', handler);
+      };
+    } else {
+      const handler = (action: Action<Fs, K>) => {
+        (fn as Fs[K])(...action.args);
+      };
+      this.fnsEmitter.on(fnsKey(type), handler);
+      return () => {
+        this.fnsEmitter.off(fnsKey(type), handler);
+      };
+    }
+  }
+
+  private _fire(action: Action<Fs>) {
+    const { type } = action;
+    this.fnsEmitter.emit(fnsKey(type), action);
+  }
+
+  private _makeFns(): Fns<Fs> {
+    const ctx = this;
+    const handler: ProxyHandler<{}> = {
+      get: function(target, prop: keyof Methods<Fs>) {
+        return (...args: any) =>
+          ctx.fire({
+            type: prop,
+            args,
+          });
+      },
+    };
+    return new Proxy({}, handler) as any;
+  }
+
+  fire(action: Action<Fs>): void {
+    if (this.upLink) {
+      this.upLink.fire(action);
+    } else {
+      this._fire(action);
+    }
+  }
+  // Covariance hack:
+  // never use this variable.
+  // don't remove space at the start
+  ' Listenable': StrictMethodsGuard<Fs>;
 }

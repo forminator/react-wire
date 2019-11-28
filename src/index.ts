@@ -11,6 +11,7 @@ export { useWire } from './use-wire';
 export { useWireState } from './use-wire-state';
 export { useWireValue } from './use-wire-value';
 export { useInterceptor } from './use-interceptor';
+export { useFn } from './use-fn';
 
 // TODO remove. kept for backward compatibility
 export { useInterceptor as useInterferer } from './use-interceptor';

@@ -132,4 +132,67 @@ describe('Wire', () => {
     });
   });
   // TODO we can add more test about subscribe for connected wires
+  describe('fns', () => {
+    it('should throw error with * type', () => {
+      const wire = new Wire<any, any>(null);
+      const fn = jest.fn();
+      expect(() => {
+        const dispose = wire.fn('*', fn);
+        dispose();
+      }).toThrowError();
+    });
+
+    describe('without up-link wire', () => {
+      it('should fire event', () => {
+        const wire = new Wire<any, { test(n: number): void }>(null);
+        const fn = jest.fn();
+        const dispose = wire.fn('test', fn);
+        wire.fns.test(3);
+        expect(fn).toBeCalledWith(3);
+        dispose();
+      });
+    });
+    describe('with up-link wire', () => {
+      it('should fire event from wire', () => {
+        const wire1 = new Wire<any, { test(n: number): void }>(null);
+        const wire2 = new Wire<any, { test(n: number): void }>(wire1);
+        wire2.connect(wire1);
+        const fn1 = jest.fn();
+        const fn2 = jest.fn();
+        const dispose1 = wire1.fn('test', fn1);
+        const dispose2 = wire2.fn('test', fn2);
+        wire2.fns.test(3);
+        expect(fn1).toBeCalledWith(3);
+        expect(fn2).toBeCalledWith(3);
+        dispose2();
+        dispose1();
+      });
+      it('should fire event from up-link', () => {
+        const wire1 = new Wire<any, { test(n: number): void }>(null);
+        const wire2 = new Wire<any, { test(n: number): void }>(wire1);
+        wire2.connect(wire1);
+        const fn1 = jest.fn();
+        const fn2 = jest.fn();
+        const dispose1 = wire1.fn('test', fn1);
+        const dispose2 = wire2.fn('test', fn2);
+        wire1.fns.test(3);
+        expect(fn1).toBeCalledWith(3);
+        expect(fn2).toBeCalledWith(3);
+        dispose2();
+        dispose1();
+      });
+      it('should fire event on sibling', () => {
+        const wire1 = new Wire<any, { test(n: number): void }>(null);
+        const wire2 = new Wire<any, { test(n: number): void }>(wire1);
+        const wire3 = new Wire<any, { test(n: number): void }>(wire1);
+        wire2.connect(wire1);
+        wire3.connect(wire1);
+        const fn = jest.fn();
+        const dispose = wire2.fn('test', fn);
+        wire3.fns.test(3);
+        expect(fn).toBeCalledWith(3);
+        dispose();
+      });
+    });
+  });
 });

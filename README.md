@@ -15,6 +15,7 @@ connect react components with wire
   - [`useWireValue` hook](#usewirevalue-hook)
   - [`useWireState` hook](#usewirestate-hook)
   - [get/set wire value](#getset-wire-value)
+  - [`fns` object and `useFn` hook](#fns-object-and-usefn-hook)
 - [Advanced usages](#advanced-usages)
   - [Subscribe to the wire](#subscribe-to-the-wire)
   - [`useInterceptor` hook](#useinterceptor-hook)
@@ -31,6 +32,8 @@ connect react components with wire
 ```bash
 yarn add @forminator/react-wire
 ```
+
+Add [proxy-polyfill](https://github.com/GoogleChrome/proxy-polyfill) to support ie browser. proxy support is more than 90% in browsers, [more detail](https://caniuse.com/#feat=proxy)
 
 ## Usage
 
@@ -128,6 +131,89 @@ const value = wire.getValue();
 ```tsx
 // set value
 wire.setValue(someValue);
+```
+
+### `fns` object and `useFn` hook
+
+With `fns` object and `useFn` hook, you can transfer function calls over wires. Callback function should be memoized with useCallback
+
+```ts
+// subscribe for `sample` function call
+useFn(
+  wire,
+  'sample',
+  useCallback(value => {
+    console.log(value);
+  }, []),
+);
+
+// call `sample` function
+wire.fns.sample(5);
+```
+
+you can define typing for `fns` and `useFn`.
+
+```ts
+type Value = number;
+interface Fns {
+  sample: (n: number) => void;
+}
+
+const wire = useWire<Value, Fns>(null);
+```
+
+```ts
+// code
+wire.fns.sample();
+```
+
+error:
+
+```
+error TS2554: Expected 1 arguments, but got 0.
+wire.fns.sample();
+         ~~~~~~~~
+    sample: (n: number) => void;
+             ~~~~~~~~~
+    An argument for 'n' was not provided.
+```
+
+```ts
+// code
+useFn(wire, 'sample', useCallback((n: string) => {}, []));
+```
+
+error:
+
+```
+error TS2345: Argument of type '(n: string) => void' is not assignable to parameter of type '(n: number) => void'.
+  Types of parameters 'n' and 'n' are incompatible.
+    Type 'number' is not assignable to type 'string'.
+
+useFn(wire, 'sample', useCallback((n: string) => {}, []));
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+up-link wire should have an exact type for each function, but can have more functions.
+
+```ts
+interface AB {
+  a: (n: number) => void;
+  b: (n: string) => void;
+}
+interface A {
+  a: (n: number) => void;
+}
+interface B {
+  b: (n: string) => void;
+}
+interface C {
+  c: (n: string) => void;
+}
+const wireAB = useWire<Value, AB>(null);
+const wireA = useWire<Value, A>(wireAB);
+const wireB = useWire<Value, B>(wireAB);
+const wireB = useWire<Value, C>(wireAB); // error
 ```
 
 ## Advanced usages

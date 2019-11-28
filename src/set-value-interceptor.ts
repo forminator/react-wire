@@ -5,9 +5,9 @@ import { _WireImpl } from './wire.impl';
 /**
  * @internal
  */
-export class _SetValueInterceptor<Value> extends _WireImpl<Value> {
+export class _SetValueInterceptor<Value, Fs> extends _WireImpl<Value, Fs> {
   private interceptor: Interceptor<Value>;
-  constructor(upLink: Wire<Value>, interceptor: Interceptor<Value>) {
+  constructor(upLink: Wire<Value, Fs>, interceptor: Interceptor<Value>) {
     super(upLink);
     this.interceptor = interceptor;
   }

@@ -30,14 +30,14 @@ import { Wire } from './wire';
  * ```
  *
  */
-export function useInterceptor<Value>(
-  wire: Wire<Value>,
+export function useInterceptor<Value, Fs = {}>(
+  wire: Wire<Value, Fs>,
   interceptor: Interceptor<Value>,
-): Wire<Value> {
+): Wire<Value, Fs> {
   const [valueInterceptor] = useState(
     () => new _SetValueInterceptor(wire, interceptor),
   );
-  const outputWire = useWire<Value>(valueInterceptor);
+  const outputWire = useWire<Value, Fs>(valueInterceptor);
 
   useEffect(() => {
     return valueInterceptor.connect(wire);
