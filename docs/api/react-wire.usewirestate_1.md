@@ -10,7 +10,7 @@ same as react useState but synced with wire.
 
 ```typescript
 export declare function useWireState<Value>(
-  wire: Subscribable<Value> | null | undefined,
+  wire: Wire<Value> | null | undefined,
   initialValue?: undefined | Value | (() => Value | undefined),
 ): [Value | undefined, Dispatch<SetStateAction<Value>>];
 ```
@@ -19,7 +19,7 @@ export declare function useWireState<Value>(
 
 | Parameter    | Type                                                                         | Description                                     |
 | ------------ | ---------------------------------------------------------------------------- | ----------------------------------------------- |
-| wire         | <code>Subscribable&lt;Value&gt; &#124; null &#124; undefined</code>          | the wire to be connected to and sync value with |
+| wire         | <code>Wire&lt;Value&gt; &#124; null &#124; undefined</code>                  | the wire to be connected to and sync value with |
 | initialValue | <code>undefined &#124; Value &#124; (() =&gt; Value &#124; undefined)</code> | initial value or initializer function           |
 
 <b>Returns:</b>

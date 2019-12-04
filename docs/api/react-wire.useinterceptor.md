@@ -9,22 +9,22 @@ returns new wire and intercepting setValue of returned wire
 <b>Signature:</b>
 
 ```typescript
-export declare function useInterceptor<Value>(
-  wire: Wire<Value>,
+export declare function useInterceptor<Value, Fs = {}>(
+  wire: Wire<Value, Fs>,
   interceptor: Interceptor<Value>,
-): Wire<Value>;
+): Wire<Value, Fs>;
 ```
 
 ## Parameters
 
 | Parameter   | Type                                  | Description          |
 | ----------- | ------------------------------------- | -------------------- |
-| wire        | <code>Wire&lt;Value&gt;</code>        | up-link wire         |
+| wire        | <code>Wire&lt;Value, Fs&gt;</code>    | up-link wire         |
 | interceptor | <code>Interceptor&lt;Value&gt;</code> | interceptor function |
 
 <b>Returns:</b>
 
-`Wire<Value>`
+`Wire<Value, Fs>`
 
 new intercepted wire
 

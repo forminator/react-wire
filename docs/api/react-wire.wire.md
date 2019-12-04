@@ -7,5 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type Wire<Value> = Subscribable<Value>;
+export declare type Wire<Value, Fs = {}> = Subscribable<Value> &
+  WithFns<Fs> &
+  Listenable<Fs>;
 ```

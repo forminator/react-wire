@@ -10,6 +10,7 @@ connect react components with wire
 
 | Function                                                            | Description                                                 |
 | ------------------------------------------------------------------- | ----------------------------------------------------------- |
+| [useFn(wire, name, fn)](./react-wire.usefn.md)                      | subscribe for function calls                                |
 | [useInterceptor(wire, interceptor)](./react-wire.useinterceptor.md) | returns new wire and intercepting setValue of returned wire |
 | [useWire(upLink, initialValue)](./react-wire.usewire.md)            | creates and returns a new wire.                             |
 | [useWireState(wire, initialValue)](./react-wire.usewirestate.md)    | same as react useState but synced with wire.                |

@@ -9,22 +9,22 @@ creates and returns a new wire.
 <b>Signature:</b>
 
 ```typescript
-export declare function useWire<Value>(
-  upLink: Wire<Value> | null | undefined,
+export declare function useWire<Value, Fs = {}>(
+  upLink: Wire<Value, Fs> | null | undefined,
   initialValue?: Value | (() => Value | undefined),
-): Wire<Value>;
+): Wire<Value, Fs>;
 ```
 
 ## Parameters
 
-| Parameter    | Type                                                        | Description                                             |
-| ------------ | ----------------------------------------------------------- | ------------------------------------------------------- |
-| upLink       | <code>Wire&lt;Value&gt; &#124; null &#124; undefined</code> | the up-link wire to be connected to and sync value with |
-| initialValue | <code>Value &#124; (() =&gt; Value &#124; undefined)</code> | initial value or initializer function                   |
+| Parameter    | Type                                                            | Description                                             |
+| ------------ | --------------------------------------------------------------- | ------------------------------------------------------- |
+| upLink       | <code>Wire&lt;Value, Fs&gt; &#124; null &#124; undefined</code> | the up-link wire to be connected to and sync value with |
+| initialValue | <code>Value &#124; (() =&gt; Value &#124; undefined)</code>     | initial value or initializer function                   |
 
 <b>Returns:</b>
 
-`Wire<Value>`
+`Wire<Value, Fs>`
 
 new wire
 
