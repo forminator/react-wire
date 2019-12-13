@@ -1,5 +1,5 @@
 import mitt, { Emitter } from 'mitt';
-import ReactDOM from 'react-dom';
+import { batchedUpdates } from './batched-updates';
 import { Action, ActionListener, Listenable } from './listenable';
 import { Methods, StrictMethodsGuard } from './type-utils';
 
@@ -96,7 +96,7 @@ export class _WireImpl<Value, Fs = {}>
 
   private _setValue(value: Value): void {
     this.value = value;
-    ReactDOM.unstable_batchedUpdates(() => {
+    batchedUpdates(() => {
       this.emitter.emit(this.key, value);
     });
   }
@@ -154,7 +154,9 @@ export class _WireImpl<Value, Fs = {}>
 
   private _fire(action: Action<Fs>) {
     const { type } = action;
-    this.fnsEmitter.emit(fnsKey(type), action);
+    batchedUpdates(() => {
+      this.fnsEmitter.emit(fnsKey(type), action);
+    });
   }
 
   private _makeFns(): Fns<Fs> {
