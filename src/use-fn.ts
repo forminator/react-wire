@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Methods } from './type-utils';
+import { KeyOfMethods } from './type-utils';
 import { Wire } from './wire';
 
 /**
@@ -25,7 +25,7 @@ import { Wire } from './wire';
  wire.fns.sample(5);
 ```
  */
-export function useFn<Fs, K extends keyof Methods<Fs>>(
+export function useFn<Fs, K extends KeyOfMethods<Fs>>(
   wire: Wire<any, Fs>,
   name: K,
   fn: Fs[K],

@@ -1,7 +1,7 @@
 import mitt, { Emitter } from 'mitt';
 import { batchedUpdates } from './batched-updates';
-import { Action, ActionListener, Listenable } from './listenable';
-import { Methods, StrictMethodsGuard } from './type-utils';
+import { Action, ActionListener } from './listenable';
+import { KeyOfMethods, StrictMethodsGuard } from './type-utils';
 
 import { Wire } from './wire';
 import { Fns } from './with-fns';
@@ -11,8 +11,7 @@ const fnsKey = (type: string | number | symbol) => 'action:' + type.toString();
 /**
  * @internal
  */
-export class _WireImpl<Value, Fs = {}>
-  implements Wire<Value, Fs>, Listenable<Fs> {
+export class _WireImpl<Value, Fs = {}> implements Wire<Value, Fs> {
   private key: string = 'value';
   private value: Value | undefined;
   private readonly emitter: Emitter = mitt();
@@ -118,7 +117,7 @@ export class _WireImpl<Value, Fs = {}>
     };
   }
 
-  fn<K extends keyof Methods<Fs>>(name: K, fn: Fs[K]): () => void {
+  fn<K extends KeyOfMethods<Fs>>(name: K, fn: Fs[K]): () => void {
     if (name === '*') {
       throw new Error("the name parameter can't be a star (*) string");
     }
@@ -126,8 +125,8 @@ export class _WireImpl<Value, Fs = {}>
   }
 
   listen(type: '*', fn: ActionListener<Fs>): () => void;
-  listen<K extends keyof Methods<Fs>>(type: K, fn: Fs[K]): () => void;
-  listen<K extends keyof Methods<Fs>>(
+  listen<K extends KeyOfMethods<Fs>>(type: K, fn: Fs[K]): () => void;
+  listen<K extends KeyOfMethods<Fs>>(
     type: K | '*',
     fn: Fs[K] | ActionListener<Fs>,
   ): () => void {
@@ -162,7 +161,7 @@ export class _WireImpl<Value, Fs = {}>
   private _makeFns(): Fns<Fs> {
     const ctx = this;
     const handler: ProxyHandler<{}> = {
-      get: function(target, prop: keyof Methods<Fs>) {
+      get: function(target, prop: KeyOfMethods<Fs>) {
         return (...args: any) =>
           ctx.fire({
             type: prop,

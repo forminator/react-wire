@@ -9,7 +9,7 @@ subscribe for function calls
 <b>Signature:</b>
 
 ```typescript
-export declare function useFn<Fs, K extends keyof Methods<Fs>>(
+export declare function useFn<Fs, K extends KeyOfMethods<Fs>>(
   wire: Wire<any, Fs>,
   name: K,
   fn: Fs[K],
