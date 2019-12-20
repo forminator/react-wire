@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.1.2](https://github.com/forminator/react-wire/compare/v0.1.1...v0.1.2) (2019-12-20)
+
+### Features
+
+- **fns:** add fns and useFn ([7a8109b](https://github.com/forminator/react-wire/commit/7a8109b3065bc4408e49301b76e6c10ffb29ecef))
+
+### Bug Fixes
+
+- update dependencies ([a94f3cd](https://github.com/forminator/react-wire/commit/a94f3cdc90fdb4031a31e430902e238f822ab8dd))
+- **fns:** fix empty Fs type problem ([f22479c](https://github.com/forminator/react-wire/commit/f22479cd4495bd9975bd1030a3e979206a3bffcc))
+
+### Documentations
+
+- update docs related to fns ([76cac88](https://github.com/forminator/react-wire/commit/76cac881ffde3f3791f4e5e4b7c3e636c6146332))
+
 ### [0.1.1](https://github.com/forminator/react-wire/compare/v0.1.0...v0.1.1) (2019-11-07)
 
 ### Features
