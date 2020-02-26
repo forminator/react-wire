@@ -35,21 +35,21 @@
     "release": "standard-version"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@testing-library/react-hooks": "^3.2.1",
-    "@types/jest": "^24.0.23",
-    "@types/react": "^16.9.13",
-    "@types/react-dom": "^16.9.4",
-    "@types/testing-library__react-hooks": "^3.1.0",
-    "husky": "^3.1.0",
-    "libton-script": "^0.11.3",
-    "lint-staged": "^9.5.0",
+    "@types/jest": "^25.1.3",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "@types/testing-library__react-hooks": "^3.2.0",
+    "husky": "^4.2.3",
+    "libton-script": "^0.12.1",
+    "lint-staged": "^10.0.8",
     "markdown-toc": "^1.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-test-renderer": "^16.12.0",
-    "standard-version": "^7.0.1"
+    "standard-version": "^7.1.0"
   },
   "dependencies": {
     "mitt": "^1.2.0"

@@ -180,7 +180,11 @@ wire.fns.sample();
 
 ```ts
 // code
-useFn(wire, 'sample', useCallback((n: string) => {}, []));
+useFn(
+  wire,
+  'sample',
+  useCallback((n: string) => {}, []),
+);
 ```
 
 error:
