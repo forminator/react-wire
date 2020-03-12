@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { isInitializer } from './is-initializer';
+import { isInitializer } from './utils/is-initializer';
 import { Wire } from './wire';
 import { _WireImpl } from './wire.impl';
 

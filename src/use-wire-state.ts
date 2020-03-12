@@ -6,8 +6,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { isSetStateAction } from './is-set-state-action';
-import { Defined } from './type-utils';
+import { isSetStateAction } from './utils/is-set-state-action';
+import { Defined } from './utils/type-utils';
 import { useWire } from './use-wire';
 import { Wire } from './wire';
 

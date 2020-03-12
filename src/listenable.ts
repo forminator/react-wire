@@ -1,4 +1,4 @@
-import { KeyOfMethods, StrictMethodsGuard } from './type-utils';
+import { KeyOfMethods, StrictMethodsGuard } from './utils/type-utils';
 
 export interface Action<Fs, K extends KeyOfMethods<Fs> = KeyOfMethods<Fs>> {
   type: K;

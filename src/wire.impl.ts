@@ -1,7 +1,7 @@
 import mitt, { Emitter } from 'mitt';
-import { batchedUpdates } from './batched-updates';
+import { batchedUpdates } from './utils/batched-updates';
 import { Action, ActionListener } from './listenable';
-import { KeyOfMethods, StrictMethodsGuard } from './type-utils';
+import { KeyOfMethods, StrictMethodsGuard } from './utils/type-utils';
 
 import { Wire } from './wire';
 import { Fns } from './with-fns';

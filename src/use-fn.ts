@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { KeyOfMethods } from './type-utils';
+import { KeyOfMethods } from './utils/type-utils';
 import { Wire } from './wire';
 
 /**

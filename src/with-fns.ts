@@ -1,4 +1,4 @@
-import { KeyOfMethods, Methods } from './type-utils';
+import { KeyOfMethods, Methods } from './utils/type-utils';
 
 export interface WithFns<Fs extends {}> {
   fn: <K extends KeyOfMethods<Fs>>(name: K, value: Fs[K]) => () => void;
