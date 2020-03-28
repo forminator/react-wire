@@ -327,7 +327,3 @@ const wire = useWire(condition ? wire1 : wire2);
 const value = useWireValue(condition ? wire1 : wire2);
 const [state, setState] = useWireState(condition ? wire1 : wire2);
 ```
-
-## API Docs
-
-[API docs](./docs/api/react-wire.md)
