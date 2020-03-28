@@ -319,7 +319,7 @@ state; // => 2
 
 ### Rewiring
 
-Please avoid changing the wire variable. rewiring can cause strange behaviors and bad intermediate values
+Please avoid changing the wire variable. if wire argument changed, an error will be thrown.
 
 ```tsx
 // wrong, avoid.

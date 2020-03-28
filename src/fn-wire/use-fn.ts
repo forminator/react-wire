@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { KeyOfMethods } from '../utils/type-utils';
+import { useStabilityGuard } from '../utils/use-stability-guard';
 import { FnsWire } from './fns-wire';
 
 /**
@@ -30,6 +31,7 @@ export function useFn<Fns, K extends KeyOfMethods<Fns>>(
   name: K,
   fn: Fns[K],
 ) {
+  useStabilityGuard(wire);
   useEffect(() => {
     return wire.fn(name, fn);
   }, [wire, name, fn]);
