@@ -6,12 +6,8 @@
  * @packageDocumentation
  */
 
-export { _WireImpl } from './wire.impl';
-export { useWire } from './use-wire';
-export { useWireState } from './use-wire-state';
-export { useWireValue } from './use-wire-value';
-export { useInterceptor } from './use-interceptor';
-export { useFn } from './use-fn';
-
-// TODO remove. kept for backward compatibility
-export { useInterceptor as useInterferer } from './use-interceptor';
+export { useWire } from './wire/use-wire';
+export { useWireState } from './state-wire/use-wire-state';
+export { useWireValue } from './state-wire/use-wire-value';
+export { useInterceptor } from './interceptor/use-interceptor';
+export { useFn } from './fn-wire/use-fn';
