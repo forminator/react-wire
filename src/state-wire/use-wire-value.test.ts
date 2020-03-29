@@ -18,7 +18,7 @@ describe('useWireValue', () => {
       describe('without initial value', () => {
         it('should return undefined', () => {
           const { result } = renderHook(() => {
-            const wire = useStateWire(null);
+            const wire = useStateWire<number>(null);
             const value = useWireValue(wire);
             return { value };
           });
@@ -42,7 +42,7 @@ describe('useWireValue', () => {
     describe('with initial  value on sibling', () => {
       it('should return wire initial value', () => {
         const { result } = renderHook(() => {
-          const parent = useStateWire(null);
+          const parent = useStateWire<number>(null);
           const wire = useStateWire(parent, 4);
           const value = useWireValue(wire);
           const sibling = useStateWire(parent, 5);
@@ -57,7 +57,7 @@ describe('useWireValue', () => {
     describe('with default value', () => {
       it('should returns default value', () => {
         const { result } = renderHook(() => {
-          const wire = useStateWire(null);
+          const wire = useStateWire<number>(null);
           const value = useWireValue(wire, 5);
           return { value };
         });
