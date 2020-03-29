@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0](https://github.com/forminator/react-wire/compare/v0.1.2...v0.2.0) (2020-03-29)
+
+### Features
+
+- add stability guard ([f529c74](https://github.com/forminator/react-wire/commit/f529c74751e853bf4ca150dd2a4b0f41b9c4d471))
+- **fns-wire:** add fns-wire ([5fc7475](https://github.com/forminator/react-wire/commit/5fc7475dfab62460a219e162208e11da34a8458c))
+- **interceptor:** add interceptor ([ecb959e](https://github.com/forminator/react-wire/commit/ecb959e5537d1d6887ee252e99e25f2b7655afe5))
+- **state-wire:** add state wire ([22590a8](https://github.com/forminator/react-wire/commit/22590a884737147705ae4eea1fe2bec16ac1710c))
+- **state-wire:** add use-wire-value ([7951ad7](https://github.com/forminator/react-wire/commit/7951ad7189751aedf84ebf0860bdfe61ed2f814e))
+- **wire:** add use-wire ([ce9e825](https://github.com/forminator/react-wire/commit/ce9e82593ba4e31f8f0d26565734e438ff752a44))
+
+### Bug Fixes
+
+- update dependencies ([689638d](https://github.com/forminator/react-wire/commit/689638d71861cb2470b004bc03dd7bb816cff189))
+- update dependencies ([474482b](https://github.com/forminator/react-wire/commit/474482b0674a95b1f811bfa9e0d8e3ddeb50d922))
+
 ### [0.1.2](https://github.com/forminator/react-wire/compare/v0.1.1...v0.1.2) (2019-12-20)
 
 ### Features
