@@ -12,6 +12,10 @@ export function useWire<V, Fns = {}>(
 ): Wire<V, Fns>;
 export function useWire<V, Fns = {}>(
   upLink: Wire<V, Fns> | null | undefined,
+  initialValue: InitializerOrValue<V>,
+): Wire<V, Fns>;
+export function useWire<V, Fns = {}>(
+  upLink: Wire<V, Fns> | null | undefined,
   initialValue?: InitializerOrValue<V | undefined>,
 ): Wire<V | undefined, Fns>;
 export function useWire<V, Fns = {}>(

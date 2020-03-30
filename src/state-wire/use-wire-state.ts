@@ -22,6 +22,10 @@ export function useWireState<V>(
 ): valueAndAction<V>;
 export function useWireState<V>(
   wire: StateWire<V> | null | undefined,
+  initialValue: InitializerOrValue<V>,
+): valueAndAction<V>;
+export function useWireState<V>(
+  wire: StateWire<V> | null | undefined,
   initialValue?: InitializerOrValue<V | undefined>,
 ): valueAndAction<V | undefined>;
 export function useWireState<V>(
