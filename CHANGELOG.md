@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.2.1](https://github.com/forminator/react-wire/compare/v0.2.0...v0.2.1) (2020-03-30)
+
+### Bug Fixes
+
+- add default Fns type to wire ([104fb97](https://github.com/forminator/react-wire/commit/104fb97475f5e3623a40b45387b2db28fc3e037d))
+- improve useWireValue typing ([a4475a4](https://github.com/forminator/react-wire/commit/a4475a403b9d98e34a08f426e84eac9643301e96))
+
 ## [0.2.0](https://github.com/forminator/react-wire/compare/v0.1.2...v0.2.0) (2020-03-29)
 
 ### Features
