@@ -5,5 +5,4 @@ node_modules
 /bin/
 /coverage/
 /.cache/
-/index.d.ts
 /tsdoc-metadata.json
