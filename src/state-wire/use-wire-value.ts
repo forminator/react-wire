@@ -1,26 +1,28 @@
 import { useDebugValue, useEffect, useState } from 'react';
 import { Defined } from '../utils/type-utils';
 import { useStabilityGuard } from '../utils/use-stability-guard';
-import { StateWire, WireState } from './state-wire';
+import { ReadonlyStateWire, WireState } from './readonly-state-wire';
 
 export function useWireValue(
   wire: null | undefined,
   defaultValue?: unknown,
 ): undefined;
-export function useWireValue<W extends StateWire<any>>(wire: W): WireState<W>;
-export function useWireValue<W extends StateWire<any>>(
+export function useWireValue<W extends ReadonlyStateWire<any>>(
+  wire: W,
+): WireState<W>;
+export function useWireValue<W extends ReadonlyStateWire<any>>(
   wire: W | null | undefined,
   defaultValue: Defined<WireState<W>>,
 ): Defined<WireState<W>>;
-export function useWireValue<W extends StateWire<any>>(
+export function useWireValue<W extends ReadonlyStateWire<any>>(
   wire: W,
   defaultValue?: WireState<W> | undefined,
 ): WireState<W>;
-export function useWireValue<W extends StateWire<any>>(
+export function useWireValue<W extends ReadonlyStateWire<any>>(
   wire: W | null | undefined,
   defaultValue?: WireState<W>,
 ): WireState<W> | undefined;
-export function useWireValue<W extends StateWire<any>>(
+export function useWireValue<W extends ReadonlyStateWire<any>>(
   wire: W | null | undefined,
   defaultValue?: WireState<W>,
 ): WireState<W> | undefined {

@@ -25,14 +25,17 @@ export interface StateWire<V> extends StateWireGuard<V> {
   subscribe(callback: (value: Defined<V>) => void): () => void;
 }
 
-export function isStateWire<V = unknown>(wire: unknown): wire is StateWire<V> {
-  return !!(wire && (wire as any)[' state-wire']);
+export function isWritableStateWire<V = unknown>(
+  wire: unknown,
+): wire is StateWire<V> {
+  return !!(
+    wire &&
+    (wire as any)[' state-wire'] &&
+    (wire as any)[' state-wire'][0] &&
+    (wire as any)[' state-wire'][1]
+  );
 }
 
 export function createStateWireGuard<V>(): StateWireGuard<V> {
-  return { ' state-wire': true as any };
+  return { ' state-wire': [true /* read */, true /* write */] as any };
 }
-
-export type WireState<W extends StateWire<any>> = W extends StateWire<infer V>
-  ? V
-  : never;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { StateWire, WireState } from '../state-wire/state-wire';
+import { WireState } from '../state-wire/readonly-state-wire';
+import { StateWire } from '../state-wire/state-wire';
 import { useStabilityGuard } from '../utils/use-stability-guard';
 import { createInterceptor } from './create-interceptor';
 import { Interceptor } from './interceptor';

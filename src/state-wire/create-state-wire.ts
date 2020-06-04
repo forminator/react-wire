@@ -1,6 +1,10 @@
 import mitt, { Emitter } from 'mitt';
 import { Defined, isDefined } from '../utils/type-utils';
-import { createStateWireGuard, isStateWire, StateWire } from './state-wire';
+import {
+  createStateWireGuard,
+  isWritableStateWire,
+  StateWire,
+} from './state-wire';
 
 type DisconnectFunction = () => void;
 type ConnectFunction = () => DisconnectFunction;
@@ -24,7 +28,7 @@ export function createStateWire<V>(
   const key: string = 'value';
   let stateValue = initialValue;
   const emitter: Emitter = mitt();
-  const upLink: StateWire<V | undefined> | null = isStateWire<V>(ctx)
+  const upLink: StateWire<V | undefined> | null = isWritableStateWire<V>(ctx)
     ? ctx
     : null;
 

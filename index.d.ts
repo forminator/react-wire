@@ -9,6 +9,8 @@ import { SetStateAction } from 'react';
 
 declare type CB<T> = (t: T) => void;
 
+declare type CovarianceGuard<T> = [T, unknown];
+
 declare type Defined<T> = T extends undefined ? never : T;
 
 export declare interface FnsWire<Fns extends {}> extends FnsWireGuard<Fns> {
@@ -44,6 +46,28 @@ declare type MethodKeys<T> = {
 declare type Methods<T> = Pick<T, MethodKeys<T>>;
 
 declare type NonNever<T> = IsNever<T> extends true ? any : T;
+
+export declare interface ReadonlyStateWire<V>
+  extends ReadonlyStateWireGuard<V> {
+  /**
+   * get current value
+   * @returns current value
+   */
+  getValue(): V;
+  /**
+   * subscribe for value change
+   * @param callback
+   * @returns unsubscribe function
+   */
+  subscribe(callback: (value: Defined<V>) => void): () => void;
+}
+
+declare interface ReadonlyStateWireGuard<V> {
+  ' state-wire': CovarianceGuard<V>;
+}
+
+export declare type ReadonlyWire<V, Fns = {}> = ReadonlyStateWire<V> &
+  FnsWire<Fns>;
 
 export declare interface StateWire<V> extends StateWireGuard<V> {
   /**
@@ -177,21 +201,21 @@ export declare function useWireValue(
   defaultValue?: unknown,
 ): undefined;
 
-export declare function useWireValue<W extends StateWire<any>>(
+export declare function useWireValue<W extends ReadonlyStateWire<any>>(
   wire: W,
 ): WireState<W>;
 
-export declare function useWireValue<W extends StateWire<any>>(
+export declare function useWireValue<W extends ReadonlyStateWire<any>>(
   wire: W | null | undefined,
   defaultValue: Defined<WireState<W>>,
 ): Defined<WireState<W>>;
 
-export declare function useWireValue<W extends StateWire<any>>(
+export declare function useWireValue<W extends ReadonlyStateWire<any>>(
   wire: W,
   defaultValue?: WireState<W> | undefined,
 ): WireState<W>;
 
-export declare function useWireValue<W extends StateWire<any>>(
+export declare function useWireValue<W extends ReadonlyStateWire<any>>(
   wire: W | null | undefined,
   defaultValue?: WireState<W>,
 ): WireState<W> | undefined;
@@ -206,10 +230,8 @@ export declare type WireFns<W extends FnsWire<any>> = W extends FnsWire<
   ? Fns
   : never;
 
-export declare type WireState<W extends StateWire<any>> = W extends StateWire<
-  infer V
->
-  ? V
-  : never;
+export declare type WireState<
+  W extends ReadonlyStateWire<any>
+> = W extends ReadonlyStateWire<infer V> ? V : never;
 
 export {};
