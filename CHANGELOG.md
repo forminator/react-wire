@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.2.3](https://github.com/forminator/react-wire/compare/v0.2.2...v0.2.3) (2020-06-05)
+
+### Features
+
+- **state-wire:** add readonly wire type ([b73b74c](https://github.com/forminator/react-wire/commit/b73b74c5fc1170c1374ad085bdfc0471085a8f5e))
+
 ### [0.2.2](https://github.com/forminator/react-wire/compare/v0.2.1...v0.2.2) (2020-03-30)
 
 ### Bug Fixes
