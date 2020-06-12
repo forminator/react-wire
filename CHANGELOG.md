@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.2.5](https://github.com/forminator/react-wire/compare/v0.2.4...v0.2.5) (2020-06-12)
+
+### Documentations
+
+- **wire:** add createWire dock ([21892ba](https://github.com/forminator/react-wire/commit/21892ba5d4753d94b879f11d17dc798e1652dcfa))
+
 ### [0.2.4](https://github.com/forminator/react-wire/compare/v0.2.3...v0.2.4) (2020-06-12)
 
 ### Features
