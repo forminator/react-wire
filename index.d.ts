@@ -11,6 +11,8 @@ declare type CB<T> = (t: T) => void;
 
 declare type CovarianceGuard<T> = [T, unknown];
 
+export declare function createWire<V>(initialValue: V): Wire<V>;
+
 declare type Defined<T> = T extends undefined ? never : T;
 
 export declare interface FnsWire<Fns extends {}> extends FnsWireGuard<Fns> {
