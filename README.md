@@ -17,13 +17,13 @@ connect react components with wire
   - [get/set wire value](#getset-wire-value)
   - [`fns` object and `useFn` hook](#fns-object-and-usefn-hook)
 - [Advanced usages](#advanced-usages)
+  - [Global wire](#global-wire)
   - [Subscribe to the wire](#subscribe-to-the-wire)
   - [`useInterceptor` hook](#useinterceptor-hook)
 - [Notes](#notes)
   - [`undefined` value vs `null` value](#undefined-value-vs-null-value)
   - [Initial value](#initial-value)
   - [Rewiring](#rewiring)
-- [API Docs](#api-docs)
 
 <!-- tocstop -->
 
@@ -221,6 +221,18 @@ const wireB = useWire<Value, C>(wireAB); // error
 ```
 
 ## Advanced usages
+
+### Global wire
+
+If you want have a global wire you can `createWire` function.
+
+```ts
+const themeWire = createWire<'light' | 'dark'>('light');
+
+function SomeComponent() {
+  const theme = useWireValue(themeWire);
+}
+```
 
 ### Subscribe to the wire
 
