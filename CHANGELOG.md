@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.2.4](https://github.com/forminator/react-wire/compare/v0.2.3...v0.2.4) (2020-06-12)
+
+### Features
+
+- **wire:** add create wire ([4b378e2](https://github.com/forminator/react-wire/commit/4b378e2e69d097b0ba5181cd177fb59b5663d4bd))
+
 ### [0.2.3](https://github.com/forminator/react-wire/compare/v0.2.2...v0.2.3) (2020-06-05)
 
 ### Features
