@@ -18,6 +18,8 @@ connect react components with wire
   - [`fns` object and `useFn` hook](#fns-object-and-usefn-hook)
 - [Advanced usages](#advanced-usages)
   - [Global wire](#global-wire)
+  - [`useSelector` hook](#useselector-hook)
+  - [`createSelector` function](#createselector-function)
   - [Subscribe to the wire](#subscribe-to-the-wire)
   - [`useInterceptor` hook](#useinterceptor-hook)
 - [Notes](#notes)
@@ -231,6 +233,47 @@ const themeWire = createWire<'light' | 'dark'>('light');
 
 function SomeComponent() {
   const theme = useWireValue(themeWire);
+}
+```
+
+### `useSelector` hook
+
+`useSelector` creates and returns a new selector. a selector is a wire with the calculated value.
+
+```ts
+const wire = useWire(null, 4);
+const selector = useSelector({
+  get: ({ get }) => get(wire) * 2,
+});
+
+selector.getValue(); // 8
+```
+
+You can create a writable selector with passing the `set` option.
+
+```ts
+const wire = useWire(null, 4);
+const selector = useSelector({
+  get: ({ get }) => get(wire) * 2,
+  set: ({ set }, value) => set(wire, value / 2),
+});
+
+selector.setValue(6);
+wire.getValue(); // 3
+```
+
+### `createSelector` function
+
+`createSelector` creates a new selector. It can be used outside of the react.
+
+```ts
+const themeWire = createWire<'light' | 'dark'>('light');
+const textColor = createSelector({
+  get: ({ get }) => (get(themeWire) === 'light' ? '#000' : '#fff'),
+});
+
+function SomeComponent() {
+  const color = useWireValue(textColor);
 }
 ```
 
