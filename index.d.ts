@@ -11,6 +11,14 @@ declare type CB<T> = (t: T) => void;
 
 declare type CovarianceGuard<T> = [T, unknown];
 
+export declare function createSelector<V, Fns = {}>(
+  options: WritableSelectorOptions<V>,
+): Wire<V, Fns>;
+
+export declare function createSelector<V, Fns = {}>(
+  options: ReadOnlySelectorOptions<V>,
+): ReadonlyWire<V, Fns>;
+
 export declare function createWire<V, Fns = {}>(initialValue: V): Wire<V, Fns>;
 
 declare type Defined<T> = T extends undefined ? never : T;
@@ -30,6 +38,8 @@ declare interface FnsWireGuard<Fns> {
   ' fns-wire': StrictMethodsGuard<Fns>;
 }
 
+declare type GetWireValue = <V>(wire: ReadonlyStateWire<V>) => V;
+
 declare type InitializerOrValue<V> = V | (() => V);
 
 export declare type Interceptor<Value> = (
@@ -48,6 +58,10 @@ declare type MethodKeys<T> = {
 declare type Methods<T> = Pick<T, MethodKeys<T>>;
 
 declare type NonNever<T> = IsNever<T> extends true ? any : T;
+
+declare interface ReadOnlySelectorOptions<V> {
+  get: (options: { get: GetWireValue }) => V;
+}
 
 export declare interface ReadonlyStateWire<V>
   extends ReadonlyStateWireGuard<V> {
@@ -70,6 +84,8 @@ declare interface ReadonlyStateWireGuard<V> {
 
 export declare type ReadonlyWire<V, Fns = {}> = ReadonlyStateWire<V> &
   FnsWire<Fns>;
+
+declare type SetWireValue = <V>(wire: StateWire<V>, value: Defined<V>) => void;
 
 export declare interface StateWire<V> extends StateWireGuard<V> {
   /**
@@ -160,6 +176,14 @@ export declare function useInterceptor<W extends StateWire<any>>(
   interceptor: Interceptor<WireState<W>>,
 ): W;
 
+export declare function useSelector<V, Fns = {}>(
+  options: WritableSelectorOptions<V>,
+): Wire<V, Fns>;
+
+export declare function useSelector<V, Fns = {}>(
+  options: ReadOnlySelectorOptions<V>,
+): ReadonlyWire<V, Fns>;
+
 export declare function useWire<V, Fns = {}>(
   upLink: Wire<V, Fns>,
 ): Wire<V, Fns>;
@@ -235,5 +259,16 @@ export declare type WireFns<W extends FnsWire<any>> = W extends FnsWire<
 export declare type WireState<
   W extends ReadonlyStateWire<any>
 > = W extends ReadonlyStateWire<infer V> ? V : never;
+
+declare interface WritableSelectorOptions<V> {
+  get: (options: { get: GetWireValue }) => V;
+  set: (
+    options: {
+      get: GetWireValue;
+      set: SetWireValue;
+    },
+    value: V,
+  ) => void;
+}
 
 export {};

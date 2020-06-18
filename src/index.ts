@@ -12,3 +12,5 @@ export { useWireValue } from './state-wire/use-wire-value';
 export { useInterceptor } from './interceptor/use-interceptor';
 export { useFn } from './fn-wire/use-fn';
 export { createWire } from './wire/create-wire';
+export { createSelector } from './selector/create-selector';
+export { useSelector } from './selector/use-selector';
