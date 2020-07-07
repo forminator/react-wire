@@ -1,7 +1,7 @@
 {
   "name": "@forminator/react-wire",
   "description": "connect react components with wire",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "license": "MIT",
   "main": "lib/forminator-react-wire.js",
   "unpkg": "dist/forminator-react-wire.js",

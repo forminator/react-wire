@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0](https://github.com/forminator/react-wire/compare/v0.2.5...v0.3.0) (2020-07-07)
+
+### Features
+
+- **selector:** add createSelector and useSelector ([75024ba](https://github.com/forminator/react-wire/commit/75024ba4b578da3b9a09241768a55a8594c5bfc7))
+- **selector:** export useSelector and createSelector ([586a0e9](https://github.com/forminator/react-wire/commit/586a0e99660802dd12581130abb27b4c438a025b))
+- **state-selector:** add createStateSelector ([5c7bd97](https://github.com/forminator/react-wire/commit/5c7bd97d19df26e10da02d3c0b13b6d8d5789559))
+- **state-selector:** add useStateSelector ([ca0e3a0](https://github.com/forminator/react-wire/commit/ca0e3a059d10bc0098c5ee8bfae8204c39a4e576))
+
+### Bug Fixes
+
+- **wire:** add Fns generic to createWire ([7a23e2b](https://github.com/forminator/react-wire/commit/7a23e2b64cec190d8dfd98a5e609906afff884a2))
+
+### Documentations
+
+- **selector:** add useSelector and createSelector docs ([95c16e8](https://github.com/forminator/react-wire/commit/95c16e89e34c3d9f5dd767dec2331a0ecd885f87))
+
 ### [0.2.5](https://github.com/forminator/react-wire/compare/v0.2.4...v0.2.5) (2020-06-12)
 
 ### Documentations
