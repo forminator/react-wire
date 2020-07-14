@@ -184,6 +184,11 @@ export declare function useSelector<V, Fns = {}>(
   options: ReadOnlySelectorOptions<V>,
 ): ReadonlyWire<V, Fns>;
 
+export declare function useSubscribe<V>(
+  wire: ReadonlyStateWire<V>,
+  callback: (value: Defined<V>) => void,
+): void;
+
 export declare function useWire<V, Fns = {}>(
   upLink: Wire<V, Fns>,
 ): Wire<V, Fns>;
