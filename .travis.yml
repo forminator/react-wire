@@ -9,6 +9,7 @@ script:
   - yarn format:check
   - yarn test --coverage --verbose
   - yarn build
+  - git diff --exit-code --name-only
   - codecov
 deploy:
   provider: npm
