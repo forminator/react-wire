@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.3.1](https://github.com/forminator/react-wire/compare/v0.3.0...v0.3.1) (2020-07-15)
+
+### Features
+
+- **state-wire:** add useSubscribe hook ([#19](https://github.com/forminator/react-wire/issues/19)) ([6190f18](https://github.com/forminator/react-wire/commit/6190f18a954ce63c0633e59efa2eaf09fb78870a))
+
 ## [0.3.0](https://github.com/forminator/react-wire/compare/v0.2.5...v0.3.0) (2020-07-07)
 
 ### Features
