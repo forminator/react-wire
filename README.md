@@ -20,6 +20,7 @@ connect react components with wire
   - [Global wire](#global-wire)
   - [`useSelector` hook](#useselector-hook)
   - [`createSelector` function](#createselector-function)
+  - [`useSubscribe` hook](#usesubscribe-hook)
   - [Subscribe to the wire](#subscribe-to-the-wire)
   - [`useInterceptor` hook](#useinterceptor-hook)
 - [Notes](#notes)
@@ -277,9 +278,22 @@ function SomeComponent() {
 }
 ```
 
+### `useSubscribe` hook
+
+Every time the wire value changes, the callback function would be called
+
+```tsx
+// subscribe
+useSubscribe(
+  useCallback(value => {
+    /* ... */
+  }, []),
+);
+```
+
 ### Subscribe to the wire
 
-Every time wire value changed the callback function will be called
+Every time the wire value changes, the callback function would be called
 
 <details>
 <summary>more detail</summary>
