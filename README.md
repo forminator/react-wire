@@ -285,6 +285,7 @@ Every time the wire value changes, the callback function would be called
 ```tsx
 // subscribe
 useSubscribe(
+  wire,
   useCallback(value => {
     /* ... */
   }, []),
