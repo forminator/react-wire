@@ -140,7 +140,7 @@ declare type StrictMethodsGuard<Fns> = {
 ```
  */
 export declare function useFn<Fns, K extends KeyOfMethods<Fns>>(
-  wire: FnsWire<Fns>,
+  wire: FnsWire<Fns> | null | undefined,
   name: K,
   fn: Fns[K],
 ): void;
