@@ -27,12 +27,12 @@ import { FnsWire } from './fns-wire';
 ```
  */
 export function useFn<Fns, K extends KeyOfMethods<Fns>>(
-  wire: FnsWire<Fns>,
+  wire: FnsWire<Fns> | null | undefined,
   name: K,
   fn: Fns[K],
 ) {
   useStabilityGuard(wire);
   useEffect(() => {
-    return wire.fn(name, fn);
+    return wire?.fn(name, fn);
   }, [wire, name, fn]);
 }

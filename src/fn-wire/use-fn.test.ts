@@ -1,4 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
+import { FnsWire } from './fns-wire';
 import { useFn } from './use-fn';
 import { useFnsWire } from './use-fns-wire';
 
@@ -14,6 +15,20 @@ describe('useFn', () => {
       result.current.wire.fns.test(3);
     });
     expect(fn).toBeCalledWith(3);
+  });
+  it('should accept null or undefined wire', () => {
+    const fn = jest.fn();
+    const { result } = renderHook((): {
+      wire: FnsWire<{ test(n: number): void }> | null;
+    } => {
+      const wire = null;
+      useFn(wire, 'test', fn);
+      return { wire };
+    });
+    act(() => {
+      result.current.wire?.fns.test(3);
+    });
+    expect(fn).not.toBeCalled();
   });
   it('should subscribe on fns with parent', () => {
     const fn = jest.fn();
