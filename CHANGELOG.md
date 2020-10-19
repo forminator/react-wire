@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.3.2](https://github.com/forminator/react-wire/compare/v0.3.1...v0.3.2) (2020-10-19)
+
+### Features
+
+- **fns-wire:** accept null and undefined in useFn function ([#23](https://github.com/forminator/react-wire/issues/23)) ([4e45fa6](https://github.com/forminator/react-wire/commit/4e45fa600d174f21d837a647317e5a6487d93b17))
+
+### Documentations
+
+- fix useSubscribe doc in readme ([#21](https://github.com/forminator/react-wire/issues/21)) ([681ef09](https://github.com/forminator/react-wire/commit/681ef09c19399dc757755b309ebbf91e19b17787))
+- fix useSubscribe doc in readme ([#22](https://github.com/forminator/react-wire/issues/22)) ([8e8821d](https://github.com/forminator/react-wire/commit/8e8821d5e7ad7b383ac2cfd6dba731e92ce1be25))
+
 ### [0.3.1](https://github.com/forminator/react-wire/compare/v0.3.0...v0.3.1) (2020-07-15)
 
 ### Features
