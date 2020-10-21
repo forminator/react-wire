@@ -119,7 +119,7 @@ setState(value);
 
 ```tsx
 // functional update
-setState(value => update(value));
+setState((value) => update(value));
 ```
 
 **note**: If current state is `undefined`, updater function won't be called! you can pass `initialValue` to `useWireState` or make sure the wire has value to avoid this behavior.
@@ -145,7 +145,7 @@ With `fns` object and `useFn` hook, you can transfer function calls over wires. 
 useFn(
   wire,
   'sample',
-  useCallback(value => {
+  useCallback((value) => {
     console.log(value);
   }, []),
 );
@@ -286,7 +286,7 @@ Every time the wire value changes, the callback function would be called
 // subscribe
 useSubscribe(
   wire,
-  useCallback(value => {
+  useCallback((value) => {
     /* ... */
   }, []),
 );
@@ -301,7 +301,7 @@ Every time the wire value changes, the callback function would be called
 
 ```tsx
 // subscribe
-const unsubscribe = wire.subscribe(value => {
+const unsubscribe = wire.subscribe((value) => {
   /* ... */
 });
 

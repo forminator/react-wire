@@ -14,7 +14,7 @@ describe('create-wire', () => {
   it('should return wire', () => {
     const fn = jest.fn();
     const wire = createWire(4);
-    wire.subscribe(value => {
+    wire.subscribe((value) => {
       fn(value);
     });
     wire.setValue(3);

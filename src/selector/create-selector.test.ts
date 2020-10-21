@@ -32,7 +32,7 @@ describe('create-wire', () => {
     const selector = createSelector({
       get: ({ get }) => get(wire) * 2,
     });
-    selector.subscribe(value => {
+    selector.subscribe((value) => {
       fn(value);
     });
     wire.setValue(3);
