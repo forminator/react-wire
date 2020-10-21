@@ -12,7 +12,7 @@ describe('useSubscribe', () => {
       const wire = useStateWire(null, 5);
       useSubscribe(
         wire,
-        useCallback(value => {
+        useCallback((value) => {
           fn(value);
         }, []),
       );
@@ -28,7 +28,7 @@ describe('useSubscribe', () => {
       const wire = useStateWire(null, 5);
       useSubscribe(
         wire,
-        useCallback(value => {
+        useCallback((value) => {
           fn(value);
         }, []),
       );
@@ -48,7 +48,7 @@ describe('useSubscribe', () => {
       const wire = useStateWire(null, 5);
       useSubscribe(
         wire,
-        useCallback(value => {
+        useCallback((value) => {
           fn(value);
         }, []),
       );

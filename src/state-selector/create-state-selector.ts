@@ -85,7 +85,7 @@ export function createStateSelector<V>(
     return () => {
       const oldActiveWires = activeWires.current;
       activeWires.current = new Map();
-      oldActiveWires.forEach(unsubscribe => {
+      oldActiveWires.forEach((unsubscribe) => {
         unsubscribe && unsubscribe();
       });
     };

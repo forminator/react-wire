@@ -6,7 +6,7 @@ describe('useInterceptor', () => {
   it('should have undefined value if upLink wire have undefined value', () => {
     const { result } = renderHook(() => {
       const wire1 = useStateWire<string>(null);
-      const wire2 = useInterceptor(wire1, s => s.toUpperCase());
+      const wire2 = useInterceptor(wire1, (s) => s.toUpperCase());
       return { wire1, wire2 };
     });
 
@@ -17,7 +17,7 @@ describe('useInterceptor', () => {
   it('should not change up-link wire', () => {
     const { result } = renderHook(() => {
       const wire1 = useStateWire<string>(null, 'hi');
-      const wire2 = useInterceptor(wire1, s => s.toUpperCase());
+      const wire2 = useInterceptor(wire1, (s) => s.toUpperCase());
       return { wire1, wire2 };
     });
 
@@ -28,7 +28,7 @@ describe('useInterceptor', () => {
   it('should intercept with returned wire values', () => {
     const { result } = renderHook(() => {
       const wire1 = useStateWire<string>(null);
-      const wire2 = useInterceptor(wire1, s => s.toUpperCase());
+      const wire2 = useInterceptor(wire1, (s) => s.toUpperCase());
       const wire3 = useStateWire<string>(wire2, 'hi');
       return { wire1, wire2, wire3 };
     });
@@ -41,7 +41,7 @@ describe('useInterceptor', () => {
   it('should intercept with returned wire setValue functions', () => {
     const { result } = renderHook(() => {
       const wire1 = useStateWire<string>(null);
-      const wire2 = useInterceptor(wire1, s => s.toUpperCase());
+      const wire2 = useInterceptor(wire1, (s) => s.toUpperCase());
       const wire3 = useStateWire<string>(wire2, 'hi');
       return { wire1, wire2, wire3 };
     });
@@ -58,7 +58,7 @@ describe('useInterceptor', () => {
   it('should not intercept with up-link setValue functions', () => {
     const { result } = renderHook(() => {
       const wire1 = useStateWire<string>(null);
-      const wire2 = useInterceptor(wire1, s => s.toUpperCase());
+      const wire2 = useInterceptor(wire1, (s) => s.toUpperCase());
       const wire3 = useStateWire<string>(wire2, 'hi');
       return { wire1, wire2, wire3 };
     });
@@ -103,8 +103,8 @@ describe('useInterceptor', () => {
   it('should apply all interceptor', () => {
     const { result } = renderHook(() => {
       const wire1 = useStateWire<string>(null, 'hi');
-      const wire2 = useInterceptor(wire1, s => s.toUpperCase());
-      const wire3 = useInterceptor(wire2, s => s.replace(/\d+/, ''));
+      const wire2 = useInterceptor(wire1, (s) => s.toUpperCase());
+      const wire3 = useInterceptor(wire2, (s) => s.replace(/\d+/, ''));
       return { wire1, wire2, wire3 };
     });
 
@@ -119,8 +119,8 @@ describe('useInterceptor', () => {
   it('should apply from down to up', () => {
     const { result } = renderHook(() => {
       const wire1 = useStateWire<string>(null, 'hi');
-      const wire2 = useInterceptor(wire1, s => s.toLowerCase());
-      const wire3 = useInterceptor(wire2, s => s.toUpperCase());
+      const wire2 = useInterceptor(wire1, (s) => s.toLowerCase());
+      const wire3 = useInterceptor(wire2, (s) => s.toUpperCase());
       return { wire1, wire2, wire3 };
     });
 

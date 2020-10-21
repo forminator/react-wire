@@ -42,7 +42,7 @@ export function useWireState<V>(
     if (isDefined(wireValue) && wireValue !== stateValue) {
       setStateValue(wireValue);
     }
-    return innerWire.subscribe(value => {
+    return innerWire.subscribe((value) => {
       setStateValue(value);
     });
     // `stateValue` variable only used as initial value

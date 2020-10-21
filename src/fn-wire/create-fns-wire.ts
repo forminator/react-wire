@@ -23,7 +23,7 @@ export function createFnsWire<Fns = {}>(
   const upLink: FnsWire<Fns> | null = isFnsWire<Fns>(ctx) ? ctx : null;
 
   const handler: ProxyHandler<{}> = {
-    get: function(target, prop: KeyOfMethods<Fns>) {
+    get: function (target, prop: KeyOfMethods<Fns>) {
       return (...args: any) => {
         if (upLink) {
           (upLink.fns as any)[prop](...args);

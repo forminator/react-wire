@@ -38,7 +38,7 @@ export function useWireValue<W extends ReadonlyStateWire<any>>(
       if (wireValue !== stateValue) {
         setStateValue(wireValue);
       }
-      return wire.subscribe(value => {
+      return wire.subscribe((value) => {
         setStateValue(value);
       });
     }
