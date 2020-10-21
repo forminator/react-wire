@@ -26,6 +26,17 @@ describe('useWireState', () => {
           expect(result.current.value).toBe(4);
         });
       });
+
+      describe('with initializer value', () => {
+        it('should return initial value', () => {
+          const { result } = renderHook(() => {
+            const [value, setValue] = useWireState(null, () => 4);
+            return { value, setValue };
+          });
+
+          expect(result.current.value).toBe(4);
+        });
+      });
     });
 
     describe('with wire', () => {
@@ -174,7 +185,7 @@ describe('useWireState', () => {
   describe('setValue(fn)', () => {
     describe('without wire', () => {
       it('should not call updater function when value is undefined', () => {
-        const fn = jest.fn(v => v + 1);
+        const fn = jest.fn((v) => v + 1);
         const { result } = renderHook(() => {
           const [value, setValue] = useWireState<number>(null);
           return { value, setValue };
@@ -192,7 +203,7 @@ describe('useWireState', () => {
           return { value, setValue };
         });
         act(() => {
-          result.current.setValue(v => v + 1);
+          result.current.setValue((v) => v + 1);
         });
         expect(result.current.value).toBe(5);
       });
@@ -200,7 +211,7 @@ describe('useWireState', () => {
 
     describe('with wire', () => {
       it('should not call updater function when value is undefined', () => {
-        const fn = jest.fn(v => v + 1);
+        const fn = jest.fn((v) => v + 1);
         const { result } = renderHook(() => {
           const wire = useStateWire<number>(null);
           const [value, setValue] = useWireState(wire);
@@ -216,7 +227,7 @@ describe('useWireState', () => {
       });
 
       it('should update value and wire value', () => {
-        const fn = jest.fn(v => v + 1);
+        const fn = jest.fn((v) => v + 1);
         const { result } = renderHook(() => {
           const wire = useStateWire<number>(null, 4);
           const [value, setValue] = useWireState<number>(wire);

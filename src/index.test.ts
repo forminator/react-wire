@@ -4,6 +4,10 @@ import {
   useWire,
   useWireState,
   useWireValue,
+  createWire,
+  createSelector,
+  useSelector,
+  useSubscribe,
 } from './index';
 
 describe('index file', () => {
@@ -13,5 +17,9 @@ describe('index file', () => {
     expect(useWireState).toBeDefined();
     expect(useInterceptor).toBeDefined();
     expect(useFn).toBeDefined();
+    expect(createWire).toBeDefined();
+    expect(createSelector).toBeDefined();
+    expect(useSelector).toBeDefined();
+    expect(useSubscribe).toBeDefined();
   });
 });
