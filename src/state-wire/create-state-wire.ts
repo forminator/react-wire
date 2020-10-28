@@ -41,8 +41,10 @@ export function createStateWire<V>(
     if (upLink) {
       upLink.setValue(value);
     } else {
-      stateValue = value;
-      emitter.emit(key, stateValue);
+      if (stateValue !== value) {
+        stateValue = value;
+        emitter.emit(key, stateValue);
+      }
     }
   };
 

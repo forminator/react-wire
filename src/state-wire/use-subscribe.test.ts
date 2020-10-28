@@ -41,6 +41,26 @@ describe('useSubscribe', () => {
     expect(fn).toBeCalledWith(3);
   });
 
+  it('should not call the callback function when the new value is same', () => {
+    const fn = jest.fn();
+
+    const { result } = renderHook(() => {
+      const wire = useStateWire(null, 5);
+      useSubscribe(
+        wire,
+        useCallback((value) => {
+          fn(value);
+        }, []),
+      );
+      return { wire };
+    });
+    act(() => {
+      result.current.wire.setValue(5);
+    });
+
+    expect(fn).not.toBeCalled();
+  });
+
   it('should not call the callback function after unmount', () => {
     const fn = jest.fn();
 
@@ -62,5 +82,91 @@ describe('useSubscribe', () => {
     });
 
     expect(fn).not.toBeCalled();
+  });
+
+  describe('with uplink', () => {
+    it('should not call the callback function when the new value is same (same value)', () => {
+      const fn = jest.fn();
+
+      const { result } = renderHook(() => {
+        const upLink = useStateWire(null, 5);
+        const wire = useStateWire(upLink, 5);
+        useSubscribe(
+          wire,
+          useCallback((value) => {
+            fn(value);
+          }, []),
+        );
+        return { wire };
+      });
+      act(() => {
+        result.current.wire.setValue(5);
+      });
+
+      expect(fn).not.toBeCalled();
+    });
+
+    it('should not call the callback function when the new value is same (different value)', () => {
+      const fn = jest.fn();
+
+      const { result } = renderHook(() => {
+        const upLink = useStateWire(null, 5);
+        const wire = useStateWire(upLink, 4);
+        useSubscribe(
+          wire,
+          useCallback((value) => {
+            fn(value);
+          }, []),
+        );
+        return { wire };
+      });
+      act(() => {
+        result.current.wire.setValue(5);
+      });
+
+      expect(fn).not.toBeCalled();
+    });
+
+    it('should not call the callback function when the new value is same (undefined uplink value)', () => {
+      const fn = jest.fn();
+
+      const { result } = renderHook(() => {
+        const upLink = useStateWire(null);
+        const wire = useStateWire(upLink, 5);
+        useSubscribe(
+          wire,
+          useCallback((value) => {
+            fn(value);
+          }, []),
+        );
+        return { wire };
+      });
+      act(() => {
+        result.current.wire.setValue(5);
+      });
+
+      expect(fn).not.toBeCalled();
+    });
+
+    it('should not call the callback function when the new value is same (undefined value)', () => {
+      const fn = jest.fn();
+
+      const { result } = renderHook(() => {
+        const upLink = useStateWire(null, 5);
+        const wire = useStateWire(upLink);
+        useSubscribe(
+          wire,
+          useCallback((value) => {
+            fn(value);
+          }, []),
+        );
+        return { wire };
+      });
+      act(() => {
+        result.current.wire.setValue(5);
+      });
+
+      expect(fn).not.toBeCalled();
+    });
   });
 });
