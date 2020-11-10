@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.3.3](https://github.com/forminator/react-wire/compare/v0.3.2...v0.3.3) (2020-11-10)
+
+### Features
+
+- **state-wire:** emit update only when the value is changed ([#25](https://github.com/forminator/react-wire/issues/25)) ([0ddb999](https://github.com/forminator/react-wire/commit/0ddb9995581b99fb113afc2b67a5b278e30970e9))
+
+### Bug Fixes
+
+- support fast-refresh ([#26](https://github.com/forminator/react-wire/issues/26)) ([369d7dd](https://github.com/forminator/react-wire/commit/369d7dde0e8ca8a302e265abef055694af37ee90))
+- update dependencies ([#24](https://github.com/forminator/react-wire/issues/24)) ([7b30e0e](https://github.com/forminator/react-wire/commit/7b30e0e1ad31dc220e4cbdd95924763cfda231cc))
+
 ### [0.3.2](https://github.com/forminator/react-wire/compare/v0.3.1...v0.3.2) (2020-10-19)
 
 ### Features
