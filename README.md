@@ -389,7 +389,7 @@ state; // => 2
 
 ### Rewiring
 
-Please avoid changing the wire variable. if wire argument changed, an error will be thrown.
+Please avoid changing the wire variable. if wire argument changed, a warning will be shown.
 
 ```tsx
 // wrong, avoid.
