@@ -4,7 +4,9 @@ import { useStabilityGuard } from './use-stability-guard';
 
 describe('useStabilityGuard', () => {
   it('should throw error if wire changed', () => {
-    const { result, rerender } = renderHook(
+    const spy = jest.spyOn(global.console, 'warn');
+    spy.mockImplementation(() => {});
+    const { rerender } = renderHook(
       ({ firstWire }: { firstWire: boolean }) => {
         const wire1 = useStateWire(null, 5);
         const wire2 = useStateWire(null, 6);
@@ -15,7 +17,7 @@ describe('useStabilityGuard', () => {
     );
     rerender({ firstWire: false });
 
-    expect(result.error).toBeDefined();
-    expect(result.error.message).toBe('wire argument changed');
+    expect(spy).toBeCalledWith('Please avoid changing the wire variable.');
+    spy.mockRestore();
   });
 });
