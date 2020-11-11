@@ -1,8 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { InitializerOrValue, isInitializer } from '../utils/is-initializer';
 import { isDefined } from '../utils/type-utils';
 import { createStateWire } from './create-state-wire';
 import { StateWire } from './state-wire';
+
+const create = <V>(
+  upLink: StateWire<V | undefined> | null | undefined,
+  initialValue: InitializerOrValue<V | undefined>,
+) => {
+  return createStateWire<V>(
+    upLink || {},
+    isDefined(initialValue)
+      ? isInitializer<V | undefined>(initialValue)
+        ? initialValue()
+        : initialValue
+      : undefined,
+  );
+};
 
 export function useStateWire<V>(upLink: StateWire<V>): StateWire<V>;
 export function useStateWire<V>(
@@ -17,16 +31,13 @@ export function useStateWire<V>(
   upLink: StateWire<V | undefined> | null | undefined,
   initialValue?: InitializerOrValue<V | undefined>,
 ): StateWire<V | undefined> | StateWire<V> {
-  const [[wire, connect]] = useState(() => {
-    return createStateWire<V>(
-      upLink || {},
-      isDefined(initialValue)
-        ? isInitializer<V | undefined>(initialValue)
-          ? initialValue()
-          : initialValue
-        : undefined,
-    );
-  });
+  const [[wire, connect], set] = useState(() => create(upLink, initialValue));
+  const lastUpLinkRef = useRef(upLink);
+
+  if (lastUpLinkRef.current !== upLink) {
+    lastUpLinkRef.current = upLink;
+    set(create(upLink, wire.getValue()));
+  }
   useEffect(() => {
     return connect();
   }, [connect]);

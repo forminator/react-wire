@@ -9,7 +9,6 @@ import {
 import { InitializerOrValue } from '../utils/is-initializer';
 import { isSetStateAction } from '../utils/is-set-state-action';
 import { Defined, isDefined } from '../utils/type-utils';
-import { useStabilityGuard } from '../utils/use-stability-guard';
 import { StateWire } from './state-wire';
 import { useStateWire } from './use-state-wire';
 
@@ -32,7 +31,6 @@ export function useWireState<V>(
   wire: StateWire<V | undefined> | null | undefined,
   initialValue?: InitializerOrValue<V | undefined>,
 ): valueAndAction<V | undefined> | valueAndAction<V> {
-  useStabilityGuard(wire);
   const innerWire = useStateWire(wire, initialValue);
   const valueToReturn = innerWire.getValue();
   const [stateValue, setStateValue] = useState(() => innerWire.getValue());
