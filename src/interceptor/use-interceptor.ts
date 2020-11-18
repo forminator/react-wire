@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { WireState } from '../state-wire/readonly-state-wire';
 import { StateWire } from '../state-wire/state-wire';
-import { useStabilityGuard } from '../utils/use-stability-guard';
 import { createInterceptor } from './create-interceptor';
 import { Interceptor } from './interceptor';
 
@@ -35,10 +34,14 @@ export function useInterceptor<W extends StateWire<any>>(
   wire: W,
   interceptor: Interceptor<WireState<W>>,
 ): W {
-  useStabilityGuard(wire);
-  const [[interceptedWire, setInterceptor]] = useState(() =>
+  const [[interceptedWire, setInterceptor], set] = useState(() =>
     createInterceptor<WireState<W>, W>(wire, interceptor),
   );
+  const lastWireRef = useRef(wire);
+  if (lastWireRef.current !== wire) {
+    lastWireRef.current = wire;
+    set(createInterceptor<WireState<W>, W>(wire, interceptor));
+  }
   setInterceptor(interceptor);
   return interceptedWire;
 }
