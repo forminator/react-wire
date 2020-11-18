@@ -184,6 +184,11 @@ export declare function useSelector<V, Fns = {}>(
   options: ReadOnlySelectorOptions<V>,
 ): ReadonlyWire<V, Fns>;
 
+/**
+ * @deprecated use `useEffect` and `wire.subscribe` instead.
+ * @param wire
+ * @param callback
+ */
 export declare function useSubscribe<V>(
   wire: ReadonlyStateWire<V>,
   callback: (value: Defined<V>) => void,
