@@ -82,4 +82,59 @@ describe('useWireValue', () => {
       expect(result.current.value).toBe(6);
     });
   });
+  describe('when wire changed', () => {
+    it('should use the new wire value', () => {
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useStateWire(null, 5);
+          const wire2 = useStateWire(null, 6);
+          const value = useWireValue(firstWire ? wire1 : wire2);
+          return { value, wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+      expect(result.current.value).toBe(6);
+      expect(result.current.wire1.getValue()).toBe(5);
+      expect(result.current.wire2.getValue()).toBe(6);
+    });
+    it('should updated when new wire changed', () => {
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useStateWire(null, 5);
+          const wire2 = useStateWire(null, 6);
+          const value = useWireValue(firstWire ? wire1 : wire2);
+          return { value, wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+
+      act(() => {
+        result.current.wire2.setValue(7);
+      });
+      expect(result.current.value).toBe(7);
+      expect(result.current.wire1.getValue()).toBe(5);
+      expect(result.current.wire2.getValue()).toBe(7);
+    });
+    it('should not updated when old wire changed', () => {
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useStateWire(null, 5);
+          const wire2 = useStateWire(null, 6);
+          const value = useWireValue(firstWire ? wire1 : wire2);
+          return { value, wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+
+      act(() => {
+        result.current.wire1.setValue(7);
+      });
+      expect(result.current.value).toBe(6);
+      expect(result.current.wire1.getValue()).toBe(7);
+      expect(result.current.wire2.getValue()).toBe(6);
+    });
+  });
 });
