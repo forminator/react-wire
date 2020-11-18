@@ -132,4 +132,50 @@ describe('useInterceptor', () => {
     expect(result.current.wire2.getValue()).toBe('bye');
     expect(result.current.wire3.getValue()).toBe('bye');
   });
+
+  describe('interceptor changed', () => {
+    it('should use updated interceptor', () => {
+      const { result, rerender } = renderHook(
+        ({ m }: { m: number }) => {
+          const wire1 = useStateWire(null, 3);
+          const wire2 = useInterceptor(wire1, (s) => Math.min(s, m));
+          return { wire1, wire2 };
+        },
+        { initialProps: { m: 10 } },
+      );
+      rerender({ m: 20 });
+
+      act(() => {
+        result.current.wire2.setValue(30);
+      });
+
+      expect(result.current.wire1.getValue()).toBe(20);
+      expect(result.current.wire2.getValue()).toBe(20);
+    });
+  });
+
+  describe('wire changed', () => {
+    it('should use updated wire', () => {
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useStateWire(null, 3);
+          const wire2 = useStateWire(null, 5);
+          const wire = useInterceptor(firstWire ? wire1 : wire2, (s) =>
+            Math.min(s, 10),
+          );
+          return { wire, wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+      expect(result.current.wire.getValue()).toBe(5);
+
+      act(() => {
+        result.current.wire.setValue(30);
+      });
+
+      expect(result.current.wire1.getValue()).toBe(3);
+      expect(result.current.wire2.getValue()).toBe(10);
+    });
+  });
 });
