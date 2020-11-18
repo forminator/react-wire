@@ -83,4 +83,82 @@ describe('useFn', () => {
     });
     expect(fn).toBeCalledWith(3);
   });
+  describe('when wire changed', () => {
+    it('should subscribe to the new wire', () => {
+      const fn = jest.fn();
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useFnsWire<{ test(n: number): void }>(null);
+          const wire2 = useFnsWire<{ test(n: number): void }>(null);
+          useFn(firstWire ? wire1 : wire2, 'test', fn);
+          return { wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+
+      act(() => {
+        result.current.wire2.fns.test(3);
+      });
+      expect(fn).toBeCalledWith(3);
+    });
+    it('should unsubscribe from first wire ', () => {
+      const fn = jest.fn();
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useFnsWire<{ test(n: number): void }>(null);
+          const wire2 = useFnsWire<{ test(n: number): void }>(null);
+          useFn(firstWire ? wire1 : wire2, 'test', fn);
+          return { wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+
+      act(() => {
+        result.current.wire1.fns.test(3);
+      });
+      expect(fn).not.toBeCalled();
+    });
+  });
+  describe('when up-link wire changed', () => {
+    it('should subscribe to the new wire', () => {
+      const fn = jest.fn();
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useFnsWire<{ test(n: number): void }>(null);
+          const wire2 = useFnsWire<{ test(n: number): void }>(null);
+          const wire = useFnsWire(firstWire ? wire1 : wire2);
+          useFn(wire, 'test', fn);
+          return { wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+
+      act(() => {
+        result.current.wire2.fns.test(3);
+      });
+      expect(fn).toBeCalledWith(3);
+    });
+    it('should unsubscribe from first wire ', () => {
+      const fn = jest.fn();
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useFnsWire<{ test(n: number): void }>(null);
+          const wire2 = useFnsWire<{ test(n: number): void }>(null);
+          const wire = useFnsWire(firstWire ? wire1 : wire2);
+          useFn(wire, 'test', fn);
+          return { wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+
+      act(() => {
+        result.current.wire1.fns.test(3);
+      });
+      expect(fn).not.toBeCalled();
+    });
+  });
 });
