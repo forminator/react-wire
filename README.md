@@ -26,7 +26,6 @@ connect react components with wire
 - [Notes](#notes)
   - [`undefined` value vs `null` value](#undefined-value-vs-null-value)
   - [Initial value](#initial-value)
-  - [Rewiring](#rewiring)
 
 <!-- tocstop -->
 
@@ -385,15 +384,4 @@ const [state] = useWireState(wire, 2);
 
 wire.getValue(); // => 2
 state; // => 2
-```
-
-### Rewiring
-
-Please avoid changing the wire variable. if wire argument changed, a warning will be shown.
-
-```tsx
-// wrong, avoid.
-const wire = useWire(condition ? wire1 : wire2);
-const value = useWireValue(condition ? wire1 : wire2);
-const [state, setState] = useWireState(condition ? wire1 : wire2);
 ```
