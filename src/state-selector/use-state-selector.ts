@@ -17,12 +17,21 @@ export function useStateSelector<V>(
 export function useStateSelector<V>(
   options: SelectorOptions<V>,
 ): ReadonlyStateWire<V> | StateWire<V> {
-  const [[selector, connect]] = useState(() => {
+  const [[selector, connect], set] = useState(() => {
     return createStateSelector<V>(options);
   });
+  const [usedOptions, setUsedOptions] = useState(options);
+  useEffect(() => {
+    if (usedOptions !== options) {
+      set(createStateSelector<V>(options));
+      setUsedOptions(options);
+    }
+    // fast refresh support:
+    // eslint-disable-next-line
+  }, []);
+
   useEffect(() => {
     return connect();
   }, [connect]);
-
   return selector;
 }
