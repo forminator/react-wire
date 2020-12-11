@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ReadonlyStateWire } from '../state-wire/readonly-state-wire';
 import { StateWire } from '../state-wire/state-wire';
 import {
@@ -17,12 +17,22 @@ export function useStateSelector<V>(
 export function useStateSelector<V>(
   options: SelectorOptions<V>,
 ): ReadonlyStateWire<V> | StateWire<V> {
-  const [[selector, connect]] = useState(() => {
+  const [[selector, connect], set] = useState(() => {
     return createStateSelector<V>(options);
   });
+  const lastOptions = useRef(options);
+
+  useEffect(() => {
+    if (lastOptions.current !== options) {
+      lastOptions.current = options;
+      set(createStateSelector<V>(options));
+    }
+    // fast refresh support:
+    // eslint-disable-next-line
+  }, []);
+
   useEffect(() => {
     return connect();
   }, [connect]);
-
   return selector;
 }
