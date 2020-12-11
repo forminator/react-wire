@@ -1,6 +1,5 @@
 import { useDebugValue, useEffect, useState } from 'react';
 import { Defined } from '../utils/type-utils';
-import { useStabilityGuard } from '../utils/use-stability-guard';
 import { ReadonlyStateWire, WireState } from './readonly-state-wire';
 
 export function useWireValue(
@@ -27,7 +26,6 @@ export function useWireValue<W extends ReadonlyStateWire<any>>(
   defaultValue?: WireState<W>,
 ): WireState<W> | undefined {
   type Value = WireState<W>;
-  useStabilityGuard(wire);
   const wireValue = wire?.getValue();
   const valueToReturn = wireValue === undefined ? defaultValue : wireValue;
   useDebugValue(valueToReturn);

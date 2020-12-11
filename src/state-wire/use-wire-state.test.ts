@@ -287,4 +287,89 @@ describe('useWireState', () => {
       expect(result.current.value2).toBe(wireValue);
     });
   });
+
+  describe('when up-link wire changed', () => {
+    it('should return the new wire value', () => {
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useStateWire(null, 5);
+          const wire2 = useStateWire(null, 6);
+          const [value] = useWireState(firstWire ? wire1 : wire2);
+          return { value };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+      expect(result.current.value).toBe(6);
+    });
+    it('should return update the new wire value if it is undefined', () => {
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useStateWire<number | undefined>(null, 5);
+          const wire2 = useStateWire<number | undefined>(null, undefined);
+          useWireState(firstWire ? wire1 : wire2);
+          return { wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+
+      expect(result.current.wire2.getValue()).toBe(5);
+    });
+
+    it('should be updated with the new wire', () => {
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useStateWire(null, 5);
+          const wire2 = useStateWire(null, 6);
+          const [value] = useWireState(firstWire ? wire1 : wire2);
+          return { value, wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+      act(() => {
+        result.current.wire2.setValue(7);
+      });
+      expect(result.current.value).toBe(7);
+      expect(result.current.wire1.getValue()).toBe(5);
+    });
+
+    it('should not be updated with the old wire', () => {
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useStateWire(null, 5);
+          const wire2 = useStateWire(null, 6);
+          const [value] = useWireState(firstWire ? wire1 : wire2);
+          return { value, wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+      act(() => {
+        result.current.wire1.setValue(7);
+      });
+      expect(result.current.value).toBe(6);
+      expect(result.current.wire2.getValue()).toBe(6);
+    });
+
+    it('should only updated the new wire', () => {
+      const { result, rerender } = renderHook(
+        ({ firstWire }: { firstWire: boolean }) => {
+          const wire1 = useStateWire(null, 5);
+          const wire2 = useStateWire(null, 6);
+          const [value, setValue] = useWireState(firstWire ? wire1 : wire2);
+          return { value, setValue, wire1, wire2 };
+        },
+        { initialProps: { firstWire: true } },
+      );
+      rerender({ firstWire: false });
+      act(() => {
+        result.current.setValue(7);
+      });
+      expect(result.current.value).toBe(7);
+      expect(result.current.wire1.getValue()).toBe(5);
+      expect(result.current.wire2.getValue()).toBe(7);
+    });
+  });
 });
