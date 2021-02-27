@@ -7,8 +7,8 @@ import { createStateWireGuard } from '../state-wire/state-wire';
 import { StateWire } from '../types';
 import { Defined } from '../utils/type-utils';
 
-type DisconnectFunction = () => void;
-type ConnectFunction = () => DisconnectFunction;
+type ReconnectFunction<O> = (options?: O) => void;
+type ConnectFunction<O> = () => ReconnectFunction<O>;
 
 export type GetWireValue = <V>(wire: ReadonlyStateWire<V>) => V;
 export type SetWireValue = <V>(wire: StateWire<V>, value: Defined<V>) => void;
@@ -29,20 +29,22 @@ export interface SelectorOptions<V> {
 
 export function createStateSelector<V>(
   options: WritableSelectorOptions<V>,
-): [StateWire<V>, ConnectFunction];
+): [StateWire<V>, ConnectFunction<WritableSelectorOptions<V>>];
 export function createStateSelector<V>(
   options: ReadOnlySelectorOptions<V>,
-): [ReadonlyStateWire<V>, ConnectFunction];
+): [ReadonlyStateWire<V>, ConnectFunction<ReadOnlySelectorOptions<V>>];
 export function createStateSelector<V>(
   options: SelectorOptions<V>,
-): [ReadonlyStateWire<V> | StateWire<V>, ConnectFunction] {
+):
+  | [ReadonlyStateWire<V>, ConnectFunction<ReadOnlySelectorOptions<V>>]
+  | [StateWire<V>, ConnectFunction<WritableSelectorOptions<V>>] {
   const key: string = 'value';
   const activeWires: {
     current: Map<ReadonlyStateWire<any>, null | (() => void)>;
   } = {
     current: new Map(),
   };
-  const { get: getOption, set: setOption } = options;
+  let { get: getOption, set: setOption } = options;
   const get = <V>(wire: ReadonlyStateWire<V>) => {
     activeWires.current.set(wire, null);
     return wire.getValue();
@@ -92,7 +94,16 @@ export function createStateSelector<V>(
   };
 
   const connect = () => {
-    return update();
+    const disconnect = update();
+    return (options?: SelectorOptions<V>) => {
+      if (options) {
+        getOption = options.get;
+        setOption = options.set;
+        update();
+      } else {
+        disconnect();
+      }
+    };
   };
 
   const getValue = () => {
