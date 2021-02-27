@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0](https://github.com/forminator/react-wire/compare/v0.3.3...v0.4.0) (2021-02-27)
+
+### Features
+
+- **fns-wire:** support rewiring ([#30](https://github.com/forminator/react-wire/issues/30)) ([f3d211a](https://github.com/forminator/react-wire/commit/f3d211aa398408b45b014f7aa8c1877af38360f7))
+- **interceptor:** support rewiring ([#29](https://github.com/forminator/react-wire/issues/29)) ([625a34e](https://github.com/forminator/react-wire/commit/625a34e49b7f271de7855ab0580aae6a688abf03))
+- **selector:** support dependencies ([#32](https://github.com/forminator/react-wire/issues/32)) ([30771a8](https://github.com/forminator/react-wire/commit/30771a8d87aef9bfe17515b2494370f0f2915f29))
+- **state-wire:** support rewiring ([#28](https://github.com/forminator/react-wire/issues/28)) ([382efc6](https://github.com/forminator/react-wire/commit/382efc6f8453fc364730141563738eaaf31880e8))
+
 ### [0.3.3](https://github.com/forminator/react-wire/compare/v0.3.2...v0.3.3) (2020-11-10)
 
 ### Features
