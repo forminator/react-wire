@@ -4,6 +4,7 @@
  * @packageDocumentation
  */
 
+import { DependencyList } from 'react';
 import { Dispatch } from 'react';
 import { SetStateAction } from 'react';
 
@@ -178,10 +179,12 @@ export declare function useInterceptor<W extends StateWire<any>>(
 
 export declare function useSelector<V, Fns = {}>(
   options: WritableSelectorOptions<V>,
+  deps?: DependencyList,
 ): Wire<V, Fns>;
 
 export declare function useSelector<V, Fns = {}>(
   options: ReadOnlySelectorOptions<V>,
+  deps?: DependencyList,
 ): ReadonlyWire<V, Fns>;
 
 export declare function useSubscribe<V>(

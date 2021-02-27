@@ -27,4 +27,23 @@ describe('use state selector', () => {
     });
     expect(result.current.value).toBe(8);
   });
+  it('should have updated value when dependencies changed', () => {
+    const { result, rerender } = renderHook(
+      ({ mul }: { mul: number }) => {
+        const wire = useStateWire(null, 5);
+        const selector = useStateSelector(
+          { get: ({ get }) => get(wire) * mul },
+          [mul],
+        );
+        const value = useWireValue(selector);
+
+        return { value, wire };
+      },
+      { initialProps: { mul: 2 } },
+    );
+    act(() => {
+      rerender({ mul: 3 });
+    });
+    expect(result.current.value).toBe(15);
+  });
 });

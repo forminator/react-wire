@@ -263,6 +263,20 @@ selector.setValue(6);
 wire.getValue(); // 3
 ```
 
+You can define a dependencies list for dependencies of options.
+
+```ts
+const { n } = props;
+const wire = useWire(null, 4);
+const selector = useSelector(
+  {
+    get: ({ get }) => get(wire) * n,
+    set: ({ set }, value) => set(wire, value / n),
+  },
+  [n],
+);
+```
+
 ### `createSelector` function
 
 `createSelector` creates a new selector. It can be used outside of the react.
