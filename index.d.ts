@@ -60,7 +60,7 @@ declare type Methods<T> = Pick<T, MethodKeys<T>>;
 
 declare type NonNever<T> = IsNever<T> extends true ? any : T;
 
-declare interface ReadOnlySelectorOptions<V> {
+export declare interface ReadOnlySelectorOptions<V> {
   get: (options: { get: GetWireValue }) => V;
 }
 
@@ -268,7 +268,7 @@ export declare type WireState<
   W extends ReadonlyStateWire<any>
 > = W extends ReadonlyStateWire<infer V> ? V : never;
 
-declare interface WritableSelectorOptions<V> {
+export declare interface WritableSelectorOptions<V> {
   get: (options: { get: GetWireValue }) => V;
   set: (
     options: {

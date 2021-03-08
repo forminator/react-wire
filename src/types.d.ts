@@ -3,3 +3,7 @@ export { ReadonlyStateWire, WireState } from './state-wire/readonly-state-wire';
 export { FnsWire, WireFns } from './fn-wire/fns-wire';
 export { Wire, ReadonlyWire } from './wire/wire';
 export { Interceptor } from './interceptor/interceptor';
+export {
+  ReadOnlySelectorOptions,
+  WritableSelectorOptions,
+} from './state-selector/create-state-selector';
