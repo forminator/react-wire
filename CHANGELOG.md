@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.4.1](https://github.com/forminator/react-wire/compare/v0.4.0...v0.4.1) (2021-03-08)
+
+### Features
+
+- export selector options types ([#37](https://github.com/forminator/react-wire/issues/37)) ([79718a9](https://github.com/forminator/react-wire/commit/79718a9aff51f93886da1fd6b5be02d69c3491a2))
+
 ## [0.4.0](https://github.com/forminator/react-wire/compare/v0.3.3...v0.4.0) (2021-02-27)
 
 ### Features
