@@ -7,3 +7,5 @@ export {
   ReadOnlySelectorOptions,
   WritableSelectorOptions,
 } from './state-selector/create-state-selector';
+
+export type { Defined } from './utils/type-utils';

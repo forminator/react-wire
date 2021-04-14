@@ -22,7 +22,7 @@ export declare function createSelector<V, Fns = {}>(
 
 export declare function createWire<V, Fns = {}>(initialValue: V): Wire<V, Fns>;
 
-declare type Defined<T> = T extends undefined ? never : T;
+export declare type Defined<T> = T extends undefined ? never : T;
 
 export declare interface FnsWire<Fns extends {}> extends FnsWireGuard<Fns> {
   fn: <K extends KeyOfMethods<Fns>>(name: K, value: Fns[K]) => () => void;
@@ -47,6 +47,15 @@ export declare type Interceptor<Value> = (
   nextValue: Defined<Value>,
   preValue: Value,
 ) => Value | undefined;
+
+/**
+ * isDefined check if the value is undefined or not.
+ * it helps with typescript generic types.
+ * @param value
+ */
+export declare const isDefined: <V>(
+  value: V | undefined,
+) => value is Defined<V>;
 
 declare type IsNever<T> = [T] extends [never] ? true : false;
 
