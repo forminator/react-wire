@@ -15,3 +15,5 @@ export { createWire } from './wire/create-wire';
 export { createSelector } from './selector/create-selector';
 export { useSelector } from './selector/use-selector';
 export { useSubscribe } from './state-wire/use-subscribe';
+
+export { isDefined } from './utils/type-utils';

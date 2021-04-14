@@ -1,13 +1,14 @@
 import {
+  createSelector,
+  createWire,
+  isDefined,
   useFn,
   useInterceptor,
+  useSelector,
+  useSubscribe,
   useWire,
   useWireState,
   useWireValue,
-  createWire,
-  createSelector,
-  useSelector,
-  useSubscribe,
 } from './index';
 
 describe('index file', () => {
@@ -21,5 +22,6 @@ describe('index file', () => {
     expect(createSelector).toBeDefined();
     expect(useSelector).toBeDefined();
     expect(useSubscribe).toBeDefined();
+    expect(isDefined).toBeDefined();
   });
 });

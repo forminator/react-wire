@@ -1,5 +1,10 @@
 export type Defined<T> = T extends undefined ? never : T;
 
+/**
+ * isDefined check if the value is undefined or not.
+ * it helps with typescript generic types.
+ * @param value
+ */
 export const isDefined = <V>(value: V | undefined): value is Defined<V> =>
   value !== undefined;
 
