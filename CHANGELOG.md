@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.4.2](https://github.com/forminator/react-wire/compare/v0.4.1...v0.4.2) (2021-04-14)
+
+### Bug Fixes
+
+- export isDefined and Defined ([#39](https://github.com/forminator/react-wire/issues/39)) ([bc49ae4](https://github.com/forminator/react-wire/commit/bc49ae4ebd60ed6583694b789975c613faaf2e68))
+
 ### [0.4.1](https://github.com/forminator/react-wire/compare/v0.4.0...v0.4.1) (2021-03-08)
 
 ### Features
