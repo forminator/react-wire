@@ -168,5 +168,21 @@ describe('useSubscribe', () => {
 
       expect(fn).not.toBeCalled();
     });
+    it('should call the callback when the value changes between render and effect', () => {
+      const fn = jest.fn();
+
+      renderHook(() => {
+        const upLink = useStateWire(null);
+        useStateWire(upLink, 4);
+        useSubscribe(
+          upLink,
+          useCallback((value) => {
+            fn(value);
+          }, []),
+        );
+      });
+
+      expect(fn).toBeCalledWith(4);
+    });
   });
 });
