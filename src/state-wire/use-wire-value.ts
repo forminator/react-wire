@@ -1,6 +1,9 @@
-import { useDebugValue, useEffect, useState } from 'react';
+import { useCallback, useDebugValue } from 'react';
+import shim from 'use-sync-external-store/shim';
 import { Defined } from '../utils/type-utils';
 import { ReadonlyStateWire, WireState } from './readonly-state-wire';
+
+const { useSyncExternalStore } = shim;
 
 export function useWireValue(
   wire: null | undefined,
@@ -26,23 +29,20 @@ export function useWireValue<W extends ReadonlyStateWire<any>>(
   defaultValue?: WireState<W>,
 ): WireState<W> | undefined {
   type Value = WireState<W>;
-  const wireValue = wire?.getValue();
-  const valueToReturn = wireValue === undefined ? defaultValue : wireValue;
-  useDebugValue(valueToReturn);
-  const [stateValue, setStateValue] = useState<Value | undefined>(wireValue);
-  useEffect(() => {
-    if (wire) {
-      const wireValue = wire.getValue();
-      if (wireValue !== stateValue) {
-        setStateValue(wireValue);
-      }
-      return wire.subscribe((value) => {
-        setStateValue(value);
-      });
-    }
-    // `stateValue` variable only used as initial value
-    // eslint-disable-next-line react-app/react-hooks/exhaustive-deps
-  }, [wire]);
 
+  const subscribe: (onStoreChange: () => void) => () => void = useCallback(
+    (fn) => wire?.subscribe(() => fn()) ?? (() => {}),
+    [wire],
+  );
+  const getSnapshot: () => Value | undefined = useCallback(
+    () => wire?.getValue(),
+    [wire],
+  );
+  const stateValue = useSyncExternalStore<Value | undefined>(
+    subscribe,
+    getSnapshot,
+  );
+  const valueToReturn = stateValue === undefined ? defaultValue : stateValue;
+  useDebugValue(valueToReturn);
   return valueToReturn;
 }

@@ -41,6 +41,7 @@
     "@types/jest": "^26.0.15",
     "@types/react": "^16.9.53",
     "@types/testing-library__react-hooks": "^3.4.1",
+    "@types/use-sync-external-store": "^0.0.3",
     "husky": "^4.3.0",
     "libton-script": "^0.12.7",
     "lint-staged": "^10.4.2",
@@ -50,7 +51,8 @@
     "standard-version": "^9.0.0"
   },
   "dependencies": {
-    "mitt": "^1.2.0"
+    "mitt": "^1.2.0",
+    "use-sync-external-store": "^1.0.0-rc.0"
   },
   "peerDependencies": {
     "react": "^18.0.0-rc.0"

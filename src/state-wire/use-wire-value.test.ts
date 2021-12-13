@@ -27,6 +27,17 @@ describe('useWireValue', () => {
         });
       });
 
+      describe('with null initial value', () => {
+        it('should return wire initial value', () => {
+          const { result } = renderHook(() => {
+            const wire = useStateWire<number | null>(null, null);
+            const value = useWireValue(wire, 5);
+            return { value };
+          });
+
+          expect(result.current.value).toBe(null);
+        });
+      });
       describe('with initial value', () => {
         it('should return wire initial value', () => {
           const { result } = renderHook(() => {
