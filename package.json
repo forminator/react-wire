@@ -43,12 +43,14 @@
     "@types/testing-library__react-hooks": "^3.4.1",
     "@types/use-sync-external-store": "^0.0.3",
     "husky": "^4.3.0",
+    "jest-leak-detector": "^27.4.2",
     "libton-script": "^0.12.7",
     "lint-staged": "^10.4.2",
     "markdown-toc": "^1.2.0",
     "react": "^18.0.0-rc.0",
     "react-test-renderer": "^18.0.0-rc.0",
-    "standard-version": "^9.0.0"
+    "standard-version": "^9.0.0",
+    "weak-napi": "^2.0.2"
   },
   "dependencies": {
     "mitt": "^1.2.0",
