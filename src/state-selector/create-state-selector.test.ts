@@ -25,6 +25,28 @@ const createAreaValueSelector = () => {
   return { selector, connect, wire1, wire2 };
 };
 
+const createPropSelector = () => {
+  const [wire, connectWire] = createStateWire({}, { a: 1 });
+  connectWire();
+  const [selector, connect] = createStateSelector({
+    get: ({ get }) => {
+      return get(wire).a;
+    },
+  });
+  return { selector, connect, wire };
+};
+
+const createBoxSelector = () => {
+  const [wire, connectWire] = createStateWire({}, 1);
+  connectWire();
+  const [selector, connect] = createStateSelector({
+    get: ({ get }) => {
+      return { a: get(wire) };
+    },
+  });
+  return { selector, connect, wire };
+};
+
 const createConditionalSelector = () => {
   const [wire1, connectWire1] = createStateWire({}, 2);
   const [wire2, connectWire2] = createStateWire({}, 3);
@@ -128,6 +150,30 @@ describe('selector', () => {
       expect(selector.getValue()).toBe(4);
       expect(fn).not.toBeCalled();
     });
+    it('should be connected after multiple connect and disconnect and connect', () => {
+      const { selector, wire, connect } = createDoubleValueSelector();
+      connect()();
+      connect()();
+      connect();
+      const fn = jest.fn();
+      const unsubscribe = selector.subscribe(fn);
+      wire.setValue(3);
+      unsubscribe();
+      expect(fn).toBeCalledWith(6);
+      expect(selector.getValue()).toBe(6);
+    });
+    it('should be disconnected after multiple connect and disconnect', () => {
+      const { selector, wire, connect } = createDoubleValueSelector();
+      connect()();
+      connect()();
+      connect()();
+      const fn = jest.fn();
+      const unsubscribe = selector.subscribe(fn);
+      wire.setValue(3);
+      unsubscribe();
+      expect(selector.getValue()).toBe(4);
+      expect(fn).not.toBeCalled();
+    });
   });
   describe('multiple wires', () => {
     it('should have correct initial value before connect ', () => {
@@ -161,6 +207,35 @@ describe('selector', () => {
       expect(fn).toBeCalledWith(9);
     });
   });
+
+  describe('prop selector', () => {
+    it('should not trigger when final value is not changed', () => {
+      const fn = jest.fn();
+      const { selector, connect, wire } = createPropSelector();
+      connect();
+      selector.subscribe(fn);
+      wire.setValue({ a: 1 });
+      expect(fn).not.toBeCalled();
+    });
+  });
+
+  describe('box selector', () => {
+    it('should not changed on connect if dependency wires not changed', () => {
+      const { selector, connect } = createBoxSelector();
+      const value = selector.getValue();
+      connect();
+      expect(selector.getValue()).toBe(value);
+    });
+    it('should changed on connect if dependency wires changed', () => {
+      const { selector, connect, wire } = createBoxSelector();
+      const value = selector.getValue();
+      wire.setValue(5);
+      connect();
+      expect(selector.getValue()).not.toBe(value);
+      expect(selector.getValue()).toEqual({ a: 5 });
+    });
+  });
+
   describe('conditional selector', () => {
     it('should have correct initial value before connect ', () => {
       const { selector } = createConditionalSelector();
