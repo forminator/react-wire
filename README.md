@@ -9,6 +9,7 @@ connect react components with wire
 
 <!-- toc -->
 
+- [Motivation](#motivation)
 - [Install](#install)
 - [Usage](#usage)
   - [`useWire` hook](#usewire-hook)
@@ -29,6 +30,17 @@ connect react components with wire
   - [Rewiring](#rewiring)
 
 <!-- tocstop -->
+
+## Motivation
+
+- top-level components
+  - doesn't care about the value
+  - care about the connection between components
+- detailed components
+  - only care about the value
+  - doesn't care about where the value came from or will be used
+- controlled/uncontrolled components should be easy to write
+- choosing the correct state location shouldn't be too hard
 
 ## Install
 
