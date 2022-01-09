@@ -18,7 +18,7 @@ connect react components with wire
   - [`useWireState` hook](#usewirestate-hook)
   - [get/set wire value](#getset-wire-value)
   - [`fns` object and `useFn` hook](#fns-object-and-usefn-hook)
-- [Advanced usages](#advanced-usages)
+- [Advanced API](#advanced-api)
   - [Global wire](#global-wire)
   - [`useSelector` hook](#useselector-hook)
   - [`createSelector` function](#createselector-function)
@@ -85,17 +85,19 @@ function FancyList(props) {
   const [filter, setFilter] = useState('');
   return (
     <>
-      <FnacyInput value={filter} setValue={setFilter} />
+      <FancyInput value={filter} setValue={setFilter} />
       <List items={props.items} filter={filter} />
     </>
   );
 }
 ```
 
-- you need to refactor all `FancyInput` usage, pass `value`, and `setValue` to make it work as expected
-- the top-level component (`FancyList`) re-render each time the `filter` changes
+- you need to refactor all the `FancyInput` usages, pass `value`, and `setValue` to make it work as expected
+- the top-level component (`FancyList`) re-renders each time the `filter` changes
 
-Let see how react-wire help you:
+Let see how react-wire helps you:
+
+Same as above, but use `useWireState` instead of `useState`:
 
 ```tsx
 function FancyInput(props) {
@@ -105,7 +107,7 @@ function FancyInput(props) {
 }
 ```
 
-Same as above, but use `useWireState` instead of `useState`, right now `FancyInput` is uncontrolled. Now, if you need to make it controllable, you should pass an up-link wire.
+Right now `FancyInput` is uncontrolled. If you need to make it controllable, you should pass an up-link wire.
 
 ```diff
 function FancyInput(props) {
@@ -123,7 +125,7 @@ function FancyList(props) {
   const filter$ = useWire(null, '');
   return (
     <>
-      <FnacyInput value$={filter$} />
+      <FancyInput value$={filter$} />
       <List items={props.items} filter$={filter$} />
     </>
   );
@@ -132,10 +134,10 @@ function FancyList(props) {
 
 With this new code:
 
-- all `FancyInput` uncontrolled usage is working as expected without any change
+- all the `FancyInput` uncontrolled usages are working as expected without any change
 - the Top-level component (`FancyList`) will not re-render each time the value changes
 - only detailed components (`FancyInput`, `List`) will re-render each time the value changes
-- `FancyInput` is now controllable and can be used as a controlled or uncontrolled component by passing a wire.
+- `FancyInput` is now controllable and can be used as a controlled or uncontrolled component by passing a wire
 - `FancyList` can be controllable if you want:
 
 ```tsx
@@ -145,7 +147,7 @@ function FancyList(props) {
 }
 ```
 
-react-wire have more advanced features:
+react-wire has more advanced features:
 
 - selectors to maintain calculated values
 - fns to pass function calls over the wire
@@ -335,7 +337,7 @@ const wireB = useWire<Value, B>(wireAB);
 const wireB = useWire<Value, C>(wireAB); // error
 ```
 
-## Advanced usages
+## Advanced API
 
 ### Global wire
 
