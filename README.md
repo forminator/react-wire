@@ -69,7 +69,7 @@ function FancyPage() {
 }
 ```
 
-But sometimes, you need to use the state outside of the component; for example, you want to use the state to filter a list, so you have to move the state to the parent component:
+Let's add a new feature, a filterable list that gets a string as a filter and only shows items containing that string. Now we need to read the state of input outside of the `FancyInput` component; so we have to move the state to the parent component:
 
 ```diff
 function FancyInput(props) {
