@@ -12,12 +12,13 @@ connect react components with wire
 - [Motivation](#motivation)
 - [Install](#install)
 - [Usage](#usage)
+- [API](#api)
   - [`useWire` hook](#usewire-hook)
   - [`useWireValue` hook](#usewirevalue-hook)
   - [`useWireState` hook](#usewirestate-hook)
   - [get/set wire value](#getset-wire-value)
   - [`fns` object and `useFn` hook](#fns-object-and-usefn-hook)
-- [Advanced usages](#advanced-usages)
+- [Advanced API](#advanced-api)
   - [Global wire](#global-wire)
   - [`useSelector` hook](#useselector-hook)
   - [`createSelector` function](#createselector-function)
@@ -51,6 +52,107 @@ yarn add @forminator/react-wire
 Add [proxy-polyfill](https://github.com/GoogleChrome/proxy-polyfill) to support ie browser. proxy support is more than 90% in browsers, [more detail](https://caniuse.com/#feat=proxy)
 
 ## Usage
+
+With pure react, you use `useState` to store state:
+
+```tsx
+function FancyInput(props) {
+  const [value, setValue] = useState('');
+
+  return <input value={value} onChange={(e) => setValue(e.target.value)} />;
+}
+```
+
+```tsx
+function FancyPage() {
+  return <FancyInput />;
+}
+```
+
+Let's add a new feature, a filterable list that gets a string as a filter and only shows items containing that string. Now we need to read the state of input outside of the `FancyInput` component; so we have to move the state to the parent component:
+
+```diff
+function FancyInput(props) {
+-  const [value, setValue] = useState('');
++  const { value, setValue } = props;
+
+  return <input value={value} onChange={(e) => setValue(e.target.value)} />;
+}
+```
+
+```tsx
+function FancyList(props) {
+  const [filter, setFilter] = useState('');
+  return (
+    <>
+      <FancyInput value={filter} setValue={setFilter} />
+      <List items={props.items} filter={filter} />
+    </>
+  );
+}
+```
+
+- you need to refactor all the `FancyInput` usages, pass `value`, and `setValue` to make it work as expected
+- the top-level component (`FancyList`) re-renders each time the `filter` changes
+
+Let see how react-wire helps you:
+
+Same as above, but use `useWireState` instead of `useState`:
+
+```tsx
+function FancyInput(props) {
+  const [value, setValue] = useWireState(null, '');
+
+  return <input value={value} onChange={(e) => setValue(e.target.value)} />;
+}
+```
+
+Right now `FancyInput` is uncontrolled. If you need to make it controllable, you should pass an up-link wire.
+
+```diff
+function FancyInput(props) {
+-  const [value, setValue] = useWireState(null, '');
++  const [value, setValue] = useWireState(props.value$, '');
+
+  return <input value={value} onChange={(e) => setValue(e.target.value)} />;
+}
+```
+
+And create a wire with the `useWire` hook and pass it to components:
+
+```tsx
+function FancyList(props) {
+  const filter$ = useWire(null, '');
+  return (
+    <>
+      <FancyInput value$={filter$} />
+      <List items={props.items} filter$={filter$} />
+    </>
+  );
+}
+```
+
+With this new code:
+
+- all the `FancyInput` uncontrolled usages are working as expected without any change
+- the Top-level component (`FancyList`) will not re-render each time the value changes
+- only detailed components (`FancyInput`, `List`) will re-render each time the value changes
+- `FancyInput` is now controllable and can be used as a controlled or uncontrolled component by passing a wire
+- `FancyList` can be controllable if you want:
+
+```tsx
+function FancyList(props) {
+  const filter$ = useWire(props.filter$, '');
+  /* ... */
+}
+```
+
+react-wire has more advanced features:
+
+- selectors to maintain calculated values
+- fns to pass function calls over the wire
+
+## API
 
 ### `useWire` hook
 
@@ -235,7 +337,7 @@ const wireB = useWire<Value, B>(wireAB);
 const wireB = useWire<Value, C>(wireAB); // error
 ```
 
-## Advanced usages
+## Advanced API
 
 ### Global wire
 
