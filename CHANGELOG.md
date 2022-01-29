@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0-alpha.0](https://github.com/forminator/react-wire/compare/v0.4.2...v0.5.0-alpha.0) (2022-01-29)
+
+### Features
+
+- **state-wire:** use use-sync-external-store ([#50](https://github.com/forminator/react-wire/issues/50)) ([de15ac4](https://github.com/forminator/react-wire/commit/de15ac4b2ec14e8ddf35adbb0d56d2eaf5a74495))
+- **use-subscribe:** call the callback when the value changes between render and effect ([#49](https://github.com/forminator/react-wire/issues/49)) ([e5836ff](https://github.com/forminator/react-wire/commit/e5836ffb057e599ad7ca6d44936465a746d74569))
+
+### Bug Fixes
+
+- **selector:** skip update value on connect if not required ([#52](https://github.com/forminator/react-wire/issues/52)) ([982cebf](https://github.com/forminator/react-wire/commit/982cebfb5f4ac235570cf012c976019bc9107879))
+- update react and use react-test-renderer instead of react-dom ([#51](https://github.com/forminator/react-wire/issues/51)) ([4a6244a](https://github.com/forminator/react-wire/commit/4a6244a6e6cafa2cb273256a76511f77f4bb5bd7))
+
+### Documentations
+
+- **readme:** add motivation section ([#55](https://github.com/forminator/react-wire/issues/55)) ([bd3c7ba](https://github.com/forminator/react-wire/commit/bd3c7ba06081a574a8d7f7eca38b1508605bf1be))
+- **readme:** add usage section ([#56](https://github.com/forminator/react-wire/issues/56)) ([b520957](https://github.com/forminator/react-wire/commit/b5209570242d2d716761553657a141acb83ba5a6))
+
 ### [0.4.2](https://github.com/forminator/react-wire/compare/v0.4.1...v0.4.2) (2021-04-14)
 
 ### Bug Fixes
