@@ -37,10 +37,9 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@testing-library/react-hooks": "^3.4.2",
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^26.0.15",
     "@types/react": "^16.9.53",
-    "@types/testing-library__react-hooks": "^3.4.1",
     "@types/use-sync-external-store": "^0.0.3",
     "husky": "^4.3.0",
     "jest-leak-detector": "^27.4.2",
