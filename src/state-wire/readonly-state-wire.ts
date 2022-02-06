@@ -1,10 +1,13 @@
 import { CovarianceGuard, Defined } from '../utils/type-utils';
+import { WireId } from '../utils/wire-id';
 
 export interface ReadonlyStateWireGuard<V> {
   ' state-wire': CovarianceGuard<V>;
 }
 
-export interface ReadonlyStateWire<V> extends ReadonlyStateWireGuard<V> {
+export interface ReadonlyStateWire<V>
+  extends ReadonlyStateWireGuard<V>,
+    WireId {
   /**
    * get current value
    * @returns current value

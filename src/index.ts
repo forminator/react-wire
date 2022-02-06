@@ -17,3 +17,4 @@ export { useSelector } from './selector/use-selector';
 export { useSubscribe } from './state-wire/use-subscribe';
 
 export { isDefined } from './utils/type-utils';
+export { getLinkIds, getWireId } from './utils/wire-id';

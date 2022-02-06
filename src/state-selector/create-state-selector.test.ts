@@ -1,4 +1,5 @@
 import { createStateWire } from '../state-wire/create-state-wire';
+import { getLinkIds, getWireId } from '../utils/wire-id';
 import { createStateSelector } from './create-state-selector';
 
 const createDoubleValueSelector = () => {
@@ -321,6 +322,28 @@ describe('selector', () => {
       selector.setValue(12);
       expect(wire2.getValue()).toBe(6);
       expect(selector.getValue()).toBe(12);
+    });
+  });
+  describe('ids', function () {
+    it('should have same id', function () {
+      const [stateSelector] = createStateSelector({ get: () => 1 });
+      const id = getWireId(stateSelector);
+      expect(getWireId(stateSelector)).toBe(id);
+    });
+    it('should be last item of link ids', function () {
+      const [stateSelector] = createStateSelector({ get: () => 1 });
+      const id = getWireId(stateSelector);
+      const ids = getLinkIds(stateSelector);
+      expect(getLinkIds(stateSelector)).toBe(ids);
+      expect(getLinkIds(stateSelector)).toEqual([id]);
+    });
+    it('should be have up links', function () {
+      const { selector, wire } = createDoubleValueSelector();
+      const wireId = getWireId(wire);
+      const selectorId = getWireId(selector);
+      const ids = getLinkIds(selector);
+      expect(getLinkIds(selector)).toBe(ids);
+      expect(getLinkIds(selector)).toEqual([[wireId], selectorId]);
     });
   });
 });

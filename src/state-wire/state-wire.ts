@@ -1,10 +1,11 @@
 import { Defined, StrictGuard } from '../utils/type-utils';
+import { WireId } from '../utils/wire-id';
 
 export interface StateWireGuard<V> {
   ' state-wire': StrictGuard<V>;
 }
 
-export interface StateWire<V> extends StateWireGuard<V> {
+export interface StateWire<V> extends StateWireGuard<V>, WireId {
   /**
    * get current value
    * @returns current value
