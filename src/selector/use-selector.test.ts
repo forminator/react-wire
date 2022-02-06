@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '../test/render-hook';
 import { useEffect, useState } from 'react';
 import { useWireValue } from '../state-wire/use-wire-value';
 import { useWire } from '../wire/use-wire';
