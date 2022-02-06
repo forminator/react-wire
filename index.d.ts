@@ -39,6 +39,20 @@ declare interface FnsWireGuard<Fns> {
   ' fns-wire': StrictMethodsGuard<Fns>;
 }
 
+export declare function getLinkIds(wire: undefined): undefined;
+
+export declare function getLinkIds(wire: WireId): LinkIds;
+
+export declare function getLinkIds(
+  wire: WireId | undefined,
+): LinkIds | undefined;
+
+export declare function getWireId(wire: undefined): undefined;
+
+export declare function getWireId(wire: WireId): string;
+
+export declare function getWireId(wire: WireId | undefined): string | undefined;
+
 declare type GetWireValue = <V>(wire: ReadonlyStateWire<V>) => V;
 
 declare type InitializerOrValue<V> = V | (() => V);
@@ -61,6 +75,8 @@ declare type IsNever<T> = [T] extends [never] ? true : false;
 
 declare type KeyOfMethods<T> = NonNever<keyof Methods<T>>;
 
+export declare type LinkIds = Array<string | LinkIds>;
+
 declare type MethodKeys<T> = {
   [P in keyof T]: T[P] extends Function ? P : never;
 }[keyof T];
@@ -74,7 +90,8 @@ export declare interface ReadOnlySelectorOptions<V> {
 }
 
 export declare interface ReadonlyStateWire<V>
-  extends ReadonlyStateWireGuard<V> {
+  extends ReadonlyStateWireGuard<V>,
+    WireId {
   /**
    * get current value
    * @returns current value
@@ -97,7 +114,7 @@ export declare type ReadonlyWire<V, Fns = {}> = ReadonlyStateWire<V> &
 
 declare type SetWireValue = <V>(wire: StateWire<V>, value: Defined<V>) => void;
 
-export declare interface StateWire<V> extends StateWireGuard<V> {
+export declare interface StateWire<V> extends StateWireGuard<V>, WireId {
   /**
    * get current value
    * @returns current value
@@ -272,6 +289,17 @@ export declare type WireFns<W extends FnsWire<any>> = W extends FnsWire<
 >
   ? Fns
   : never;
+
+export declare interface WireId {
+  /**
+   * @internal
+   */
+  _getId(): string;
+  /**
+   * @internal
+   */
+  _getLinkIds(): LinkIds;
+}
 
 export declare type WireState<
   W extends ReadonlyStateWire<any>

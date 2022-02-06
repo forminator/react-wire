@@ -5,7 +5,9 @@ import {
 } from '../state-wire/readonly-state-wire';
 import { createStateWireGuard } from '../state-wire/state-wire';
 import { StateWire } from '../types';
+import { memoize } from '../utils/memoize';
 import { Defined } from '../utils/type-utils';
+import { createId } from '../utils/wire-id';
 
 type ReconnectFunction<O> = (options?: O) => void;
 type ConnectFunction<O> = () => ReconnectFunction<O>;
@@ -146,9 +148,37 @@ export function createStateSelector<V>(
     };
   };
 
+  const id = createId('s-');
+  const _getId = () => id;
+
+  // it should memoize for each selector instance, do not move to top level
+  const memoizedGetLinkIds = memoize((wires: UnsubscribeMap) => {
+    return [
+      ...Array.from(wires.keys()).map((wire) => wire._getLinkIds()),
+      _getId(),
+    ];
+  });
+
+  const _getLinkIds = () => {
+    return memoizedGetLinkIds(activeWires.current);
+  };
+
   const selectorContext: ReadonlyStateWire<V> | StateWire<V> = setOption
-    ? { getValue, subscribe, setValue, ...createStateWireGuard() }
-    : { getValue, subscribe, ...createReadonlyStateWireGuard() };
+    ? {
+        getValue,
+        subscribe,
+        setValue,
+        ...createStateWireGuard(),
+        _getId,
+        _getLinkIds,
+      }
+    : {
+        getValue,
+        subscribe,
+        ...createReadonlyStateWireGuard(),
+        _getId,
+        _getLinkIds,
+      };
 
   return [selectorContext, connect];
 }

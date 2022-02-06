@@ -1,6 +1,8 @@
 import {
   createSelector,
   createWire,
+  getLinkIds,
+  getWireId,
   isDefined,
   useFn,
   useInterceptor,
@@ -23,5 +25,7 @@ describe('index file', () => {
     expect(useSelector).toBeDefined();
     expect(useSubscribe).toBeDefined();
     expect(isDefined).toBeDefined();
+    expect(getLinkIds).toBeDefined();
+    expect(getWireId).toBeDefined();
   });
 });

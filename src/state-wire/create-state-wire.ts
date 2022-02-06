@@ -1,5 +1,7 @@
 import mitt, { Emitter } from 'mitt';
+import { memoize } from '../utils/memoize';
 import { Defined, isDefined } from '../utils/type-utils';
+import { createId } from '../utils/wire-id';
 import {
   createStateWireGuard,
   isWritableStateWire,
@@ -79,5 +81,18 @@ export function createStateWire<V>(
     subscribe,
   };
 
-  return [{ ...stateContext, ...createStateWireGuard() }, connect];
+  const id = createId('w-');
+  const _getId = () => id;
+  // it should memoize for each wire instance, do not move to top level
+  const memoizedGetLinkIds = memoize(
+    (upLink: StateWire<V | undefined> | null) => {
+      return upLink ? [...upLink._getLinkIds(), _getId()] : [_getId()];
+    },
+  );
+  const _getLinkIds = () => memoizedGetLinkIds(upLink);
+
+  return [
+    { ...stateContext, ...createStateWireGuard(), _getId, _getLinkIds },
+    connect,
+  ];
 }

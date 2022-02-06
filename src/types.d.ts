@@ -9,3 +9,4 @@ export {
 } from './state-selector/create-state-selector';
 
 export type { Defined } from './utils/type-utils';
+export type { WireId, LinkIds } from './utils/wire-id';
