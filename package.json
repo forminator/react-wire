@@ -37,6 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@testing-library/react": "^13.0.0-alpha.5",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^26.0.15",
     "@types/react": "^16.9.53",
@@ -47,7 +48,7 @@
     "lint-staged": "^10.4.2",
     "markdown-toc": "^1.2.0",
     "react": "^18.0.0-rc.0",
-    "react-test-renderer": "^18.0.0-rc.0",
+    "react-dom": "^18.0.0-rc.0",
     "standard-version": "^9.0.0",
     "weak-napi": "^2.0.2"
   },
