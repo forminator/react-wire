@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { WireState } from '../state-wire/readonly-state-wire';
 import { StateWire } from '../state-wire/state-wire';
 import { createInterceptor } from './create-interceptor';
@@ -38,10 +38,12 @@ export function useInterceptor<W extends StateWire<any>>(
     createInterceptor<WireState<W>, W>(wire, interceptor),
   );
   const lastWireRef = useRef(wire);
-  if (lastWireRef.current !== wire) {
-    lastWireRef.current = wire;
-    set(createInterceptor<WireState<W>, W>(wire, interceptor));
-  }
+  useLayoutEffect(() => {
+    if (lastWireRef.current !== wire) {
+      lastWireRef.current = wire;
+      set(createInterceptor<WireState<W>, W>(wire, interceptor));
+    }
+  }, [wire, interceptor]);
   setInterceptor(interceptor);
   return interceptedWire;
 }
