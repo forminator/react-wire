@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '../test/render-hook';
 import { FnsWire } from './fns-wire';
 import { useFn } from './use-fn';
 import { useFnsWire } from './use-fns-wire';

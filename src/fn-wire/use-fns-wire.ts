@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createFnsWire } from './create-fns-wire';
 import { FnsWire } from './fns-wire';
 
@@ -11,10 +11,12 @@ export function useFnsWire<Fns = {}>(
 ): FnsWire<Fns> {
   const [[wire, connect], set] = useState(() => create(upLink));
   const lastUpLinkRef = useRef(upLink);
-  if (lastUpLinkRef.current !== upLink) {
-    lastUpLinkRef.current = upLink;
-    set(create(upLink));
-  }
+  useLayoutEffect(() => {
+    if (lastUpLinkRef.current !== upLink) {
+      lastUpLinkRef.current = upLink;
+      set(create(upLink));
+    }
+  }, [upLink]);
   useEffect(() => {
     return connect();
   }, [connect]);

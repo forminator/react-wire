@@ -1,5 +1,5 @@
-import { renderHook } from '@testing-library/react-hooks';
 import { useWireState } from '../state-wire/use-wire-state';
+import { renderHook } from '../test/render-hook';
 import { useWire } from './use-wire';
 
 describe('use-wire', () => {

@@ -1,6 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
-import { useEffect, useState } from 'react';
-import { useWire } from '../wire/use-wire';
+import { act, renderHook } from '../test/render-hook';
 import { useStateWire } from './use-state-wire';
 import { useWireValue } from './use-wire-value';
 
@@ -148,21 +146,6 @@ describe('useWireValue', () => {
       expect(result.current.value).toBe(6);
       expect(result.current.wire1.getValue()).toBe(7);
       expect(result.current.wire2.getValue()).toBe(6);
-    });
-  });
-  it('should updated in sync with react useState', function () {
-    const { result } = renderHook(() => {
-      const wire = useWire(null, 0);
-      const wireValue = useWireValue(wire);
-      const [value, setValue] = useState(0);
-      useEffect(() => {
-        expect(wireValue).toBe(value);
-      });
-      return { wire, setValue };
-    });
-    act(() => {
-      result.current.setValue(1);
-      result.current.wire.setValue(1);
     });
   });
 });

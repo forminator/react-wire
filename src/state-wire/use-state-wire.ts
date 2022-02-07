@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { InitializerOrValue, isInitializer } from '../utils/is-initializer';
 import { isDefined } from '../utils/type-utils';
 import { createStateWire } from './create-state-wire';
@@ -34,10 +34,12 @@ export function useStateWire<V>(
   const [[wire, connect], set] = useState(() => create(upLink, initialValue));
   const lastUpLinkRef = useRef(upLink);
 
-  if (lastUpLinkRef.current !== upLink) {
-    lastUpLinkRef.current = upLink;
-    set(create(upLink, wire.getValue()));
-  }
+  useLayoutEffect(() => {
+    if (lastUpLinkRef.current !== upLink) {
+      lastUpLinkRef.current = upLink;
+      set(create(upLink, wire.getValue()));
+    }
+  }, [upLink, wire]);
   useEffect(() => {
     return connect();
   }, [connect]);

@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react-hooks';
 import { useCallback } from 'react';
+import { act, renderHook } from '../test/render-hook';
 import { useStateWire } from './use-state-wire';
 import { useSubscribe } from './use-subscribe';
 
