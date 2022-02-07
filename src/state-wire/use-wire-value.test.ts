@@ -150,19 +150,4 @@ describe('useWireValue', () => {
       expect(result.current.wire2.getValue()).toBe(6);
     });
   });
-  it('should updated in sync with react useState', function () {
-    const { result } = renderHook(() => {
-      const wire = useWire(null, 0);
-      const wireValue = useWireValue(wire);
-      const [value, setValue] = useState(0);
-      useEffect(() => {
-        expect(wireValue).toBe(value);
-      });
-      return { wire, setValue };
-    });
-    act(() => {
-      result.current.setValue(1);
-      result.current.wire.setValue(1);
-    });
-  });
 });
