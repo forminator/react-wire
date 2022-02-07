@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0-alpha.1](https://github.com/forminator/react-wire/compare/v0.5.0-alpha.0...v0.5.0-alpha.1) (2022-02-07)
+
+### Features
+
+- add id to state wires ([#61](https://github.com/forminator/react-wire/issues/61)) ([f8ce41b](https://github.com/forminator/react-wire/commit/f8ce41b2e5869a740005611dd4c3d514c7c836d2))
+
+### Bug Fixes
+
+- support re-wireing (uplink change) in strict mode for react 18 ([#63](https://github.com/forminator/react-wire/issues/63)) ([8f53c2e](https://github.com/forminator/react-wire/commit/8f53c2e1e05a0a990dc4520b1c00ac750aa7026c))
+
 ## [0.5.0-alpha.0](https://github.com/forminator/react-wire/compare/v0.4.2...v0.5.0-alpha.0) (2022-01-29)
 
 ### Features
