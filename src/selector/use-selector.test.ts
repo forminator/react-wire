@@ -1,6 +1,4 @@
-import { act, renderHook } from '../test/render-hook';
-import { useEffect, useState } from 'react';
-import { useWireValue } from '../state-wire/use-wire-value';
+import { renderHook } from '../test/render-hook';
 import { useWire } from '../wire/use-wire';
 import { useSelector } from './use-selector';
 

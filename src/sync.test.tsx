@@ -2,7 +2,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import React, { Fragment, PropsWithChildren, useEffect, useState } from 'react';
 import { useSelector } from './selector/use-selector';
 import { useWireValue } from './state-wire/use-wire-value';
-import { act, renderHook } from './test/render-hook';
+import { renderHook } from './test/render-hook';
 import { useWire } from './wire/use-wire';
 
 // the act function is not as same as click event, so we use fire event instead of act

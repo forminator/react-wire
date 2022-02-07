@@ -1,6 +1,6 @@
+import LeakDetector from 'jest-leak-detector';
 import { createStateSelector } from './state-selector/create-state-selector';
 import { createStateWire } from './state-wire/create-state-wire';
-import LeakDetector from 'jest-leak-detector';
 
 describe('memory', () => {
   describe('create state wire', () => {

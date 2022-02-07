@@ -1,6 +1,6 @@
-import { act, renderHook } from '../test/render-hook';
 import { useStateWire } from '../state-wire/use-state-wire';
 import { useWireValue } from '../state-wire/use-wire-value';
+import { act, renderHook } from '../test/render-hook';
 import { useStateSelector } from './use-state-selector';
 
 describe('use state selector', () => {

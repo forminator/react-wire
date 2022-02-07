@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { WireState } from '../state-wire/readonly-state-wire';
 import { StateWire } from '../state-wire/state-wire';
 import { createInterceptor } from './create-interceptor';

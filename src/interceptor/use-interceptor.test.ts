@@ -1,5 +1,5 @@
-import { act, renderHook } from '../test/render-hook';
 import { useStateWire } from '../state-wire/use-state-wire';
+import { act, renderHook } from '../test/render-hook';
 import { useInterceptor } from './use-interceptor';
 
 describe('useInterceptor', () => {

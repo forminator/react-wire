@@ -1,6 +1,4 @@
 import { act, renderHook } from '../test/render-hook';
-import { useEffect, useState } from 'react';
-import { useWire } from '../wire/use-wire';
 import { useStateWire } from './use-state-wire';
 import { useWireValue } from './use-wire-value';
 

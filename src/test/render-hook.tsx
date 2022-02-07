@@ -1,5 +1,5 @@
 // source: https://github.com/testing-library/react-testing-library/blob/887d95b84ddbcedb46932bf52fbda4518abb35c8/src/pure.js#L118
-import { render, act } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import React, {
   ComponentType,
   createRef,
