@@ -35,8 +35,8 @@
     "release": "standard-version"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@testing-library/react": "^13.0.0-alpha.5",
     "@types/jest": "^26.0.15",
     "@types/react": "^16.9.53",
