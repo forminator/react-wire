@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0](https://github.com/forminator/react-wire/compare/v0.5.0-alpha.1...v0.5.0) (2022-04-02)
+
 ## [0.5.0-alpha.1](https://github.com/forminator/react-wire/compare/v0.5.0-alpha.0...v0.5.0-alpha.1) (2022-02-07)
 
 ### Features
