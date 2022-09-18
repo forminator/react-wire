@@ -3,8 +3,7 @@ import {
   createReadonlyStateWireGuard,
   ReadonlyStateWire,
 } from '../state-wire/readonly-state-wire';
-import { createStateWireGuard } from '../state-wire/state-wire';
-import { StateWire } from '../types';
+import { createStateWireGuard, StateWire } from '../state-wire/state-wire';
 import { memoize } from '../utils/memoize';
 import { Defined } from '../utils/type-utils';
 import { createId } from '../utils/wire-id';

@@ -1,6 +1,0 @@
-filename: 'forminator-react-wire'
-name: 'ForminatorReactWire'
-globals:
-  react: React
-  react-dom: ReactDOM
-  mitt: mitt

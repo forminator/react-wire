@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { getLinkIds, getWireId } from '../utils/wire-id';
 import { createStateWire } from './create-state-wire';
 
@@ -23,7 +24,7 @@ describe('create state wire', function () {
     const id = getWireId(stateWire);
     expect(getLinkIds(stateWire)).toEqual([uplinkId, id]);
   });
-  it('should have uplink id in link ids', function () {
+  it('should have same array for uplink id in link ids', function () {
     const [upLink] = createStateWire({}, 1);
     const [stateWire] = createStateWire(upLink, 1);
     const uplinkId = getWireId(upLink);

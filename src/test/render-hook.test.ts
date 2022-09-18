@@ -1,11 +1,12 @@
+import { describe, expect, it, vi } from 'vitest';
 import { useEffect } from 'react';
 import { act, renderHook } from './render-hook';
 
 describe('test renderer', function () {
   it('should render once without strict mode', function () {
-    const fn = jest.fn();
-    const effect = jest.fn();
-    const clean = jest.fn();
+    const fn = vi.fn();
+    const effect = vi.fn();
+    const clean = vi.fn();
     const { unmount } = renderHook(
       () => {
         fn();
@@ -26,9 +27,9 @@ describe('test renderer', function () {
     expect(clean).toHaveBeenCalledTimes(1);
   });
   it('should render twice with strict mode', function () {
-    const fn = jest.fn();
-    const effect = jest.fn();
-    const clean = jest.fn();
+    const fn = vi.fn();
+    const effect = vi.fn();
+    const clean = vi.fn();
     const { unmount } = renderHook(() => {
       fn();
       useEffect(() => {
@@ -48,9 +49,7 @@ describe('test renderer', function () {
     const { rerender } = renderHook(() => {
       return {};
     });
-    act(() => {
-      rerender();
-    });
+    rerender();
   });
   it('should accept new props for rerender', function () {
     const { result, rerender } = renderHook(
@@ -60,9 +59,7 @@ describe('test renderer', function () {
       { initialProps: 5 },
     );
     expect(result.current.n).toBe(5);
-    act(() => {
-      rerender(6);
-    });
+    rerender(6);
     expect(result.current.n).toBe(6);
   });
 });

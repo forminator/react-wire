@@ -1,8 +1,9 @@
 node_modules
-/dist/
-/lib/
-/es/
-/bin/
-/coverage/
-/.cache/
+.DS_Store
+dist
+dist-ssr
+*.local
+.cache
+coverage
 /tsdoc-metadata.json
+.pnpm-debug.log

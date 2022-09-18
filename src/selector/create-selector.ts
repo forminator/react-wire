@@ -7,13 +7,13 @@ import {
 } from '../state-selector/create-state-selector';
 import { ReadonlyWire, Wire } from '../wire/wire';
 
-export function createSelector<V, Fns = {}>(
+export function createSelector<V, Fns extends {} = {}>(
   options: WritableSelectorOptions<V>,
 ): Wire<V, Fns>;
-export function createSelector<V, Fns = {}>(
+export function createSelector<V, Fns extends {} = {}>(
   options: ReadOnlySelectorOptions<V>,
 ): ReadonlyWire<V, Fns>;
-export function createSelector<V, Fns = {}>(
+export function createSelector<V, Fns extends {} = {}>(
   options: SelectorOptions<V>,
 ): ReadonlyWire<V, Fns> | Wire<V, Fns> {
   const [fnsWire, connectFnsWire] = createFnsWire<Fns>({});

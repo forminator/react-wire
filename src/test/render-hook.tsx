@@ -21,21 +21,21 @@ interface RenderHookOptions<Props> {
   strict?: boolean;
 }
 
-interface RenderHookResultWithoutProps<Result, Props> {
+interface RenderHookResultWithoutProps<Result> {
   rerender: () => void;
   result: { current: Result };
   unmount: () => void;
 }
 
-interface RenderHookOptionsWithoutProps<Props> {
+interface RenderHookOptionsWithoutProps {
   wrapper?: ComponentType;
   strict?: boolean;
 }
 
-export function renderHook<Result, Props>(
+export function renderHook<Result>(
   renderCallback: () => Result,
-  options?: RenderHookOptionsWithoutProps<Props>,
-): RenderHookResultWithoutProps<Result, Props>;
+  options?: RenderHookOptionsWithoutProps,
+): RenderHookResultWithoutProps<Result>;
 export function renderHook<Result, Props>(
   renderCallback: (props: Props) => Result,
   options: RenderHookOptions<Props>,
@@ -43,14 +43,11 @@ export function renderHook<Result, Props>(
 export function renderHook<Result, Props>(
   renderCallback: (props?: Props) => Result,
   options: Partial<RenderHookOptions<Props>> = {},
-):
-  | RenderHookResult<Result, Props>
-  | RenderHookResultWithoutProps<Result, Props> {
+): RenderHookResult<Result, Props> | RenderHookResultWithoutProps<Result> {
   const { initialProps, wrapper, strict = true } = options;
   const Wrapper = strict ? StrictMode : Fragment;
-  const result: MutableRefObject<Result> = createRef() as MutableRefObject<
-    Result
-  >;
+  const result: MutableRefObject<Result> =
+    createRef() as MutableRefObject<Result>;
 
   function TestComponent({
     renderCallbackProps,

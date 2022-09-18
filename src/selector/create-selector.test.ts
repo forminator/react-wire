@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import { createWire } from '../wire/create-wire';
 import { createSelector } from './create-selector';
 
@@ -26,8 +27,8 @@ describe('create-wire', () => {
     selector.setValue(6);
     expect(wire.getValue()).toBe(3);
   });
-  it('should return wire', () => {
-    const fn = jest.fn();
+  it('should call subscribed value', () => {
+    const fn = vi.fn();
     const wire = createWire(4);
     const selector = createSelector({
       get: ({ get }) => get(wire) * 2,

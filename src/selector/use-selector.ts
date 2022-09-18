@@ -8,15 +8,15 @@ import {
 import { useStateSelector } from '../state-selector/use-state-selector';
 import { ReadonlyWire, Wire } from '../wire/wire';
 
-export function useSelector<V, Fns = {}>(
+export function useSelector<V, Fns extends {} = {}>(
   options: WritableSelectorOptions<V>,
   deps?: DependencyList,
 ): Wire<V, Fns>;
-export function useSelector<V, Fns = {}>(
+export function useSelector<V, Fns extends {} = {}>(
   options: ReadOnlySelectorOptions<V>,
   deps?: DependencyList,
 ): ReadonlyWire<V, Fns>;
-export function useSelector<V, Fns = {}>(
+export function useSelector<V, Fns extends {} = {}>(
   options: SelectorOptions<V>,
   deps?: DependencyList,
 ): ReadonlyWire<V, Fns> | Wire<V, Fns> {

@@ -16,7 +16,7 @@ export interface ReadonlyStateWire<V>
 
   /**
    * subscribe for value change
-   * @param callback
+   * @param callback -
    * @returns unsubscribe function
    */
   subscribe(callback: (value: Defined<V>) => void): () => void;
@@ -36,6 +36,5 @@ export function createReadonlyStateWireGuard<V>(): ReadonlyStateWireGuard<V> {
   return { ' state-wire': [true /* read */, false /* write */] as any };
 }
 
-export type WireState<
-  W extends ReadonlyStateWire<any>
-> = W extends ReadonlyStateWire<infer V> ? V : never;
+export type WireState<W extends ReadonlyStateWire<any>> =
+  W extends ReadonlyStateWire<infer V> ? V : never;

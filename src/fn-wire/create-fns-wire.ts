@@ -1,34 +1,37 @@
 import mitt, { Emitter } from 'mitt';
-import { KeyOfMethods } from '../utils/type-utils';
+import { Fn, KeyOfMethods, Parameters } from '../utils/type-utils';
 import { createFnsWireGuard, FnsWire, isFnsWire } from './fns-wire';
 
 type DisconnectFunction = () => void;
 type ConnectFunction = () => DisconnectFunction;
 
-export interface Action<Fns, K extends KeyOfMethods<Fns> = KeyOfMethods<Fns>> {
+export interface Action<
+  Fns extends {},
+  K extends KeyOfMethods<Fns> = KeyOfMethods<Fns>,
+> {
   type: K;
   args: Parameters<Fns[K]>;
 }
 
-export function createFnsWire<Fns = {}>(
+export function createFnsWire<Fns extends {} = {}>(
   ctx: FnsWire<Fns>,
 ): [FnsWire<Fns>, ConnectFunction];
-export function createFnsWire<Fns = {}>(
+export function createFnsWire<Fns extends {} = {}>(
   ctx: Partial<FnsWire<Fns>>,
 ): [FnsWire<Fns>, ConnectFunction];
-export function createFnsWire<Fns = {}>(
+export function createFnsWire<Fns extends {} = {}>(
   ctx: FnsWire<Fns> | Partial<FnsWire<Fns>>,
 ): [FnsWire<Fns>, ConnectFunction] {
   const emitter: Emitter = mitt();
   const upLink: FnsWire<Fns> | null = isFnsWire<Fns>(ctx) ? ctx : null;
 
   const handler: ProxyHandler<{}> = {
-    get: function (target, prop: KeyOfMethods<Fns>) {
+    get: function (target, prop: string) {
       return (...args: any) => {
         if (upLink) {
           (upLink.fns as any)[prop](...args);
         } else {
-          emitter.emit(prop as string, { type: prop, args });
+          emitter.emit(prop, { type: prop, args });
         }
       };
     },
@@ -43,7 +46,7 @@ export function createFnsWire<Fns = {}>(
       return upLink.fn(name, fn);
     } else {
       const handle = (action: Action<Fns>) => {
-        fn(...action.args);
+        (fn as Fn)(...action.args);
       };
       emitter.on(name as string, handle);
       return () => {

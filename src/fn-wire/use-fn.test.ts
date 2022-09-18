@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import { act, renderHook } from '../test/render-hook';
 import { FnsWire } from './fns-wire';
 import { useFn } from './use-fn';
@@ -5,7 +6,7 @@ import { useFnsWire } from './use-fns-wire';
 
 describe('useFn', () => {
   it('should subscribe on fns', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const { result } = renderHook(() => {
       const wire = useFnsWire<{ test(n: number): void }>(null);
       useFn(wire, 'test', fn);
@@ -17,21 +18,23 @@ describe('useFn', () => {
     expect(fn).toBeCalledWith(3);
   });
   it('should accept null or undefined wire', () => {
-    const fn = jest.fn();
-    const { result } = renderHook((): {
-      wire: FnsWire<{ test(n: number): void }> | null;
-    } => {
-      const wire = null;
-      useFn(wire, 'test', fn);
-      return { wire };
-    });
+    const fn = vi.fn();
+    const { result } = renderHook(
+      (): {
+        wire: FnsWire<{ test(n: number): void }> | null;
+      } => {
+        const wire = null;
+        useFn(wire, 'test', fn);
+        return { wire };
+      },
+    );
     act(() => {
       result.current.wire?.fns.test(3);
     });
     expect(fn).not.toBeCalled();
   });
   it('should subscribe on fns with parent', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const { result } = renderHook(() => {
       const parent = useFnsWire<{ test(n: number): void }>(null);
       const wire = useFnsWire<{ test(n: number): void }>(parent);
@@ -44,7 +47,7 @@ describe('useFn', () => {
     expect(fn).toBeCalledWith(3);
   });
   it('should subscribe on fns with parent, listen on parent', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const { result } = renderHook(() => {
       const parent = useFnsWire<{ test(n: number): void }>(null);
       const wire = useFnsWire<{ test(n: number): void }>(parent);
@@ -57,7 +60,7 @@ describe('useFn', () => {
     expect(fn).toBeCalledWith(3);
   });
   it('should subscribe on fns with parent, fire on parent', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const { result } = renderHook(() => {
       const parent = useFnsWire<{ test(n: number): void }>(null);
       const wire = useFnsWire<{ test(n: number): void }>(parent);
@@ -70,7 +73,7 @@ describe('useFn', () => {
     expect(fn).toBeCalledWith(3);
   });
   it('should subscribe on fns with sibling', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const { result } = renderHook(() => {
       const parent = useFnsWire<{ test(n: number): void }>(null);
       const wire1 = useFnsWire<{ test(n: number): void }>(parent);
@@ -85,7 +88,7 @@ describe('useFn', () => {
   });
   describe('when wire changed', () => {
     it('should subscribe to the new wire', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const { result, rerender } = renderHook(
         ({ firstWire }: { firstWire: boolean }) => {
           const wire1 = useFnsWire<{ test(n: number): void }>(null);
@@ -102,8 +105,8 @@ describe('useFn', () => {
       });
       expect(fn).toBeCalledWith(3);
     });
-    it('should unsubscribe from first wire ', () => {
-      const fn = jest.fn();
+    it('should unsubscribe from first wire', () => {
+      const fn = vi.fn();
       const { result, rerender } = renderHook(
         ({ firstWire }: { firstWire: boolean }) => {
           const wire1 = useFnsWire<{ test(n: number): void }>(null);
@@ -123,7 +126,7 @@ describe('useFn', () => {
   });
   describe('when up-link wire changed', () => {
     it('should subscribe to the new wire', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const { result, rerender } = renderHook(
         ({ firstWire }: { firstWire: boolean }) => {
           const wire1 = useFnsWire<{ test(n: number): void }>(null);
@@ -141,8 +144,8 @@ describe('useFn', () => {
       });
       expect(fn).toBeCalledWith(3);
     });
-    it('should unsubscribe from first wire ', () => {
-      const fn = jest.fn();
+    it('should unsubscribe from first wire', () => {
+      const fn = vi.fn();
       const { result, rerender } = renderHook(
         ({ firstWire }: { firstWire: boolean }) => {
           const wire1 = useFnsWire<{ test(n: number): void }>(null);

@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import { createStateWire } from '../state-wire/create-state-wire';
 import { getLinkIds, getWireId } from '../utils/wire-id';
 import { createStateSelector } from './create-state-selector';
@@ -95,11 +96,11 @@ const createWritableAreaValueSelector = (value1: number, value2: number) => {
 
 describe('selector', () => {
   describe('single wire', () => {
-    it('should have correct initial value before connect ', () => {
+    it('should have correct initial value before connect', () => {
       const { selector } = createDoubleValueSelector();
       expect(selector.getValue()).toBe(4);
     });
-    it('should have correct value after connect ', () => {
+    it('should have correct value after connect', () => {
       const [wire, connectWire] = createStateWire({}, 2);
       connectWire();
       const [selector, connect] = createStateSelector({
@@ -110,40 +111,40 @@ describe('selector', () => {
       connect();
       expect(selector.getValue()).toBe(4);
     });
-    it('should update value after connect if wire value changed ', () => {
+    it('should update value after connect if wire value changed', () => {
       const { selector, wire, connect } = createDoubleValueSelector();
       wire.setValue(3);
       connect();
       expect(selector.getValue()).toBe(6);
     });
-    it('should update value after wire value changed ', () => {
+    it('should update value after wire value changed', () => {
       const { selector, wire, connect } = createDoubleValueSelector();
       connect();
       wire.setValue(3);
       expect(selector.getValue()).toBe(6);
     });
-    it('should call subscribe function when value changed ', () => {
+    it('should call subscribe function when value changed', () => {
       const { selector, wire, connect } = createDoubleValueSelector();
       connect();
-      const fn = jest.fn();
+      const fn = vi.fn();
       const unsubscribe = selector.subscribe(fn);
       wire.setValue(3);
       unsubscribe();
       expect(fn).toBeCalledWith(6);
     });
-    it('should not call subscribe function after unsubscribe ', () => {
+    it('should not call subscribe function after unsubscribe', () => {
       const { selector, wire, connect } = createDoubleValueSelector();
       connect();
-      const fn = jest.fn();
+      const fn = vi.fn();
       const unsubscribe = selector.subscribe(fn);
       unsubscribe();
       wire.setValue(3);
       expect(fn).not.toBeCalled();
     });
-    it('should not change after disconnect ', () => {
+    it('should not change after disconnect', () => {
       const { selector, wire, connect } = createDoubleValueSelector();
       const disconnect = connect();
-      const fn = jest.fn();
+      const fn = vi.fn();
       const unsubscribe = selector.subscribe(fn);
       disconnect();
       wire.setValue(3);
@@ -156,7 +157,7 @@ describe('selector', () => {
       connect()();
       connect()();
       connect();
-      const fn = jest.fn();
+      const fn = vi.fn();
       const unsubscribe = selector.subscribe(fn);
       wire.setValue(3);
       unsubscribe();
@@ -168,7 +169,7 @@ describe('selector', () => {
       connect()();
       connect()();
       connect()();
-      const fn = jest.fn();
+      const fn = vi.fn();
       const unsubscribe = selector.subscribe(fn);
       wire.setValue(3);
       unsubscribe();
@@ -177,31 +178,31 @@ describe('selector', () => {
     });
   });
   describe('multiple wires', () => {
-    it('should have correct initial value before connect ', () => {
+    it('should have correct initial value before connect', () => {
       const { selector } = createAreaValueSelector();
       expect(selector.getValue()).toBe(6);
     });
-    it('should have correct value after connect ', () => {
+    it('should have correct value after connect', () => {
       const { selector, connect } = createAreaValueSelector();
       connect();
       expect(selector.getValue()).toBe(6);
     });
-    it('should update value after connect if wire value changed ', () => {
+    it('should update value after connect if wire value changed', () => {
       const { selector, connect, wire1 } = createAreaValueSelector();
       wire1.setValue(3);
       connect();
       expect(selector.getValue()).toBe(9);
     });
-    it('should update value after wire value changed ', () => {
+    it('should update value after wire value changed', () => {
       const { selector, connect, wire1 } = createAreaValueSelector();
       connect();
       wire1.setValue(3);
       expect(selector.getValue()).toBe(9);
     });
-    it('should call subscribe function when value changed ', () => {
+    it('should call subscribe function when value changed', () => {
       const { selector, connect, wire1 } = createAreaValueSelector();
       connect();
-      const fn = jest.fn();
+      const fn = vi.fn();
       const unsubscribe = selector.subscribe(fn);
       wire1.setValue(3);
       unsubscribe();
@@ -211,7 +212,7 @@ describe('selector', () => {
 
   describe('prop selector', () => {
     it('should not trigger when final value is not changed', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const { selector, connect, wire } = createPropSelector();
       connect();
       selector.subscribe(fn);
@@ -238,42 +239,42 @@ describe('selector', () => {
   });
 
   describe('conditional selector', () => {
-    it('should have correct initial value before connect ', () => {
+    it('should have correct initial value before connect', () => {
       const { selector } = createConditionalSelector();
       expect(selector.getValue()).toBe(2);
     });
-    it('should have correct value after connect ', () => {
+    it('should have correct value after connect', () => {
       const { selector, connect } = createConditionalSelector();
       connect();
       expect(selector.getValue()).toBe(2);
     });
 
     describe('change value', () => {
-      it('should update value after connect if wire value changed ', () => {
+      it('should update value after connect if wire value changed', () => {
         const { selector, connect, wire1 } = createConditionalSelector();
         wire1.setValue(4);
         connect();
         expect(selector.getValue()).toBe(4);
       });
-      it('should update value after wire value changed ', () => {
+      it('should update value after wire value changed', () => {
         const { selector, connect, wire1 } = createConditionalSelector();
         connect();
         wire1.setValue(4);
         expect(selector.getValue()).toBe(4);
       });
-      it('should call subscribe function when value changed ', () => {
+      it('should call subscribe function when value changed', () => {
         const { selector, connect, wire1 } = createConditionalSelector();
         connect();
-        const fn = jest.fn();
+        const fn = vi.fn();
         const unsubscribe = selector.subscribe(fn);
         wire1.setValue(4);
         unsubscribe();
         expect(fn).toBeCalledWith(4);
       });
-      it('should not call subscribe function when unused value changed ', () => {
+      it('should not call subscribe function when unused value changed', () => {
         const { selector, connect, wire2 } = createConditionalSelector();
         connect();
-        const fn = jest.fn();
+        const fn = vi.fn();
         const unsubscribe = selector.subscribe(fn);
         wire2.setValue(5);
         unsubscribe();
@@ -282,22 +283,22 @@ describe('selector', () => {
     });
 
     describe('change condition', () => {
-      it('should update value after connect if wire value changed ', () => {
+      it('should update value after connect if wire value changed', () => {
         const { selector, connect, wire3 } = createConditionalSelector();
         wire3.setValue(false);
         connect();
         expect(selector.getValue()).toBe(3);
       });
-      it('should update value after wire value changed ', () => {
+      it('should update value after wire value changed', () => {
         const { selector, connect, wire3 } = createConditionalSelector();
         connect();
         wire3.setValue(false);
         expect(selector.getValue()).toBe(3);
       });
-      it('should call subscribe function when value changed ', () => {
+      it('should call subscribe function when value changed', () => {
         const { selector, connect, wire3 } = createConditionalSelector();
         connect();
-        const fn = jest.fn();
+        const fn = vi.fn();
         const unsubscribe = selector.subscribe(fn);
         wire3.setValue(false);
         unsubscribe();
@@ -306,14 +307,14 @@ describe('selector', () => {
     });
   });
   describe('writable selector', () => {
-    it('should update wire value ', () => {
+    it('should update wire value', () => {
       const { selector, connect, wire } = createWritableDoubleValueSelector();
       connect();
       selector.setValue(8);
       expect(wire.getValue()).toBe(4);
       expect(selector.getValue()).toBe(8);
     });
-    it('should update wire value ', () => {
+    it('should update wire value with multiple wire', () => {
       const { selector, connect, wire2 } = createWritableAreaValueSelector(
         2,
         3,

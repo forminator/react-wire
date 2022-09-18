@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import { act, renderHook } from '../test/render-hook';
 import { useStateWire } from './use-state-wire';
 import { useWireState } from './use-wire-state';
@@ -185,7 +186,7 @@ describe('useWireState', () => {
   describe('setValue(fn)', () => {
     describe('without wire', () => {
       it('should not call updater function when value is undefined', () => {
-        const fn = jest.fn((v) => v + 1);
+        const fn = vi.fn((v) => v + 1);
         const { result } = renderHook(() => {
           const [value, setValue] = useWireState<number>(null);
           return { value, setValue };
@@ -211,7 +212,7 @@ describe('useWireState', () => {
 
     describe('with wire', () => {
       it('should not call updater function when value is undefined', () => {
-        const fn = jest.fn((v) => v + 1);
+        const fn = vi.fn((v) => v + 1);
         const { result } = renderHook(() => {
           const wire = useStateWire<number>(null);
           const [value, setValue] = useWireState(wire);
@@ -227,7 +228,7 @@ describe('useWireState', () => {
       });
 
       it('should update value and wire value', () => {
-        const fn = jest.fn((v) => v + 1);
+        const fn = vi.fn((v) => v + 1);
         const { result } = renderHook(() => {
           const wire = useStateWire<number>(null, 4);
           const [value, setValue] = useWireState<number>(wire);
@@ -245,7 +246,7 @@ describe('useWireState', () => {
   });
 
   describe('multiple state on wire', () => {
-    it('should return same values', () => {
+    it('should return same values without initial value', () => {
       const { result } = renderHook(() => {
         const wire = useStateWire<number>(null);
         const [value1, setValue1] = useWireState(wire, 4);
@@ -258,7 +259,7 @@ describe('useWireState', () => {
       expect(result.current.value2).toBe(wireValue);
     });
 
-    it('should return same values', () => {
+    it('should return same values with initial value', () => {
       const { result } = renderHook(() => {
         const wire = useStateWire<number>(null, 3);
         const [value1, setValue1] = useWireState(wire, 4);

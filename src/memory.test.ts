@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import LeakDetector from 'jest-leak-detector';
 import { createFnsWire } from './fn-wire/create-fns-wire';
 import { createStateSelector } from './state-selector/create-state-selector';
@@ -15,12 +16,12 @@ describe('memory', () => {
       }
 
       let value: unknown = {};
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       let wire = run(value);
 
       const detector = new LeakDetector(value);
       value = null;
       expect(await detector.isLeaking()).toBe(true);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       wire = null;
       expect(await detector.isLeaking()).toBe(false);
     });
@@ -39,12 +40,12 @@ describe('memory', () => {
       }
 
       let value: unknown = {};
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       let selector = run(value);
 
       const detector = new LeakDetector(value);
       value = null;
       expect(await detector.isLeaking()).toBe(true);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       selector = null;
       expect(await detector.isLeaking()).toBe(false);
     });
