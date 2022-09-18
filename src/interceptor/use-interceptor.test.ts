@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { useStateWire } from '../state-wire/use-state-wire';
 import { act, renderHook } from '../test/render-hook';
 import { useInterceptor } from './use-interceptor';

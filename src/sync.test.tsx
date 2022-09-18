@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { fireEvent, screen } from '@testing-library/react';
 import React, { Fragment, PropsWithChildren, useEffect, useState } from 'react';
 import { useSelector } from './selector/use-selector';
@@ -7,10 +8,11 @@ import { useWire } from './wire/use-wire';
 
 // the act function is not as same as click event, so we use fire event instead of act
 const Wrapper = (props: PropsWithChildren<{ onClick: () => void }>) => {
+  const { children } = props;
   return (
     <Fragment>
       <button onClick={props.onClick}>click</button>
-      {props.children}
+      {children}
     </Fragment>
   );
 };
@@ -22,9 +24,11 @@ describe('sync with use state', function () {
         result.current.wire.setValue(1);
         result.current.setValue(1);
       };
-      const wrapper = (props: PropsWithChildren<{}>) => (
-        <Wrapper onClick={onClick}>{props.children}</Wrapper>
-      );
+      const wrapper = (props: PropsWithChildren<{}>) => {
+        const { children } = props;
+
+        return <Wrapper onClick={onClick}>{children}</Wrapper>;
+      };
       const { result } = renderHook(
         () => {
           const wire = useWire(null, 0);
@@ -46,9 +50,11 @@ describe('sync with use state', function () {
         result.current.wire.setValue(1);
         result.current.setValue(1);
       };
-      const wrapper = (props: PropsWithChildren<{}>) => (
-        <Wrapper onClick={onClick}>{props.children}</Wrapper>
-      );
+      const wrapper = (props: PropsWithChildren<{}>) => {
+        const { children } = props;
+
+        return <Wrapper onClick={onClick}>{children}</Wrapper>;
+      };
       const { result } = renderHook(
         () => {
           const wire = useWire(null, 0);

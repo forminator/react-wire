@@ -1,7 +1,4 @@
-/dist/
-/lib/
-/es/
-/bin/
-/coverage/
-/.cache/
+dist/
+.cache/
+coverage/
 /tsdoc-metadata.json

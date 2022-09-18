@@ -2,60 +2,85 @@
   "name": "@forminator/react-wire",
   "description": "connect react components with wire",
   "version": "0.5.0",
-  "license": "MIT",
-  "main": "lib/forminator-react-wire.js",
-  "unpkg": "dist/forminator-react-wire.js",
-  "module": "es/forminator-react-wire.js",
-  "typings": "./index.d.ts",
   "files": [
-    "dist",
-    "lib",
-    "es",
     "src",
+    "dist",
     "index.d.ts",
     "tsdoc-metadata.json"
   ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/forminator/react-wire"
   },
+  "type": "module",
+  "typings": "./index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "scripts": {
-    "build": "libton-script build",
-    "build:doc": "libton-script doc",
+    "prepare": "husky install",
+    "pre-commit": "tsc && lint-staged && pnpm lint",
     "toc": "markdown-toc -i README.md",
-    "test": "libton-script test",
-    "lint": "libton-script lint",
-    "format": "libton-script format",
-    "format:check": "libton-script format --check",
-    "validate": "libton-script lint && libton-script format --check && libton-script test",
-    "prepublishOnly": "yarn validate && yarn build",
+    "lint": "eslint --max-warnings=0 src/**/*.{ts,tsx}",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,yml,css,scss,md}'",
+    "format:check": "prettier --check '**/*.{js,jsx,ts,tsx,json,yml,css,scss,md}'",
+    "test": "vitest --run --coverage",
+    "test:watch": "vitest",
+    "build:dts": "api-extractor run --local --verbose && prettier --write index.d.ts",
+    "build": "vite build && pnpm build:dts",
+    "validate": "pnpm run lint && pnpm run format:check && pnpm run test && tsc",
+    "prepublishOnly": "pnpm run validate && pnpm build",
     "release": "standard-version"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.3",
-    "@commitlint/config-conventional": "^16.2.1",
-    "@testing-library/react": "^13.0.0",
-    "@types/jest": "^27.4.1",
-    "@types/react": "^17.0.43",
+    "@commitlint/cli": "^17",
+    "@commitlint/config-conventional": "^17",
+    "@microsoft/api-extractor": "^7",
+    "@testing-library/dom": "^8",
+    "@testing-library/jest-dom": "^5",
+    "@testing-library/react": "^13",
+    "@testing-library/user-event": "^14",
+    "@types/node": "^18",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/testing-library__jest-dom": "^5",
     "@types/use-sync-external-store": "^0.0.3",
-    "husky": "^4.3.0",
-    "jest-leak-detector": "^27.5.1",
-    "libton-script": "^0.12.7",
-    "lint-staged": "^10.4.2",
-    "markdown-toc": "^1.2.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "standard-version": "^9.0.0",
-    "weak-napi": "^2.0.2"
+    "@vitejs/plugin-react": "^2",
+    "@vitest/coverage-c8": "^0.23",
+    "c8": "^7",
+    "eslint": "^8",
+    "eslint-config-react-app": "^7",
+    "husky": "^8",
+    "jest-leak-detector": "^29",
+    "jsdom": "^20",
+    "lint-staged": "^13",
+    "markdown-toc": "^1",
+    "prettier": "^2",
+    "react": "^18",
+    "react-dom": "^18",
+    "standard-version": "^9",
+    "typescript": "^4",
+    "vite": "^3",
+    "vite-plugin-dts": "^1",
+    "vitest": "^0.23"
   },
   "dependencies": {
     "mitt": "^1.2.0",
-    "use-sync-external-store": "^1.0.0"
+    "use-sync-external-store": "^1.2.0"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": "^18"
   }
 }

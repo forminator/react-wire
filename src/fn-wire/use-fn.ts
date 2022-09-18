@@ -6,7 +6,7 @@ import { FnsWire } from './fns-wire';
  * 
  * subscribe for function calls
  * 
- * @param wire
+ * @param wire -
  * @param name - name of `fns` function
  * @param fn - memoized callback function
  * 
@@ -25,7 +25,7 @@ import { FnsWire } from './fns-wire';
  wire.fns.sample(5);
 ```
  */
-export function useFn<Fns, K extends KeyOfMethods<Fns>>(
+export function useFn<Fns extends {}, K extends KeyOfMethods<Fns>>(
   wire: FnsWire<Fns> | null | undefined,
   name: K,
   fn: Fns[K],

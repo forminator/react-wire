@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import { useCallback } from 'react';
 import { act, renderHook } from '../test/render-hook';
 import { useStateWire } from './use-state-wire';
@@ -5,7 +6,7 @@ import { useSubscribe } from './use-subscribe';
 
 describe('useSubscribe', () => {
   it('should not call the callback function on subscribing', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
 
     renderHook(() => {
       const wire = useStateWire(null, 5);
@@ -21,7 +22,7 @@ describe('useSubscribe', () => {
   });
 
   it('should call the callback function when the wire value updates', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
 
     const { result } = renderHook(() => {
       const wire = useStateWire(null, 5);
@@ -41,7 +42,7 @@ describe('useSubscribe', () => {
   });
 
   it('should not call the callback function when the new value is same', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
 
     const { result } = renderHook(() => {
       const wire = useStateWire(null, 5);
@@ -61,7 +62,7 @@ describe('useSubscribe', () => {
   });
 
   it('should not call the callback function after unmount', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
 
     const { result, unmount } = renderHook(() => {
       const wire = useStateWire(null, 5);
@@ -85,7 +86,7 @@ describe('useSubscribe', () => {
 
   describe('with uplink', () => {
     it('should not call the callback function when the new value is same (same value)', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
 
       const { result } = renderHook(() => {
         const upLink = useStateWire(null, 5);
@@ -106,7 +107,7 @@ describe('useSubscribe', () => {
     });
 
     it('should not call the callback function when the new value is same (different value)', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
 
       const { result } = renderHook(() => {
         const upLink = useStateWire(null, 5);
@@ -127,7 +128,7 @@ describe('useSubscribe', () => {
     });
 
     it('should not call the callback function when the new value is same (undefined uplink value)', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
 
       const { result } = renderHook(() => {
         const upLink = useStateWire(null);
@@ -148,7 +149,7 @@ describe('useSubscribe', () => {
     });
 
     it('should not call the callback function when the new value is same (undefined value)', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
 
       const { result } = renderHook(() => {
         const upLink = useStateWire(null, 5);
@@ -168,7 +169,7 @@ describe('useSubscribe', () => {
       expect(fn).not.toBeCalled();
     });
     it('should call the callback when the value changes between render and effect', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
 
       renderHook(() => {
         const upLink = useStateWire(null);

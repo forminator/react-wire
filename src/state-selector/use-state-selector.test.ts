@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { useStateWire } from '../state-wire/use-state-wire';
 import { useWireValue } from '../state-wire/use-wire-value';
 import { act, renderHook } from '../test/render-hook';
@@ -41,9 +42,7 @@ describe('use state selector', () => {
       },
       { initialProps: { mul: 2 } },
     );
-    act(() => {
-      rerender({ mul: 3 });
-    });
+    rerender({ mul: 3 });
     expect(result.current.value).toBe(15);
   });
 });

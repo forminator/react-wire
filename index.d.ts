@@ -12,17 +12,21 @@ declare type CB<T> = (t: T) => void;
 
 declare type CovarianceGuard<T> = [T, unknown];
 
-export declare function createSelector<V, Fns = {}>(
+export declare function createSelector<V, Fns extends {} = {}>(
   options: WritableSelectorOptions<V>,
 ): Wire<V, Fns>;
 
-export declare function createSelector<V, Fns = {}>(
+export declare function createSelector<V, Fns extends {} = {}>(
   options: ReadOnlySelectorOptions<V>,
 ): ReadonlyWire<V, Fns>;
 
-export declare function createWire<V, Fns = {}>(initialValue: V): Wire<V, Fns>;
+export declare function createWire<V, Fns extends {} = {}>(
+  initialValue: V,
+): Wire<V, Fns>;
 
 export declare type Defined<T> = T extends undefined ? never : T;
+
+declare type Fn = (...args: any) => any;
 
 export declare interface FnsWire<Fns extends {}> extends FnsWireGuard<Fns> {
   fn: <K extends KeyOfMethods<Fns>>(name: K, value: Fns[K]) => () => void;
@@ -65,7 +69,7 @@ export declare type Interceptor<Value> = (
 /**
  * isDefined check if the value is undefined or not.
  * it helps with typescript generic types.
- * @param value
+ * @param value -
  */
 export declare const isDefined: <V>(
   value: V | undefined,
@@ -78,7 +82,7 @@ declare type KeyOfMethods<T> = NonNever<keyof Methods<T>>;
 export declare type LinkIds = Array<string | LinkIds>;
 
 declare type MethodKeys<T> = {
-  [P in keyof T]: T[P] extends Function ? P : never;
+  [P in keyof T]: T[P] extends Fn ? P : never;
 }[keyof T];
 
 declare type Methods<T> = Pick<T, MethodKeys<T>>;
@@ -99,7 +103,7 @@ export declare interface ReadonlyStateWire<V>
   getValue(): V;
   /**
    * subscribe for value change
-   * @param callback
+   * @param callback -
    * @returns unsubscribe function
    */
   subscribe(callback: (value: Defined<V>) => void): () => void;
@@ -109,8 +113,10 @@ declare interface ReadonlyStateWireGuard<V> {
   ' state-wire': CovarianceGuard<V>;
 }
 
-export declare type ReadonlyWire<V, Fns = {}> = ReadonlyStateWire<V> &
-  FnsWire<Fns>;
+export declare type ReadonlyWire<
+  V,
+  Fns extends {} = {},
+> = ReadonlyStateWire<V> & FnsWire<Fns>;
 
 declare type SetWireValue = <V>(wire: StateWire<V>, value: Defined<V>) => void;
 
@@ -122,12 +128,12 @@ export declare interface StateWire<V> extends StateWireGuard<V>, WireId {
   getValue(): V;
   /**
    * set value
-   * @param value
+   * @param value -
    */
   setValue(value: Defined<V>): void;
   /**
    * subscribe for value change
-   * @param callback
+   * @param callback -
    * @returns unsubscribe function
    */
   subscribe(callback: (value: Defined<V>) => void): () => void;
@@ -147,26 +153,26 @@ declare type StrictMethodsGuard<Fns> = {
  *
  * subscribe for function calls
  *
- * @param wire
+ * @param wire -
  * @param name - name of `fns` function
  * @param fn - memoized callback function
  *
  * @example
-```ts
+ ```ts
  // subscribe for `sample` function call
  useFn(
  wire,
  'sample',
  useCallback(value => {
-    console.log(value);
-  }, []),
+ console.log(value);
+ }, []),
  );
 
  // call `sample` function
  wire.fns.sample(5);
-```
+ ```
  */
-export declare function useFn<Fns, K extends KeyOfMethods<Fns>>(
+export declare function useFn<Fns extends {}, K extends KeyOfMethods<Fns>>(
   wire: FnsWire<Fns> | null | undefined,
   name: K,
   fn: Fns[K],
@@ -203,12 +209,12 @@ export declare function useInterceptor<W extends StateWire<any>>(
   interceptor: Interceptor<WireState<W>>,
 ): W;
 
-export declare function useSelector<V, Fns = {}>(
+export declare function useSelector<V, Fns extends {} = {}>(
   options: WritableSelectorOptions<V>,
   deps?: DependencyList,
 ): Wire<V, Fns>;
 
-export declare function useSelector<V, Fns = {}>(
+export declare function useSelector<V, Fns extends {} = {}>(
   options: ReadOnlySelectorOptions<V>,
   deps?: DependencyList,
 ): ReadonlyWire<V, Fns>;
@@ -218,21 +224,21 @@ export declare function useSubscribe<V>(
   callback: (value: Defined<V>) => void,
 ): void;
 
-export declare function useWire<V, Fns = {}>(
+export declare function useWire<V, Fns extends {} = {}>(
   upLink: Wire<V, Fns>,
 ): Wire<V, Fns>;
 
-export declare function useWire<V, Fns = {}>(
+export declare function useWire<V, Fns extends {} = {}>(
   upLink: Wire<V | undefined, Fns> | null | undefined,
   initialValue: InitializerOrValue<V>,
 ): Wire<V, Fns>;
 
-export declare function useWire<V, Fns = {}>(
+export declare function useWire<V, Fns extends {} = {}>(
   upLink: Wire<V, Fns> | null | undefined,
   initialValue: InitializerOrValue<V>,
 ): Wire<V, Fns>;
 
-export declare function useWire<V, Fns = {}>(
+export declare function useWire<V, Fns extends {} = {}>(
   upLink: Wire<V, Fns> | null | undefined,
   initialValue?: InitializerOrValue<V | undefined>,
 ): Wire<V | undefined, Fns>;
@@ -282,7 +288,7 @@ export declare function useWireValue<W extends ReadonlyStateWire<any>>(
 
 declare type valueAndAction<V> = [V, Dispatch<SetStateAction<Defined<V>>>];
 
-export declare type Wire<V, Fns = {}> = StateWire<V> & FnsWire<Fns>;
+export declare type Wire<V, Fns extends {} = {}> = StateWire<V> & FnsWire<Fns>;
 
 export declare type WireFns<W extends FnsWire<any>> = W extends FnsWire<
   infer Fns
@@ -301,9 +307,8 @@ export declare interface WireId {
   _getLinkIds(): LinkIds;
 }
 
-export declare type WireState<
-  W extends ReadonlyStateWire<any>
-> = W extends ReadonlyStateWire<infer V> ? V : never;
+export declare type WireState<W extends ReadonlyStateWire<any>> =
+  W extends ReadonlyStateWire<infer V> ? V : never;
 
 export declare interface WritableSelectorOptions<V> {
   get: (options: { get: GetWireValue }) => V;

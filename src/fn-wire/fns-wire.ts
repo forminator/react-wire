@@ -15,7 +15,9 @@ export interface FnsWire<Fns extends {}> extends FnsWireGuard<Fns> {
   fns: Methods<Fns>;
 }
 
-export function isFnsWire<Fns = unknown>(wire: unknown): wire is FnsWire<Fns> {
+export function isFnsWire<Fns extends {} = {}>(
+  wire: unknown,
+): wire is FnsWire<Fns> {
   return !!(wire && (wire as any)[' fns-wire']);
 }
 

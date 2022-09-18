@@ -14,13 +14,13 @@ export interface StateWire<V> extends StateWireGuard<V>, WireId {
 
   /**
    * set value
-   * @param value
+   * @param value -
    */
   setValue(value: Defined<V>): void;
 
   /**
    * subscribe for value change
-   * @param callback
+   * @param callback -
    * @returns unsubscribe function
    */
   subscribe(callback: (value: Defined<V>) => void): () => void;

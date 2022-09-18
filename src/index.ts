@@ -18,3 +18,19 @@ export { useSubscribe } from './state-wire/use-subscribe';
 
 export { isDefined } from './utils/type-utils';
 export { getLinkIds, getWireId } from './utils/wire-id';
+
+export type { StateWire } from './state-wire/state-wire';
+export type {
+  ReadonlyStateWire,
+  WireState,
+} from './state-wire/readonly-state-wire';
+export type { FnsWire, WireFns } from './fn-wire/fns-wire';
+export type { Wire, ReadonlyWire } from './wire/wire';
+export type { Interceptor } from './interceptor/interceptor';
+export type {
+  ReadOnlySelectorOptions,
+  WritableSelectorOptions,
+} from './state-selector/create-state-selector';
+
+export type { Defined } from './utils/type-utils';
+export type { WireId, LinkIds } from './utils/wire-id';

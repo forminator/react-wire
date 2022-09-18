@@ -1,5 +1,6 @@
 /*eslint @typescript-eslint/no-unused-vars: ["warn", { "varsIgnorePattern": "^_" }]*/
 import { createId, getLinkIds, getWireId, LinkIds, WireId } from './wire-id';
+import { describe, expect, it } from 'vitest';
 
 describe('create id', function () {
   it('should create a valid id', function () {
