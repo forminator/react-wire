@@ -14,6 +14,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+          registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm publish --no-git-checks
