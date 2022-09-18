@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0](https://github.com/forminator/react-wire/compare/v0.5.0...v0.6.0) (2022-09-18)
+
+### ⚠ BREAKING CHANGES
+
+- change dist files and remove umd build
+
+- use vite build system ([#70](https://github.com/forminator/react-wire/issues/70)) ([9a9dc90](https://github.com/forminator/react-wire/commit/9a9dc90bb4fb02646fec014bd63919021a4f0ef5))
+
 ## [0.5.0](https://github.com/forminator/react-wire/compare/v0.5.0-alpha.1...v0.5.0) (2022-04-02)
 
 ## [0.5.0-alpha.1](https://github.com/forminator/react-wire/compare/v0.5.0-alpha.0...v0.5.0-alpha.1) (2022-02-07)
