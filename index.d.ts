@@ -290,11 +290,8 @@ declare type valueAndAction<V> = [V, Dispatch<SetStateAction<Defined<V>>>];
 
 export declare type Wire<V, Fns extends {} = {}> = StateWire<V> & FnsWire<Fns>;
 
-export declare type WireFns<W extends FnsWire<any>> = W extends FnsWire<
-  infer Fns
->
-  ? Fns
-  : never;
+export declare type WireFns<W extends FnsWire<any>> =
+  W extends FnsWire<infer Fns> ? Fns : never;
 
 export declare interface WireId {
   /**
