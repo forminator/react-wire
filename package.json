@@ -16,11 +16,12 @@
   "type": "module",
   "typings": "./index.d.ts",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.js"
     }
   },
   "publishConfig": {
@@ -30,7 +31,7 @@
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "pre-commit": "tsc && lint-staged && pnpm lint",
     "toc": "markdown-toc -i README.md",
     "lint": "eslint --max-warnings=0 src/**/*.{ts,tsx}",
@@ -45,42 +46,46 @@
     "release": "standard-version"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17",
-    "@commitlint/config-conventional": "^17",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@microsoft/api-extractor": "^7",
-    "@testing-library/dom": "^8",
-    "@testing-library/jest-dom": "^5",
-    "@testing-library/react": "^13",
+    "@testing-library/dom": "^10.1.0",
+    "@testing-library/jest-dom": "^6",
+    "@testing-library/react": "^15.0.7",
     "@testing-library/user-event": "^14",
-    "@types/node": "^18",
+    "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/testing-library__jest-dom": "^5",
-    "@types/use-sync-external-store": "^0.0.3",
-    "@vitejs/plugin-react": "^2",
-    "@vitest/coverage-c8": "^0.23",
-    "c8": "^7",
+    "@types/use-sync-external-store": "^0.0.6",
+    "@vitejs/plugin-react": "^4",
+    "@vitest/coverage-istanbul": "^1",
     "eslint": "^8",
     "eslint-config-react-app": "^7",
-    "husky": "^8",
+    "husky": "^9",
     "jest-leak-detector": "^29",
-    "jsdom": "^20",
-    "lint-staged": "^13",
+    "jsdom": "^24",
+    "lint-staged": "^15",
     "markdown-toc": "^1",
-    "prettier": "^2",
+    "prettier": "^3",
     "react": "^18",
     "react-dom": "^18",
     "standard-version": "^9",
-    "typescript": "^4",
-    "vite": "^3",
-    "vite-plugin-dts": "^1",
-    "vitest": "^0.23"
+    "typescript": "^5",
+    "vite": "^5",
+    "vite-plugin-dts": "^3",
+    "vitest": "^1"
   },
   "dependencies": {
     "mitt": "^1.2.0",
-    "use-sync-external-store": "^1.2.0"
+    "use-sync-external-store": "^1.2.2"
   },
   "peerDependencies": {
     "react": "^18"
+  },
+  "pnpm": {
+    "overrides": {
+      "@typescript-eslint/parser": "^6.0.0",
+      "@typescript-eslint/eslint-plugin": "^6.0.0"
+    }
   }
 }

@@ -25,6 +25,5 @@ export function createFnsWireGuard<Fns>(): FnsWireGuard<Fns> {
   return { ' fns-wire': true as any };
 }
 
-export type WireFns<W extends FnsWire<any>> = W extends FnsWire<infer Fns>
-  ? Fns
-  : never;
+export type WireFns<W extends FnsWire<any>> =
+  W extends FnsWire<infer Fns> ? Fns : never;
