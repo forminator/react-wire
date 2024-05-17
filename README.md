@@ -2,7 +2,7 @@
 
 [![NPM version](https://badgen.net/npm/v/@forminator/react-wire)](https://npmjs.com/package/@forminator/react-wire)
 [![NPM downloads](https://badgen.net/npm/dm/@forminator/react-wire)](https://npmjs.com/package/@forminator/react-wire)
-[![Build Status](https://travis-ci.com/forminator/react-wire.svg?branch=master)](https://travis-ci.com/forminator/react-wire)
+[![Build Status](https://github.com/forminator/react-wire/actions/workflows/node-ci.yml/badge.svg?branch=master)](https://github.com/forminator/react-wire/actions/workflows/node-ci.yml)
 [![codecov](https://codecov.io/gh/forminator/react-wire/branch/master/graph/badge.svg)](https://codecov.io/gh/forminator/react-wire)
 
 connect react components with wire
