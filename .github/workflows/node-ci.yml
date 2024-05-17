@@ -23,3 +23,5 @@ jobs:
       - run: pnpm run test
       - run: git diff --exit-code --name-only
       - uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
