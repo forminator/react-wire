@@ -38,9 +38,14 @@ export function useWireValue<W extends ReadonlyStateWire<any>>(
     () => wire?.getValue(),
     [wire],
   );
+  const getServerSnapshot: () => Value | undefined = useCallback(
+    () => wire?.getValue(),
+    [wire],
+  );
   const stateValue = useSyncExternalStore<Value | undefined>(
     subscribe,
     getSnapshot,
+    getServerSnapshot,
   );
   const valueToReturn = stateValue === undefined ? defaultValue : stateValue;
   useDebugValue(valueToReturn);

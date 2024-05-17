@@ -1,6 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { InitializerOrValue, isInitializer } from '../utils/is-initializer';
 import { isDefined } from '../utils/type-utils';
+import {
+  isBrowser,
+  useIsomorphicLayoutEffect,
+} from '../utils/use-isomorphic-layout-effect';
 import { createStateWire } from './create-state-wire';
 import { StateWire } from './state-wire';
 
@@ -34,7 +38,18 @@ export function useStateWire<V>(
   const [[wire, connect], set] = useState(() => create(upLink, initialValue));
   const lastUpLinkRef = useRef(upLink);
 
-  useLayoutEffect(() => {
+  if (
+    !isBrowser &&
+    upLink &&
+    upLink.getValue() === undefined &&
+    wire.getValue() !== undefined
+  ) {
+    console.error(
+      'upLink value is undefined. uplink without value is not supported in server side rendering',
+    );
+  }
+
+  useIsomorphicLayoutEffect(() => {
     if (lastUpLinkRef.current !== upLink) {
       lastUpLinkRef.current = upLink;
       set(create(upLink, wire.getValue()));
