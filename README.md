@@ -478,8 +478,9 @@ const valueWire = useInterceptor(
 
 During initialization, wire value always has more priority.
 
-- If the up-link wire has value, the initial value will be ignored and respect wire value
-- If the up-link wire has `undefined` value, the initial value will be used and wire value will be updated
+- If the up-link wire has value, the initial value will be ignored and respect up-link wire value
+- In CSR, If the up-link wire has `undefined` value, the initial value will be used and up-link wire value will be updated
+- In SSR, If the up-link wire has `undefined` value, the initial value will be used and a warning will be shown
 
 Examples:
 
@@ -514,6 +515,26 @@ const [state] = useWireState(wire, 2);
 wire.getValue(); // => 2
 state; // => 2
 ```
+
+```tsx
+// ssr
+const wire1 = useWire(null);
+const wire2 = useWire(wire1, 2); // warning: 'upLink value is undefined. uplink without value is not supported in server side rendering'
+wire1.getValue(); // => undefined
+wire2.getValue(); // => 2
+```
+
+```tsx
+// ssr
+const wire1 = useWire(null);
+const wire2 = useWire(wire1);
+wire1.getValue(); // => undefined
+wire2.getValue(); // => undefined
+```
+
+### Server Side Rendering
+
+In SSR, up-link wire without value is not supported. if you use up-link wire without value, a warning will be shown.
 
 ### Rewiring
 

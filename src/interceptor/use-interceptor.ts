@@ -1,6 +1,7 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { WireState } from '../state-wire/readonly-state-wire';
 import { StateWire } from '../state-wire/state-wire';
+import { useIsomorphicLayoutEffect } from '../utils/use-isomorphic-layout-effect';
 import { createInterceptor } from './create-interceptor';
 import { Interceptor } from './interceptor';
 
@@ -38,7 +39,7 @@ export function useInterceptor<W extends StateWire<any>>(
     createInterceptor<WireState<W>, W>(wire, interceptor),
   );
   const lastWireRef = useRef(wire);
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (lastWireRef.current !== wire) {
       lastWireRef.current = wire;
       set(createInterceptor<WireState<W>, W>(wire, interceptor));
