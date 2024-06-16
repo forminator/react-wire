@@ -2,11 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
-
-### ⚠ BREAKING CHANGES
-
-- rename `./dist/index.mjs` to `./dist/index.js`
+<!-- new release -->
 
 ## [0.6.0](https://github.com/forminator/react-wire/compare/v0.5.0...v0.6.0) (2022-09-18)
 

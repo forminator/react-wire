@@ -42,10 +42,10 @@
     "build:dts": "api-extractor run --local --verbose && prettier --write index.d.ts",
     "build": "vite build && pnpm build:dts",
     "validate": "pnpm run lint && pnpm run format:check && pnpm run test && tsc",
-    "prepublishOnly": "pnpm run validate && pnpm build",
-    "release": "standard-version"
+    "prepublishOnly": "pnpm run validate && pnpm build"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@microsoft/api-extractor": "^7",
@@ -69,7 +69,6 @@
     "prettier": "^3",
     "react": "^18",
     "react-dom": "^18",
-    "standard-version": "^9",
     "typescript": "^5",
     "vite": "^5",
     "vite-plugin-dts": "^3",
