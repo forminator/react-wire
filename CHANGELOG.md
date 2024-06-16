@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 <!-- new release -->
 
+## [0.7.0](https://github.com/forminator/react-wire/compare/0.6.0...0.7.0) (2024-06-16)
+
+### ⚠ BREAKING CHANGES
+
+- rename `./dist/index.mjs` to `./dist/index.js` ([#78](https://github.com/forminator/react-wire/pull/78)) ([4ebef4c](https://github.com/forminator/react-wire/commit/4ebef4c0e626e3df85f4e5225fdb17e6ca9a663a))
+
+### Features
+
+- add ssr support ([#79](https://github.com/forminator/react-wire/pull/79)) ([5ea8e64](https://github.com/forminator/react-wire/commit/5ea8e64a70cd0036771483122149f22d27937ec7))
+
 ## [0.6.0](https://github.com/forminator/react-wire/compare/v0.5.0...v0.6.0) (2022-09-18)
 
 ### ⚠ BREAKING CHANGES
