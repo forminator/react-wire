@@ -51,11 +51,11 @@
     "@microsoft/api-extractor": "^7",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6",
-    "@testing-library/react": "^15.0.7",
+    "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@types/use-sync-external-store": "^0.0.6",
     "@vitejs/plugin-react": "^4",
     "@vitest/coverage-istanbul": "^1",
@@ -67,8 +67,8 @@
     "lint-staged": "^15",
     "markdown-toc": "^1",
     "prettier": "^3",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "typescript": "^5",
     "vite": "^5",
     "vite-plugin-dts": "^3",
@@ -76,15 +76,9 @@
   },
   "dependencies": {
     "mitt": "^1.2.0",
-    "use-sync-external-store": "^1.2.2"
+    "use-sync-external-store": "^1.7.0"
   },
   "peerDependencies": {
-    "react": "^18"
-  },
-  "pnpm": {
-    "overrides": {
-      "@typescript-eslint/parser": "^6.0.0",
-      "@typescript-eslint/eslint-plugin": "^6.0.0"
-    }
+    "react": "^18 || ^19"
   }
 }
