@@ -1,4 +1,4 @@
-import { Defined } from '../utils/type-utils';
+import type { Defined } from '../utils/type-utils';
 
 export type Interceptor<Value> = (
   nextValue: Defined<Value>,

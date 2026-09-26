@@ -1,5 +1,5 @@
-import { CovarianceGuard, Defined } from '../utils/type-utils';
-import { WireId } from '../utils/wire-id';
+import type { CovarianceGuard, Defined } from '../utils/type-utils';
+import type { WireId } from '../utils/wire-id';
 
 export interface ReadonlyStateWireGuard<V> {
   ' state-wire': CovarianceGuard<V>;

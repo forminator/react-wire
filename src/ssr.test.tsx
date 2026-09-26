@@ -2,7 +2,7 @@
 
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { useSelector, useWire, useWireValue, Wire } from './index';
+import { useSelector, useWire, useWireValue, type Wire } from './index';
 
 describe('ssr', () => {
   afterEach(() => {

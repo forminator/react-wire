@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
-import { WireState } from '../state-wire/readonly-state-wire';
-import { StateWire } from '../state-wire/state-wire';
+import type { WireState } from '../state-wire/readonly-state-wire';
+import type { StateWire } from '../state-wire/state-wire';
 import { useIsomorphicLayoutEffect } from '../utils/use-isomorphic-layout-effect';
 import { createInterceptor } from './create-interceptor';
-import { Interceptor } from './interceptor';
+import type { Interceptor } from './interceptor';
 
 /**
  * returns new wire and intercepting setValue of returned wire

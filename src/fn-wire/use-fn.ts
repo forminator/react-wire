@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { KeyOfMethods } from '../utils/type-utils';
-import { FnsWire } from './fns-wire';
+import type { KeyOfMethods } from '../utils/type-utils';
+import type { FnsWire } from './fns-wire';
 
 /**
  * 

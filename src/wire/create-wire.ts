@@ -1,6 +1,6 @@
 import { createFnsWire } from '../fn-wire/create-fns-wire';
 import { createStateWire } from '../state-wire/create-state-wire';
-import { Wire } from './wire';
+import type { Wire } from './wire';
 
 export function createWire<V, Fns extends {} = {}>(
   initialValue: V,

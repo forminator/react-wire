@@ -1,10 +1,8 @@
 // source: https://github.com/testing-library/react-testing-library/blob/887d95b84ddbcedb46932bf52fbda4518abb35c8/src/pure.js#L118
 import { act, render } from '@testing-library/react';
 import React, {
-  ComponentType,
-  createRef,
+  type ComponentType,
   Fragment,
-  MutableRefObject,
   StrictMode,
   useEffect,
 } from 'react';
@@ -46,8 +44,7 @@ export function renderHook<Result, Props>(
 ): RenderHookResult<Result, Props> | RenderHookResultWithoutProps<Result> {
   const { initialProps, wrapper, strict = true } = options;
   const Wrapper = strict ? StrictMode : Fragment;
-  const result: MutableRefObject<Result> =
-    createRef() as MutableRefObject<Result>;
+  const result = { current: undefined as Result };
 
   function TestComponent({
     renderCallbackProps,
