@@ -18,6 +18,7 @@ jobs:
       - run: pnpm run check
       - run: pnpm run build
       - run: git diff --exit-code --name-only
+      - run: pnpm run test:package
       - uses: codecov/codecov-action@v4
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
