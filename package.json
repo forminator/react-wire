@@ -36,6 +36,7 @@
     "type:check": "tsc --noEmit",
     "test": "vitest --run --coverage",
     "test:watch": "vitest",
+    "test:package": "bash tests/package-e2e.sh",
     "check": "pnpm format:check && pnpm lint && pnpm type:check && pnpm test",
     "build": "pnpm type:check && vite build && prettier --write index.d.ts",
     "prepublishOnly": "pnpm build"
