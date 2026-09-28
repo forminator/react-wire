@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { useFnsWire } from '../fn-wire/use-fns-wire';
 import { useStateWire } from '../state-wire/use-state-wire';
-import { InitializerOrValue } from '../utils/is-initializer';
-import { Wire } from './wire';
+import type { InitializerOrValue } from '../utils/is-initializer';
+import type { Wire } from './wire';
 
 export function useWire<V, Fns extends {} = {}>(
   upLink: Wire<V, Fns>,

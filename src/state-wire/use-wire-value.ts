@@ -1,9 +1,6 @@
-import { useCallback, useDebugValue } from 'react';
-import shim from 'use-sync-external-store/shim';
-import { Defined } from '../utils/type-utils';
-import { ReadonlyStateWire, WireState } from './readonly-state-wire';
-
-const { useSyncExternalStore } = shim;
+import { useCallback, useDebugValue, useSyncExternalStore } from 'react';
+import type { Defined } from '../utils/type-utils';
+import type { ReadonlyStateWire, WireState } from './readonly-state-wire';
 
 export function useWireValue(
   wire: null | undefined,

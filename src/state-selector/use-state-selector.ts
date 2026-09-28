@@ -1,11 +1,11 @@
-import { DependencyList, useEffect, useRef, useState } from 'react';
-import { ReadonlyStateWire } from '../state-wire/readonly-state-wire';
-import { StateWire } from '../state-wire/state-wire';
+import { type DependencyList, useEffect, useRef, useState } from 'react';
+import type { ReadonlyStateWire } from '../state-wire/readonly-state-wire';
+import type { StateWire } from '../state-wire/state-wire';
 import {
   createStateSelector,
-  ReadOnlySelectorOptions,
-  SelectorOptions,
-  WritableSelectorOptions,
+  type ReadOnlySelectorOptions,
+  type SelectorOptions,
+  type WritableSelectorOptions,
 } from './create-state-selector';
 
 export function useStateSelector<V>(
@@ -28,8 +28,8 @@ export function useStateSelector<V>(
 
   useEffect(() => {
     const reconnect = reconnectRef.current;
-    reconnect && reconnect(options);
-    // eslint-disable-next-line
+    reconnect?.(options);
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   useEffect(() => {

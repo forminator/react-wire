@@ -1,6 +1,6 @@
-import mitt, { Emitter } from 'mitt';
-import { Fn, KeyOfMethods, Parameters } from '../utils/type-utils';
-import { createFnsWireGuard, FnsWire, isFnsWire } from './fns-wire';
+import mitt, { type Emitter } from 'mitt';
+import type { Fn, KeyOfMethods, Parameters } from '../utils/type-utils';
+import { createFnsWireGuard, type FnsWire, isFnsWire } from './fns-wire';
 
 type DisconnectFunction = () => void;
 type ConnectFunction = () => DisconnectFunction;

@@ -1,11 +1,11 @@
-import mitt, { Emitter } from 'mitt';
+import mitt, { type Emitter } from 'mitt';
 import { memoize } from '../utils/memoize';
-import { Defined, isDefined } from '../utils/type-utils';
+import { type Defined, isDefined } from '../utils/type-utils';
 import { createId } from '../utils/wire-id';
 import {
   createStateWireGuard,
   isWritableStateWire,
-  StateWire,
+  type StateWire,
 } from './state-wire';
 
 type DisconnectFunction = () => void;

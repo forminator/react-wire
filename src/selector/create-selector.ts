@@ -1,11 +1,11 @@
 import { createFnsWire } from '../fn-wire/create-fns-wire';
 import {
   createStateSelector,
-  ReadOnlySelectorOptions,
-  SelectorOptions,
-  WritableSelectorOptions,
+  type ReadOnlySelectorOptions,
+  type SelectorOptions,
+  type WritableSelectorOptions,
 } from '../state-selector/create-state-selector';
-import { ReadonlyWire, Wire } from '../wire/wire';
+import type { ReadonlyWire, Wire } from '../wire/wire';
 
 export function createSelector<V, Fns extends {} = {}>(
   options: WritableSelectorOptions<V>,

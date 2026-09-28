@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { InitializerOrValue, isInitializer } from '../utils/is-initializer';
+import {
+  type InitializerOrValue,
+  isInitializer,
+} from '../utils/is-initializer';
 import { isDefined } from '../utils/type-utils';
 import {
   isBrowser,
   useIsomorphicLayoutEffect,
 } from '../utils/use-isomorphic-layout-effect';
 import { createStateWire } from './create-state-wire';
-import { StateWire } from './state-wire';
+import type { StateWire } from './state-wire';
 
 const create = <V>(
   upLink: StateWire<V | undefined> | null | undefined,

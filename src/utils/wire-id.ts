@@ -1,12 +1,6 @@
 export type LinkIds = Array<string | LinkIds>;
 export interface WireId {
-  /**
-   * @internal
-   */
   _getId(): string;
-  /**
-   * @internal
-   */
   _getLinkIds(): LinkIds;
 }
 

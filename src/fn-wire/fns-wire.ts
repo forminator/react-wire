@@ -1,12 +1,10 @@
-import { KeyOfMethods, Methods, StrictMethodsGuard } from '../utils/type-utils';
+import type {
+  KeyOfMethods,
+  Methods,
+  StrictMethodsGuard,
+} from '../utils/type-utils';
 
 export interface FnsWireGuard<Fns> {
-  /**
-   * @internal
-   * Covariance hack:
-   * never use this variable.
-   * don't remove space at the start
-   */
   ' fns-wire': StrictMethodsGuard<Fns>; // Covariance hack
 }
 

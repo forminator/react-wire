@@ -1,11 +1,11 @@
-import mitt, { Emitter } from 'mitt';
+import mitt, { type Emitter } from 'mitt';
 import {
   createReadonlyStateWireGuard,
-  ReadonlyStateWire,
+  type ReadonlyStateWire,
 } from '../state-wire/readonly-state-wire';
-import { createStateWireGuard, StateWire } from '../state-wire/state-wire';
+import { createStateWireGuard, type StateWire } from '../state-wire/state-wire';
 import { memoize } from '../utils/memoize';
-import { Defined } from '../utils/type-utils';
+import type { Defined } from '../utils/type-utils';
 import { createId } from '../utils/wire-id';
 
 type ReconnectFunction<O> = (options?: O) => void;
@@ -46,7 +46,7 @@ const resubscribe = (
     const newUnsubscribe =
       oldActiveWires.get(wire) ??
       wire.subscribe(() => {
-        update && update();
+        update?.();
       });
 
     newActiveWires.set(wire, newUnsubscribe);
@@ -137,7 +137,7 @@ export function createStateSelector<V>(
   };
 
   const setValue = (value: Defined<V>) => {
-    setOption && setOption({ get: setGet, set }, value);
+    setOption?.({ get: setGet, set }, value);
   };
 
   const subscribe = (callback: (value: Defined<V>) => void) => {

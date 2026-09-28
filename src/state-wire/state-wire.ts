@@ -1,5 +1,5 @@
-import { Defined, StrictGuard } from '../utils/type-utils';
-import { WireId } from '../utils/wire-id';
+import type { Defined, StrictGuard } from '../utils/type-utils';
+import type { WireId } from '../utils/wire-id';
 
 export interface StateWireGuard<V> {
   ' state-wire': StrictGuard<V>;

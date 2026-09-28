@@ -1,4 +1,4 @@
-import { SetStateAction } from 'react';
+import type { SetStateAction } from 'react';
 
 export function isSetStateAction<S>(
   action: SetStateAction<S>,

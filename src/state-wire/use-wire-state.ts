@@ -1,8 +1,13 @@
-import { Dispatch, SetStateAction, useCallback, useDebugValue } from 'react';
-import { InitializerOrValue } from '../utils/is-initializer';
+import {
+  type Dispatch,
+  type SetStateAction,
+  useCallback,
+  useDebugValue,
+} from 'react';
+import type { InitializerOrValue } from '../utils/is-initializer';
 import { isSetStateAction } from '../utils/is-set-state-action';
-import { Defined, isDefined } from '../utils/type-utils';
-import { StateWire } from './state-wire';
+import { type Defined, isDefined } from '../utils/type-utils';
+import type { StateWire } from './state-wire';
 import { useStateWire } from './use-state-wire';
 import { useWireValue } from './use-wire-value';
 

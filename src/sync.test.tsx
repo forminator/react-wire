@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { fireEvent, screen } from '@testing-library/react';
-import React, { Fragment, PropsWithChildren, useEffect, useState } from 'react';
+import React, {
+  Fragment,
+  type PropsWithChildren,
+  useEffect,
+  useState,
+} from 'react';
 import { useSelector } from './selector/use-selector';
 import { useWireValue } from './state-wire/use-wire-value';
 import { renderHook } from './test/render-hook';

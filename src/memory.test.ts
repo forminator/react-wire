@@ -16,13 +16,12 @@ describe('memory', () => {
       }
 
       let value: unknown = {};
-      let wire = run(value);
+      let _wire = run(value);
 
       const detector = new LeakDetector(value);
       value = null;
       expect(await detector.isLeaking()).toBe(true);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      wire = null;
+      _wire = null;
       expect(await detector.isLeaking()).toBe(false);
     });
   });
@@ -40,13 +39,12 @@ describe('memory', () => {
       }
 
       let value: unknown = {};
-      let selector = run(value);
+      let _selector = run(value);
 
       const detector = new LeakDetector(value);
       value = null;
       expect(await detector.isLeaking()).toBe(true);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      selector = null;
+      _selector = null;
       expect(await detector.isLeaking()).toBe(false);
     });
   });

@@ -1,12 +1,12 @@
-import { DependencyList, useMemo } from 'react';
+import { type DependencyList, useMemo } from 'react';
 import { useFnsWire } from '../fn-wire/use-fns-wire';
-import {
+import type {
   ReadOnlySelectorOptions,
   SelectorOptions,
   WritableSelectorOptions,
 } from '../state-selector/create-state-selector';
 import { useStateSelector } from '../state-selector/use-state-selector';
-import { ReadonlyWire, Wire } from '../wire/wire';
+import type { ReadonlyWire, Wire } from '../wire/wire';
 
 export function useSelector<V, Fns extends {} = {}>(
   options: WritableSelectorOptions<V>,

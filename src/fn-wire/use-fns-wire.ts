@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useIsomorphicLayoutEffect } from '../utils/use-isomorphic-layout-effect';
 import { createFnsWire } from './create-fns-wire';
-import { FnsWire } from './fns-wire';
+import type { FnsWire } from './fns-wire';
 
 const create = <Fns extends {}>(upLink: FnsWire<Fns> | null | undefined) => {
   return createFnsWire(upLink || {});

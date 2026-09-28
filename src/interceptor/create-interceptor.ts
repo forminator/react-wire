@@ -1,6 +1,6 @@
-import { StateWire } from '../state-wire/state-wire';
-import { Defined, isDefined } from '../utils/type-utils';
-import { Interceptor } from './interceptor';
+import type { StateWire } from '../state-wire/state-wire';
+import { type Defined, isDefined } from '../utils/type-utils';
+import type { Interceptor } from './interceptor';
 
 export function createInterceptor<V, C extends StateWire<V> = StateWire<V>>(
   ctx: C,

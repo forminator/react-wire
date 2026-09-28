@@ -1,9 +1,3 @@
-/**
- * connect react components with wire
- *
- * @packageDocumentation
- */
-
 import { DependencyList } from 'react';
 import { Dispatch } from 'react';
 import { SetStateAction } from 'react';
@@ -34,12 +28,6 @@ export declare interface FnsWire<Fns extends {}> extends FnsWireGuard<Fns> {
 }
 
 declare interface FnsWireGuard<Fns> {
-  /**
-   * @internal
-   * Covariance hack:
-   * never use this variable.
-   * don't remove space at the start
-   */
   ' fns-wire': StrictMethodsGuard<Fns>;
 }
 
@@ -294,13 +282,7 @@ export declare type WireFns<W extends FnsWire<any>> =
   W extends FnsWire<infer Fns> ? Fns : never;
 
 export declare interface WireId {
-  /**
-   * @internal
-   */
   _getId(): string;
-  /**
-   * @internal
-   */
   _getLinkIds(): LinkIds;
 }
 

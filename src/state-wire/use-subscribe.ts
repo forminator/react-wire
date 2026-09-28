@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { Defined, isDefined } from '../utils/type-utils';
-import { ReadonlyStateWire } from './readonly-state-wire';
+import { type Defined, isDefined } from '../utils/type-utils';
+import type { ReadonlyStateWire } from './readonly-state-wire';
 
 export function useSubscribe<V>(
   wire: ReadonlyStateWire<V>,
